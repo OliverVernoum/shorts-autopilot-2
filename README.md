@@ -5,8 +5,8 @@ Automatically makes and uploads YouTube Shorts for several faceless channels.
 | Channel folder | Channel | Topic | Uploads (UTC) |
 |---|---|---|---|
 | `channels/cyber`  | Plain Text Threats | One cybersecurity concept per Short | every 2 hours at :07 (even UTC hours) |
-| `channels/gaming` | Boss Room Archive | Gaming facts, mechanics and history | daily 19:07 |
-| `channels/tech` | Pocket Silicon | How AI and everyday tech work | daily 21:07 |
+| `channels/gaming` | Boss Room Archive | Gaming facts, mechanics and history | 01:07, 07:07, 13:07, 19:07 |
+| `channels/tech` | Pocket Silicon | How AI and everyday tech work | 03:07, 09:07, 15:07, 21:07 |
 
 ## How it works
 

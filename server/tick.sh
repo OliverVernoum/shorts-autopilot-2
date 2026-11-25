@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Run by cron on the server (see setup.sh). Replaces the old GitHub Actions ticker/publish workflows.
-#   tick.sh short   :07 every hour -> cyber on even UTC hours, gaming at 19, tech at 21
+#   tick.sh short   :07 every hour -> cyber on even UTC hours; gaming at 01/07/13/19, tech at 03/09/15/21
 #   tick.sh long    :37 every hour -> long-form when UTC hour % every_hours (longform.txt) == 0
 #   tick.sh test    render one cyber Short without uploading (check the setup works)
 set -uo pipefail
@@ -21,8 +21,7 @@ case "$mode" in
   short)
     ch=""
     [ $((h % 2)) -eq 0 ] && ch=cyber
-    [ "$h" = 19 ] && ch="${ch:+$ch,}gaming"
-    [ "$h" = 21 ] && ch="${ch:+$ch,}tech"
+    case "$h" in 1|7|13|19) ch="${ch:+$ch,}gaming" ;; 3|9|15|21) ch="${ch:+$ch,}tech" ;; esac
     [ -z "$ch" ] && exit 0
     args="--channel $ch --count 1"; log=status/last-run.txt ;;
   long)
