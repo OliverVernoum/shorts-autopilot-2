@@ -1,0 +1,69 @@
+{
+  "id": "007-sql-injection",
+  "title": "One line of text that can break a login page",
+  "description": "SQL injection happens when a website mixes your typing into its database commands. Parameterised queries stop it by keeping data and code apart.",
+  "tags": [
+    "sql injection",
+    "web security",
+    "parameterised queries",
+    "owasp",
+    "cybersecurity basics"
+  ],
+  "series_tag": "#007",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "One line can break a login",
+      "sub": "SQL injection, explained",
+      "say": "One line typed into a login box can trick a website into handing over its database. This is SQL injection."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "$ username: ' OR '1'='1",
+        "> WHERE name='' OR '1'='1'",
+        "> '1'='1' is always true",
+        "> Every user row comes back"
+      ],
+      "say": "Here's the classic textbook example. The site glues your typing into its database question. Add an apostrophe, then OR one equals one, and the question becomes: is the name blank, or is one equal to one? That's always true."
+    },
+    {
+      "kind": "big",
+      "big": "Data not code",
+      "sub": "the bug: input read as instructions",
+      "say": "The flaw is simple. The database can't tell your data from the developer's instructions, because they arrive mixed together in one string."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Unsafe",
+        "items": [
+          "Glue input into the query",
+          "Trust whatever users type"
+        ]
+      },
+      "right": {
+        "label": "Safe",
+        "items": [
+          "Parameterised queries",
+          "Query shape sent first",
+          "Input stays plain data"
+        ]
+      },
+      "say": "The fix is parameterised queries. The developer sends the query shape first, with blanks in it. Your input is sent separately, and the database only ever treats it as data, never as code."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Use parameterised queries everywhere",
+        "Validate input as a second layer",
+        "Give database accounts least privilege"
+      ],
+      "say": "So: parameterise every query, validate input as a backup, and give the database account only the permissions it needs. Follow, and I'll unpack another threat next."
+    }
+  ],
+  "sources": [
+    "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html",
+    "https://owasp.org/www-community/attacks/SQL_Injection"
+  ]
+}

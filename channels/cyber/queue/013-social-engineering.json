@@ -1,0 +1,72 @@
+{
+  "id": "013-social-engineering",
+  "title": "4 pressure tactics scammers use to hijack your judgement",
+  "description": "Social engineering attacks the person, not the device. Learn four pressure tactics in scam messages and the simple habit that beats them.",
+  "tags": [
+    "social engineering",
+    "phishing",
+    "scams",
+    "cybersecurity awareness",
+    "NCSC"
+  ],
+  "series_tag": "#013",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "Scammers don't hack you. They hurry you.",
+      "sub": "social engineering in four moves",
+      "say": "Most scams don't break your device. They break your judgement, using pressure. There are four tactics to know."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Authority: \"I'm from your bank\"",
+        "Urgency: \"Act within the hour\"",
+        "Emotion: panic, fear or hope",
+        "Scarcity: \"Only a few left\""
+      ],
+      "say": "The National Cyber Security Centre lists them. Authority: the message claims to be from someone official, like your bank or the tax office. Urgency: you're given a deadline. Emotion: it tries to make you panic, or get excited. Scarcity: the offer is nearly gone."
+    },
+    {
+      "kind": "big",
+      "big": "Stop. Think.",
+      "sub": "the pressure is the red flag",
+      "say": "Notice what they share. They all want you to act before you think. So the pressure itself is your warning sign."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Scam",
+        "items": [
+          "Pushes you to hurry",
+          "Wants codes or passwords",
+          "Sends a link to tap"
+        ]
+      },
+      "right": {
+        "label": "Genuine",
+        "items": [
+          "Lets you call back",
+          "Never asks for your PIN",
+          "Gives you time"
+        ]
+      },
+      "say": "If in doubt, don't reply. Hang up, then contact the organisation using a number you already trust, not the one in the message."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "$ forward scam-text to 7726",
+        "> Provider can investigate, block",
+        "$ forward scam-email to",
+        "> report@phishing.gov.uk"
+      ],
+      "say": "Got a scam text? Forward it to seven seven two six. Got a scam email? Send it to report at phishing dot gov dot UK. Follow, and stay one step ahead."
+    }
+  ],
+  "sources": [
+    "https://www.ncsc.gov.uk/collection/phishing-scams/spot-scams",
+    "https://www.ncsc.gov.uk/collection/phishing-scams/report-scam-text-message",
+    "https://www.ncsc.gov.uk/collection/phishing-scams/report-scam-email"
+  ]
+}

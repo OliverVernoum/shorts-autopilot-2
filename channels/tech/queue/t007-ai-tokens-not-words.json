@@ -1,0 +1,68 @@
+{
+  "id": "t007-ai-tokens-not-words",
+  "title": "AI doesn't read words. It reads tokens.",
+  "description": "Language models split text into tokens, not words. Here's what a token is and why it explains length limits.",
+  "tags": [
+    "tokens",
+    "context window",
+    "how ai works",
+    "large language models",
+    "tech explained"
+  ],
+  "series_tag": "#T007",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "AI reads tokens, not words",
+      "sub": "and that changes the math",
+      "say": "AI doesn't read words the way you do. It reads tokens, and that explains a lot about its limits."
+    },
+    {
+      "kind": "big",
+      "big": "~4 letters",
+      "sub": "per token, in English",
+      "say": "A token is a piece of a word. In English, it's roughly four characters."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Text is split into tokens",
+        "Tokens become numbers",
+        "Model works on the numbers",
+        "Numbers turn back into text"
+      ],
+      "say": "Before a model reads anything, your text is split into tokens. Each token is converted into numbers, and the model works on those numbers. Then its output is turned back into text."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Words",
+        "items": [
+          "What people count",
+          "'Hello' is one word"
+        ]
+      },
+      "right": {
+        "label": "Tokens",
+        "items": [
+          "What models count",
+          "Rare words split into pieces"
+        ]
+      },
+      "say": "That's why the counts differ. A common short word is often a single token. Rarer or longer words can be split into several pieces."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "100 tokens = ~75 words",
+        "1 token = ~4 characters",
+        "prompt + reply share the limit"
+      ],
+      "say": "A rule of thumb: a hundred tokens is about seventy-five English words. Length limits count tokens, and your prompt and the reply share that space. So a long prompt leaves less room for the answer. Share this with anyone who's hit a length limit."
+    }
+  ],
+  "sources": [
+    "https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them",
+    "https://developers.google.com/machine-learning/crash-course/llm/transformers"
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "id": "010-vpn-truth",
+  "title": "What a VPN hides from others, and what it doesn't",
+  "description": "A VPN changes who can see your traffic, but it doesn't make you anonymous or protect you from malware. Here's the honest version.",
+  "tags": [
+    "vpn",
+    "online privacy",
+    "public wifi",
+    "ip address",
+    "cybersecurity myths"
+  ],
+  "series_tag": "#010",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "A VPN isn't an invisibility cloak",
+      "sub": "it moves who can see what",
+      "say": "A VPN is not an invisibility cloak. It just changes who can see what."
+    },
+    {
+      "kind": "big",
+      "big": "Not anonymous",
+      "sub": "log in, and the site knows you",
+      "say": "First, the myth. A VPN doesn't make you anonymous. Log in to an account, and the site knows exactly who you are."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "$ curl ifconfig.me",
+        "> 203.0.113.42",
+        "> That's the VPN server's address",
+        "> Not your home connection"
+      ],
+      "say": "What it does change is your address. Websites see the VPN server's address, not your home one. Handy for privacy, but it only covers that one thing."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Your device encrypts the traffic",
+        "The VPN server forwards it on",
+        "The site sees the server, not you"
+      ],
+      "say": "Your traffic is encrypted on the way to the VPN server, which forwards it. So café Wi-Fi owners and your internet provider can't see what you're doing."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Hidden",
+        "items": [
+          "Your IP from websites",
+          "Traffic on public Wi-Fi",
+          "Browsing from your ISP"
+        ]
+      },
+      "right": {
+        "label": "Exposed",
+        "items": [
+          "Activity to the VPN firm",
+          "Your logins and cookies",
+          "Malware and phishing"
+        ]
+      },
+      "say": "But the VPN company sits in the middle instead, so you're trusting them. And a VPN won't stop malware or phishing. Choose carefully. Follow for more plain truths."
+    }
+  ],
+  "sources": [
+    "https://www.cloudflare.com/learning/access-management/what-is-a-vpn/"
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "id": "g002-ocarina-lock-on-explained",
+  "title": "How Ocarina of Time's lock-on button works",
+  "description": "Ocarina of Time's Z-targeting solved a big problem in 3D combat. Here is what it does, and why the fairy is there.",
+  "tags": [
+    "Ocarina of Time",
+    "Zelda",
+    "Z-targeting",
+    "Nintendo 64",
+    "game design"
+  ],
+  "series_tag": "#G002",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "One button fixed 3D combat",
+      "sub": "Ocarina of Time, 1998",
+      "say": "Ocarina of Time launched in Japan on November twenty first, 1998, and its lock-on button is one of gaming's most famous controls, which we'll explain in under a minute."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Press Z to lock on",
+        "Camera follows the target",
+        "Link always faces it"
+      ],
+      "say": "Press Z, and the camera follows your target while Link keeps facing it. Arrows and other projectiles even aim at it for you."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "> ztarget.lock(enemy)",
+        "camera.follow = enemy",
+        "link.facing = enemy",
+        "projectiles.aim = enemy",
+        "strafe = circle"
+      ],
+      "say": "That lets you circle around an enemy without losing sight of it, which was tricky to do in early three D games, where camera control was a real puzzle."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Before",
+        "items": [
+          "Free camera",
+          "Manual aiming",
+          "Enemies off screen"
+        ]
+      },
+      "right": {
+        "label": "After",
+        "items": [
+          "Locked camera",
+          "Auto-aimed shots",
+          "Circle strafing"
+        ]
+      },
+      "say": "The design team first used a plain marker. Yoshiaki Koizumi changed it into a fairy to feel less robotic, and Navi was born."
+    },
+    {
+      "kind": "big",
+      "big": "99",
+      "sub": "Metacritic score, 1998 original",
+      "say": "The original scored ninety nine on Metacritic, and a Switch 2 remake arrived on November fifth, 2026. Follow for more game design secrets."
+    }
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/The_Legend_of_Zelda:_Ocarina_of_Time",
+    "https://engadget.com/2252620/switch-2-remake-of-legend-of-zelda-ocarina-of-time-arrives-november-5"
+  ]
+}

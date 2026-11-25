@@ -1,0 +1,72 @@
+{
+  "id": "t009-battery-wear",
+  "title": "Why your phone battery slowly dies, and what speeds it up",
+  "description": "Every charge cycle wears a lithium-ion battery a little. Heat and sitting at full charge make it worse.",
+  "tags": [
+    "phone battery",
+    "lithium-ion",
+    "battery health",
+    "tech explained",
+    "how it works"
+  ],
+  "series_tag": "#T009",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "Your battery is wearing out",
+      "sub": "it started on day one",
+      "say": "Your phone battery is wearing out, and it started on your very first charge. Here's what's happening inside."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Charging pushes lithium into the anode",
+        "A thin film called SEI forms there",
+        "The film thickens every cycle",
+        "Less lithium moves, resistance rises"
+      ],
+      "say": "Charging pushes lithium ions into a graphite anode. There, a thin film called the SEI layer forms. It thickens with every cycle, and some lithium gets locked away for good. The result is less capacity and higher internal resistance."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "$ battery --status",
+        "cycles:        612",
+        "max capacity:  84% of new",
+        "temp:          31 C",
+        "# example readout"
+      ],
+      "say": "Many phones show a battery health number that tracks this wear. It's usually a percentage of the original capacity."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Harsh",
+        "items": [
+          "Heat above 86 F",
+          "Sitting at 100% for days",
+          "Full-to-empty cycles"
+        ]
+      },
+      "right": {
+        "label": "Gentler",
+        "items": [
+          "Cool, shaded spots",
+          "Shallow discharges",
+          "Moderate charge levels"
+        ]
+      },
+      "say": "Heat and full charge are the worst combo. Battery University says a battery stored full at 104 degrees Fahrenheit keeps about 65 percent after a year. Stored at 40 percent charge, it keeps about 85."
+    },
+    {
+      "kind": "big",
+      "big": "300-500",
+      "sub": "typical rated full cycles",
+      "say": "Consumer lithium-ion cells are commonly rated for 300 to 500 full cycles. Shallower discharges stretch that a lot. And there's no memory effect, so topping up is fine. Follow for more hardware, explained."
+    }
+  ],
+  "sources": [
+    "https://batteryuniversity.com/article/how-to-prolong-lithium-based-batteries",
+    "https://batteryuniversity.com/article/bu-808b-what-causes-li-ion-to-die"
+  ]
+}

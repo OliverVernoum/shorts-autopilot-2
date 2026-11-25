@@ -1,0 +1,71 @@
+{
+  "id": "t024-gps-needs-einstein",
+  "title": "GPS only works because of Einstein's relativity",
+  "description": "GPS satellite clocks drift from Earth time because of speed and gravity. Without a fix, errors would grow by kilometers every day.",
+  "tags": [
+    "gps",
+    "relativity",
+    "satellites",
+    "einstein",
+    "how gps works"
+  ],
+  "series_tag": "#T024",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "GPS needs Einstein to work",
+      "sub": "or it'd be miles off",
+      "say": "GPS only works because of Einstein. Without relativity fixes, your phone's map would drift off by kilometers within a day."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Satellite sends its time and position",
+        "Your phone times the signal delay",
+        "Delay times light speed = distance",
+        "Four satellites pin down your spot"
+      ],
+      "say": "Here's the idea. Each GPS satellite broadcasts the exact time. Your receiver measures how late the signal arrives, and multiplies by the speed of light to get distance. With four satellites in view, it can work out where you are."
+    },
+    {
+      "kind": "big",
+      "big": "1 ns = 30 cm",
+      "sub": "a clock error becomes distance",
+      "say": "But light covers about thirty centimeters in one nanosecond. So the satellite clocks must be incredibly accurate, or your position goes wrong."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Speed",
+        "items": [
+          "Orbit at ~3.9 km/s",
+          "Clocks run slower",
+          "About 7 microseconds a day"
+        ]
+      },
+      "right": {
+        "label": "Gravity",
+        "items": [
+          "Weaker at 20,200 km up",
+          "Clocks run faster",
+          "About 45 microseconds a day"
+        ]
+      },
+      "say": "And relativity messes with them. Moving fast makes satellite clocks tick slower. Weaker gravity makes them tick faster. Gravity wins by about thirty-eight microseconds a day, which would add up to roughly eleven kilometers, or seven miles, of error."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "Clock offset: +38 us/day",
+        "Fix: tune before launch",
+        "Set: 10.22999999543 MHz",
+        "Result: ticks match Earth"
+      ],
+      "say": "So engineers tune the satellite clocks slightly slow before launch. Once in orbit, they tick in step with Earth. Follow for more science behind your tech."
+    }
+  ],
+  "sources": [
+    "https://www.e-education.psu.edu/geog862/node/1714",
+    "https://www.gps.gov/systems/gps/space/"
+  ]
+}

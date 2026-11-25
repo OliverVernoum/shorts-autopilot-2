@@ -1,0 +1,69 @@
+{
+  "id": "t025-how-qr-codes-survive-damage",
+  "title": "How a QR code still scans when it's torn or smudged",
+  "description": "QR codes hold extra backup data, so a damaged code can often still be read. Here's how that works.",
+  "tags": [
+    "qr code",
+    "error correction",
+    "barcodes",
+    "how qr codes work",
+    "denso wave"
+  ],
+  "series_tag": "#T025",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "Why damaged QR codes still scan",
+      "sub": "a ripped one can still work",
+      "say": "Ever scanned a QR code that was scratched or half covered, and it still worked? That's not luck. It's built in."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "Level L: ~7% restorable",
+        "Level M: ~15% restorable",
+        "Level Q: ~25% restorable",
+        "Level H: ~30% restorable"
+      ],
+      "say": "A QR code stores extra error-correcting data alongside your message. You pick a level when you make one. Low recovers about seven percent of damage. High recovers about thirty percent."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Plain",
+        "items": [
+          "Message only",
+          "One smudge breaks it"
+        ]
+      },
+      "right": {
+        "label": "QR",
+        "items": [
+          "Message plus backup",
+          "Missing parts rebuilt"
+        ]
+      },
+      "say": "The scanner uses that backup to rebuild what's missing, using math rather than guesswork. It's like a sentence that still makes sense with a few letters smudged."
+    },
+    {
+      "kind": "big",
+      "big": "1:1:3:1:1",
+      "sub": "finder pattern ratio",
+      "say": "Those three big squares in the corners have a special ratio of black and white, one, one, three, one, one. Designers chose it because it rarely appears in print, so scanners spot it from any angle."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Find the three corner squares",
+        "Work out the orientation",
+        "Read the pattern of dark and light",
+        "Fix errors, then output the text"
+      ],
+      "say": "Denso Wave announced the QR code in 1994. Now you know why it forgives you. Want more everyday tech, explained? Hit follow."
+    }
+  ],
+  "sources": [
+    "https://www.qrcode.com/en/history/",
+    "https://www.keyence.com/ss/products/auto_id/barcode_lecture/basic_2d/qr/"
+  ]
+}

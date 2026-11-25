@@ -1,0 +1,72 @@
+{
+  "id": "015-malicious-links",
+  "title": "How to spot a malicious link without clicking it",
+  "description": "You can inspect a link safely before it ever loads. Hover, read the real domain, spot lookalikes, and ignore the padlock myth.",
+  "tags": [
+    "phishing",
+    "malicious links",
+    "URL safety",
+    "typosquatting",
+    "scam awareness"
+  ],
+  "series_tag": "#015",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "Check the link before you click it",
+      "sub": "works on phone or computer",
+      "say": "You can check a link without ever clicking it. Here's how."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "$ hover over the link",
+        "> mybank.com.login-check.xyz/pay",
+        "> Real site: login-check.xyz",
+        "> Not mybank.com"
+      ],
+      "say": "First, hover over it. On a phone, press and hold. The real address appears. Read the part just before the first single slash. In this fake, the real site is login-check dot xyz, not the bank."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Fake",
+        "items": [
+          "examp1e.com lookalike",
+          "Unfamiliar ending: .xyz",
+          "Short link hides target"
+        ]
+      },
+      "right": {
+        "label": "Real",
+        "items": [
+          "Domain matches the brand",
+          "Address you typed yourself",
+          "Bookmark or official app"
+        ]
+      },
+      "say": "Watch for lookalikes, like a number one in place of the letter L, and unfamiliar endings. Short links hide where they lead, so expand them with a link checker first."
+    },
+    {
+      "kind": "big",
+      "big": "Not proof",
+      "sub": "a padlock only means encrypted",
+      "say": "And don't trust the padlock. A scam site can use HTTPS too. It only means the connection is encrypted, not that the site is honest."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Hover or long-press the link",
+        "Read the domain before the first /",
+        "Expand short links first",
+        "Open the real site yourself",
+        "Report: report@phishing.gov.uk"
+      ],
+      "say": "Still unsure? Don't click. Open the site yourself, or forward the email to report at phishing dot gov dot UK. Follow for more tiny habits that stop big attacks."
+    }
+  ],
+  "sources": [
+    "https://www.malwarebytes.com/cybersecurity/basics/how-to-check-if-a-link-is-safe",
+    "https://www.ncsc.gov.uk/collection/phishing-scams/report-scam-email"
+  ]
+}

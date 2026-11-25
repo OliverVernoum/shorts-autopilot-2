@@ -1,0 +1,68 @@
+{
+  "id": "t016-wireless-charging",
+  "title": "How wireless charging works: two coils and a magnetic field",
+  "description": "Wireless charging isn't beaming power through the air. It's induction between two coils, with the phone and charger quietly talking.",
+  "tags": [
+    "wireless charging",
+    "Qi",
+    "induction",
+    "phone charger",
+    "tech explained"
+  ],
+  "series_tag": "#T016",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "Wireless charging is two coils",
+      "sub": "and one shared magnetic field",
+      "say": "Wireless charging looks like magic. It's really two coils of wire and a magnetic field."
+    },
+    {
+      "kind": "big",
+      "big": "100-205 kHz",
+      "sub": "Qi's typical field flip rate",
+      "say": "The charger runs alternating current through a flat coil. That makes a magnetic field that flips back and forth. Qi reference designs operate between about one hundred and two hundred kilohertz."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Charger coil carries alternating current",
+        "A changing magnetic field forms",
+        "Phone's coil picks up the field",
+        "Phone converts it to battery power"
+      ],
+      "say": "The phone's coil sits in that changing field, which pushes current through it. That's induction. The phone rectifies it into DC for the battery. It only works up close, about four centimeters at most."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Aligned",
+        "items": [
+          "Coils lined up",
+          "More efficient transfer"
+        ]
+      },
+      "right": {
+        "label": "Offset",
+        "items": [
+          "Weaker coupling",
+          "Qi2 magnets fix this"
+        ]
+      },
+      "say": "Alignment matters. That's why Qi2 adds a ring of magnets, so the phone snaps into place."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "phone: need more power",
+        "charger: raising output",
+        "phone: battery full",
+        "charger: standing by"
+      ],
+      "say": "The phone also talks back by changing the load on its coil, and the charger reads that as messages. Chargers also check for metal objects so they don't heat a coin. Follow for more."
+    }
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Qi_(standard)"
+  ]
+}

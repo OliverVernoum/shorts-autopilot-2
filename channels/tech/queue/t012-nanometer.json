@@ -1,0 +1,68 @@
+{
+  "id": "t012-nanometer",
+  "title": "What the 'nanometer' in a phone chip really means",
+  "description": "Chip nodes like 5nm or 3nm used to be real measurements. Today they work more like generation names.",
+  "tags": [
+    "nanometer",
+    "chip",
+    "process node",
+    "semiconductor",
+    "tech explained"
+  ],
+  "series_tag": "#T012",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "The 'nm' number is now a label",
+      "sub": "not a ruler measurement",
+      "say": "Your phone's chip is labeled with a size in nanometers. That number doesn't mean what you'd expect."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "node    gate length",
+        "350 nm  ~350 nm",
+        "130 nm  70 nm",
+        "22 nm   35 nm"
+      ],
+      "say": "Decades ago, the node name was a real measurement. A 0.35 micron node had gates about 0.35 microns long. But by Intel's 130 nanometer chips, the gate was already 70. At 22 nanometers, it was 35."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Then",
+        "items": [
+          "Name matched gate length",
+          "Smaller meant faster"
+        ]
+      },
+      "right": {
+        "label": "Now",
+        "items": [
+          "A generation label",
+          "Real sizes vary by feature"
+        ]
+      },
+      "say": "New transistor shapes changed performance without tracking the name. Intel's Mark Bohr said some dimensions are smaller than the node name, and others are larger. One foundry's 14 nanometer chips used the same wiring density as its 20."
+    },
+    {
+      "kind": "big",
+      "big": "Not a ruler",
+      "sub": "so compare with care",
+      "say": "Researchers have noted that the label is decoupled from the real gate length, so one company's number isn't directly comparable to another's."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Transistors per square millimeter",
+        "Speed at the same power",
+        "Battery life in real tests"
+      ],
+      "say": "Better things to compare are transistor density, performance per watt, and real-world results. Follow for more chip talk."
+    }
+  ],
+  "sources": [
+    "https://spectrum.ieee.org/the-status-of-moores-law-its-complicated",
+    "https://www.pcgamer.com/chipmaking-process-node-naming-lmc-paper"
+  ]
+}

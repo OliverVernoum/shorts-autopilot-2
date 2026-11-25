@@ -1,0 +1,70 @@
+{
+  "id": "t002-united-blocks-ai-agents",
+  "title": "Why United Airlines is blocking personal AI agents",
+  "description": "United announced it is restricting unauthorized third-party AI agents from its app and website. Here's what an AI agent is and why airlines worry.",
+  "tags": [
+    "ai agents",
+    "united airlines",
+    "ai security",
+    "tech news",
+    "tech explained"
+  ],
+  "series_tag": "#T002",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "Why United blocked AI agents",
+      "sub": "announced Nov 11",
+      "say": "United Airlines announced it's blocking unauthorized third-party AI agents from its app and website."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Chatbot",
+        "items": [
+          "Answers questions",
+          "Writes text",
+          "Stays in the chat"
+        ]
+      },
+      "right": {
+        "label": "Agent",
+        "items": [
+          "Uses sites and apps",
+          "Clicks and fills forms",
+          "Acts for you"
+        ]
+      },
+      "say": "First, what's an AI agent? A chatbot answers questions. An agent goes further. It can use websites and apps to carry out tasks for you, like booking a flight."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "You give it a goal",
+        "It logs in on your behalf",
+        "It clicks, types, and pays",
+        "You review what it did"
+      ],
+      "say": "To do that, it needs access. You give it a goal, it logs in as you, clicks through the pages, and pays. Afterward, you review what it did."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "concern 1: shared credentials",
+        "concern 2: unintended purchases",
+        "concern 3: human check-in rules"
+      ],
+      "say": "United named three concerns. Sharing your login with a third party. An agent buying things or redeeming miles you didn't intend. And rules like check-in, where a person must confirm what's in their bags."
+    },
+    {
+      "kind": "big",
+      "big": "Who clicks?",
+      "sub": "who's allowed to act as you",
+      "say": "United says it will review the policy as AI assistants evolve. The bigger question is who gets to click for you. Follow if you want AI explained without the jargon."
+    }
+  ],
+  "sources": [
+    "https://skift.com/2026/11/11/united-airlines-moves-to-block-personal-ai-agents-from-booking-flights/",
+    "https://www.businesstravelnews.com/transportation/air/united-restricts-unauthorized-third-party-ai-agent-access"
+  ]
+}

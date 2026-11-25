@@ -1,0 +1,67 @@
+{
+  "id": "g009-mario-64-blj-explained",
+  "title": "Mario 64's backwards long jump, explained",
+  "description": "The BLJ is Super Mario 64's most famous speedrun glitch. Here is how it works and why Nintendo patched it later.",
+  "tags": [
+    "Super Mario 64",
+    "BLJ",
+    "speedrun techniques",
+    "Nintendo 64",
+    "gaming glitches"
+  ],
+  "series_tag": "#G009",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "Mario 64's strangest trick",
+      "sub": "the backwards long jump",
+      "say": "Super Mario 64 has a glitch where jumping backwards makes you absurdly fast. Speedrunners call it the B L J."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Find a steep slope or stairs",
+        "Long jump backwards, repeatedly",
+        "Speed climbs with each jump"
+      ],
+      "say": "The trick is repeated backwards long jumps on a steep slope or stairs. Each jump builds more speed."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "> blj.repeat()",
+        "speed: climbing...",
+        "speed: way past intended",
+        "use: speedrun skips"
+      ],
+      "say": "Mario reaches very high speed values, far beyond what the designers intended. Speedrunners use that speed to skip huge parts of the game."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Normal",
+        "items": [
+          "Capped feel",
+          "Walk the whole level"
+        ]
+      },
+      "right": {
+        "label": "BLJ",
+        "items": [
+          "Huge speed",
+          "Skip big sections"
+        ]
+      },
+      "say": "It saves enormous time, and it turned a small physics quirk into a core part of Mario 64 speedrunning. Players practise it for hours, because one mistake costs the whole run."
+    },
+    {
+      "kind": "big",
+      "big": "Patched",
+      "sub": "in later re-releases",
+      "say": "It was patched in the 1997 Rumble Pak version and later re-releases, so speedrunners stick to the original. Follow for more speedrun secrets."
+    }
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Super_Mario_64"
+  ]
+}

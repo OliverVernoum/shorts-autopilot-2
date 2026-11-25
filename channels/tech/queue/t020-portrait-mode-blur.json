@@ -1,0 +1,68 @@
+{
+  "id": "t020-portrait-mode-blur",
+  "title": "How your phone fakes that blurry portrait background",
+  "description": "Phone lenses are too small for real background blur, so portrait mode simulates it using a depth map and software.",
+  "tags": [
+    "portrait mode",
+    "bokeh",
+    "phone camera",
+    "computational photography",
+    "tech explained"
+  ],
+  "series_tag": "#T020",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "Your phone's blur is mostly software",
+      "sub": "portrait mode, explained",
+      "say": "Portrait mode looks like a pro camera. But a phone lens is tiny, so nearly everything is in focus."
+    },
+    {
+      "kind": "big",
+      "big": "Simulated",
+      "sub": "blur added after the shot",
+      "say": "Real background blur needs a large lens opening. A phone's aperture is small and fixed, so the blur gets simulated in software."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Take a sharp, in-focus photo",
+        "A neural network outlines the person",
+        "Estimate depth for each pixel",
+        "Blur more the farther away it is"
+      ],
+      "say": "Google's Pixel 2 pipeline is a good example. A network masks the person. The camera estimates depth from the slight difference between two halves of each sensor pixel. Then background pixels are blurred in proportion to distance."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "subject   0.8 m   sharp",
+        "tree      4 m     soft",
+        "building  30 m    very soft",
+        "# example depth map"
+      ],
+      "say": "Because it's software, the blur can be any shape. The catch is that blank walls and repeating patterns can confuse the depth estimate, and the mask can miss unusual subjects. That's when edges look odd."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Lens",
+        "items": [
+          "Large aperture",
+          "Optical blur"
+        ]
+      },
+      "right": {
+        "label": "Software",
+        "items": [
+          "Small aperture",
+          "Computed blur"
+        ]
+      },
+      "say": "So lens blur is optics. Phone blur is math. Both can look great, and one fits in your pocket. Follow for more."
+    }
+  ],
+  "sources": [
+    "https://research.google/blog/portrait-mode-on-the-pixel-2-and-pixel-2-xl-smartphones/"
+  ]
+}

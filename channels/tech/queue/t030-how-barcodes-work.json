@@ -1,0 +1,68 @@
+{
+  "id": "t030-how-barcodes-work",
+  "title": "Your barcode doesn't contain the price. Here's what it does",
+  "description": "A barcode is just an ID number, printed as bars. The price lives in the store's database.",
+  "tags": [
+    "barcode",
+    "upc",
+    "gs1",
+    "retail technology",
+    "how barcodes work"
+  ],
+  "series_tag": "#T030",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "A barcode doesn't hold the price",
+      "sub": "so what does it hold?",
+      "say": "The barcode on your snack doesn't contain its price. So what do those stripes actually say?"
+    },
+    {
+      "kind": "big",
+      "big": "June 26, 1974",
+      "sub": "first scan, in Troy, Ohio",
+      "say": "The first barcode scanned at a checkout was on a ten-pack of Wrigley's Juicy Fruit gum, in Troy, Ohio, on June twenty-sixth, nineteen seventy-four."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Scanner shines light on the bars",
+        "Dark and light bars reflect differently",
+        "Widths become digits",
+        "Check digit confirms a clean read"
+      ],
+      "say": "The bars are a code for a number. A scanner shines light across them and reads the pattern of dark and light. The last digit is a check digit, calculated from the others, so the scanner knows if it misread."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "scan   -> 012345678905",
+        "check  -> last digit is 5",
+        "system -> item + current price"
+      ],
+      "say": "Here's an example number. The scanner sends it to the store's system, which replies with the item and price."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Barcode",
+        "items": [
+          "An identifier number",
+          "Same everywhere"
+        ]
+      },
+      "right": {
+        "label": "Store",
+        "items": [
+          "Looks up the price",
+          "Can change anytime"
+        ]
+      },
+      "say": "That number just identifies the product. The store's computer looks it up and finds the price. So prices can change without a single sticker being reprinted. The barcode is only a name tag. The store holds everything else. Follow for more everyday tech."
+    }
+  ],
+  "sources": [
+    "https://www.gs1.org/articles/marsh-holds-place-honor-history-gs1-barcode",
+    "https://www.gs1.org/services/check-digit-calculator"
+  ]
+}

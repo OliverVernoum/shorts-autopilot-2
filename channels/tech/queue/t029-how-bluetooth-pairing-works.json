@@ -1,0 +1,69 @@
+{
+  "id": "t029-how-bluetooth-pairing-works",
+  "title": "How Bluetooth pairs two devices and why it hops channels",
+  "description": "Bluetooth devices swap secret keys when pairing, then hop across radio channels to dodge interference.",
+  "tags": [
+    "bluetooth",
+    "pairing",
+    "frequency hopping",
+    "wireless",
+    "how bluetooth works"
+  ],
+  "series_tag": "#T029",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "How Bluetooth pairing works",
+      "sub": "and why it hops channels",
+      "say": "Two gadgets that have never met suddenly trust each other. How does Bluetooth pull that off?"
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Devices find each other",
+        "You confirm on screen or with a code",
+        "They create shared secret keys",
+        "Keys are saved: this is bonding"
+      ],
+      "say": "That's pairing. The devices create shared secret keys, often with you confirming a number or passkey, which helps block a man in the middle. Saving those keys is called bonding, so they can trust each other next time."
+    },
+    {
+      "kind": "big",
+      "big": "2.4 GHz band",
+      "sub": "2.402 to 2.480 GHz, shared",
+      "say": "Then they talk over the crowded two point four gigahertz band, which is unlicensed, so lots of gadgets use it. That makes interference a real problem."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Classic",
+        "items": [
+          "79 channels",
+          "1 MHz apart"
+        ]
+      },
+      "right": {
+        "label": "LE",
+        "items": [
+          "40 channels",
+          "2 MHz apart"
+        ]
+      },
+      "say": "To dodge interference, Bluetooth hops between channels. Classic uses seventy-nine. Low Energy uses forty, three for advertising, and thirty-seven for data."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "hop 1: channel 12",
+        "hop 2: channel 53",
+        "hop 3: channel 7",
+        "bad channel? skip it"
+      ],
+      "say": "It can even adapt, keeping a map of good and bad channels and avoiding the noisy ones. Two devices, one shared secret, and a constant dance across the radio band. Follow for more wireless explainers."
+    }
+  ],
+  "sources": [
+    "https://www.bluetooth.com/learn-about-bluetooth/tech-overview/",
+    "https://support.apple.com/guide/security/sec82597d97e/web"
+  ]
+}

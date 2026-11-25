@@ -1,0 +1,68 @@
+{
+  "id": "g010-et-burial-myth-vs-fact",
+  "title": "The Atari E.T. burial: what was really in the ground",
+  "description": "Atari buried games in a New Mexico landfill in 1983. When diggers returned in 2014, they found a different story than the myth.",
+  "tags": [
+    "Atari",
+    "E.T. burial",
+    "video game crash",
+    "gaming history",
+    "retro gaming"
+  ],
+  "series_tag": "#G010",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "The great E.T. burial",
+      "sub": "what was really in the ground",
+      "say": "In 1983, Atari dumped games in a New Mexico landfill. The legend says millions of E.T. cartridges. The truth is stranger."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Myth",
+        "items": [
+          "Millions of E.T. carts",
+          "Only E.T. was buried"
+        ]
+      },
+      "right": {
+        "label": "Fact",
+        "items": [
+          "About 728,000 carts",
+          "59 games found"
+        ]
+      },
+      "say": "Atari's own manager said only about seven hundred twenty eight thousand cartridges were buried, across many different games, not just one."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Sept 1983: landfill, New Mexico",
+        "Apr 26, 2014: excavation",
+        "About 1,300 carts recovered"
+      ],
+      "say": "Diggers returned on April twenty sixth, 2014, for the documentary Atari: Game Over. They recovered about thirteen hundred cartridges."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "> dig.log",
+        "site: Alamogordo, NM",
+        "recovered: ~1,300 carts",
+        "titles: 59 games",
+        "E.T. share: unknown"
+      ],
+      "say": "The E.T. share is unknown. Designer Howard Scott Warshaw doubted millions were ever destroyed, and Atari made about five million copies, selling roughly one and a half million."
+    },
+    {
+      "kind": "big",
+      "big": "728,000",
+      "sub": "buried, not millions",
+      "say": "So the myth was bigger than the dump, and the truth is still a great story. Follow for more gaming history, myths busted."
+    }
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Atari_video_game_burial"
+  ]
+}

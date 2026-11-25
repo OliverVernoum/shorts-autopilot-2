@@ -1,0 +1,72 @@
+{
+  "id": "016-red-blue-purple",
+  "title": "Red team vs blue team vs purple team: which job is yours?",
+  "description": "Red teams attack with permission, blue teams defend, and purple means both sides share what they learn. Here's what each cyber career involves.",
+  "tags": [
+    "red team",
+    "blue team",
+    "purple team",
+    "cybersecurity careers",
+    "penetration testing"
+  ],
+  "series_tag": "#016",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "Hackers you can legally hire",
+      "sub": "red, blue and purple teams",
+      "say": "Some people get paid to hack companies, with permission. Others get paid to stop them."
+    },
+    {
+      "kind": "big",
+      "big": "Red = attack",
+      "sub": "authorised, simulated attackers",
+      "say": "The red team plays the attacker. It's authorised to imitate a real adversary, to show which defences actually hold up."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Red",
+        "items": [
+          "Thinks like an attacker",
+          "Penetration tester",
+          "Finds the gaps"
+        ]
+      },
+      "right": {
+        "label": "Blue",
+        "items": [
+          "Monitors and responds",
+          "Security analyst",
+          "Fixes the gaps"
+        ]
+      },
+      "say": "The blue team defends. They watch the systems, spot attacks, and respond. Job titles you'll see include penetration tester on the red side, and security operations analyst on the blue."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "red   : fake phish sent, 3 clicked",
+        "blue  : alert missed",
+        "purple: write new detection rule",
+        "red   : retest, blue catches it"
+      ],
+      "say": "Purple isn't always a separate team. It's red and blue working together. Red shares how it got in, blue tunes its detection, and they test again."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Learn networking and Linux basics",
+        "Practise only in legal labs and CTFs",
+        "Write up what you learn",
+        "Pick a colour: attack or defend"
+      ],
+      "say": "Want in? Learn networking and Linux, practise only on labs and games you're allowed to use, and write up what you learn. Follow, and pick your colour."
+    }
+  ],
+  "sources": [
+    "https://csrc.nist.gov/glossary/term/red_team_blue_team_approach",
+    "https://csrc.nist.gov/glossary/term/red_team",
+    "https://www.techtarget.com/cybersecurity/tip/Red-vs-blue-vs-purple-team-What-are-the-differences"
+  ]
+}

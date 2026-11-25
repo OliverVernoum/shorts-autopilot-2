@@ -1,0 +1,70 @@
+{
+  "id": "011-mitm",
+  "title": "Man-in-the-middle attacks in under a minute",
+  "description": "A man-in-the-middle attack puts a stranger between you and the website you're using. Here's how it works and how HTTPS keeps it in check.",
+  "tags": [
+    "man in the middle",
+    "mitm attack",
+    "https",
+    "public wifi",
+    "certificate warning"
+  ],
+  "series_tag": "#011",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "A stranger reading your mail",
+      "sub": "man-in-the-middle, in under a minute",
+      "say": "A man-in-the-middle attack puts a stranger between you and a website, passing messages along while reading them."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "You join a fake Wi-Fi hotspot",
+        "Attacker relays your traffic",
+        "They read or change what passes",
+        "You notice nothing"
+      ],
+      "say": "It often starts with a fake Wi-Fi hotspot, named like a real café's. Your traffic flows through the attacker, who can read or change anything unprotected, while everything looks normal."
+    },
+    {
+      "kind": "big",
+      "big": "HTTPS + certs",
+      "sub": "encryption, plus proof of who's there",
+      "say": "The defence is HTTPS. It encrypts your traffic, and certificates prove the site is genuine. So a middleman sees scrambled data, and can't easily pose as the real site."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "$ open https://bank.example",
+        "> Your connection is not private",
+        "> NET::ERR_CERT_AUTHORITY_INVALID",
+        "> Certificate can't be trusted"
+      ],
+      "say": "If your browser shows a warning like this, stop. It might be harmless, but it's exactly what interception can look like. Don't click through."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Do",
+        "items": [
+          "Check the network's real name",
+          "Keep your devices updated",
+          "Heed certificate warnings"
+        ]
+      },
+      "right": {
+        "label": "Don't",
+        "items": [
+          "Click through warnings",
+          "Log in over plain http",
+          "Auto-join open networks"
+        ]
+      },
+      "say": "So check the network name, keep devices updated, and never ignore certificate warnings. Follow, and catch the next threat soon."
+    }
+  ],
+  "sources": [
+    "https://www.cloudflare.com/learning/security/threats/man-in-the-middle-attack/"
+  ]
+}

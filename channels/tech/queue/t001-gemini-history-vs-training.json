@@ -1,0 +1,69 @@
+{
+  "id": "t001-gemini-history-vs-training",
+  "title": "Your AI chat history and AI training are not the same thing",
+  "description": "Google announced Gemini will let you keep chat history while opting out of model training. Here's what each setting actually means.",
+  "tags": [
+    "gemini",
+    "ai privacy",
+    "chat history",
+    "ai training",
+    "tech explained"
+  ],
+  "series_tag": "#T001",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "History and training are different",
+      "sub": "Google just split them in Gemini",
+      "say": "Your AI chat history and AI training are two different things, and Google just split them apart in Gemini."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "History",
+        "items": [
+          "Saved for you",
+          "Scroll back to old chats"
+        ]
+      },
+      "right": {
+        "label": "Training",
+        "items": [
+          "Helps improve future AI",
+          "Used by the company"
+        ]
+      },
+      "say": "History is for you. It lets you scroll back through old chats. Training is for the model. It means conversations can be used to help improve future AI. Those are separate ideas."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "history = on",
+        "training = off",
+        "> chats saved for you",
+        "> not used to train models"
+      ],
+      "say": "On November sixteenth, Google announced that Gemini users can keep history on while opting out of training. It's rolling out globally over the coming weeks."
+    },
+    {
+      "kind": "big",
+      "big": "~2 months",
+      "sub": "chats kept with History off",
+      "say": "One catch. With history off, Google says chats are still kept for around two months, to respond to you, handle feedback, and keep people safe."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Open your AI app's settings",
+        "Find history and training",
+        "Read what each one controls",
+        "Check how long chats are kept"
+      ],
+      "say": "Whatever AI app you use, check two things. What does it save, and what does it learn from? They can be separate switches, and they're worth finding. Follow Pocket Silicon for more AI explained simply."
+    }
+  ],
+  "sources": [
+    "https://blog.google/innovation-and-ai/products/gemini-app/updated-controls/",
+    "https://androidcentral.com/apps-software/ai/you-can-now-keep-your-gemini-history-without-feeding-googles-training-pipeline"
+  ]
+}

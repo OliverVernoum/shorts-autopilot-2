@@ -1,0 +1,55 @@
+{
+  "id": "g008-tetris-level-29-kill-screen",
+  "title": "Tetris' 'kill screen' wasn't the end after all",
+  "description": "NES Tetris was thought unbeatable past level 29. Players broke that, and in 2023 a teenager crashed the game.",
+  "tags": [
+    "Tetris",
+    "NES Tetris",
+    "speedrun",
+    "Blue Scuti",
+    "gaming records"
+  ],
+  "series_tag": "#G008",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "Tetris was 'unbeatable'",
+      "sub": "until a 13-year-old crashed it",
+      "say": "For years, NES Tetris was considered impossible past level twenty nine. Then players kept proving that wrong."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "2011: Thor Aackerlund beats 29",
+        "2018: Joseph Saelee hits 31",
+        "2020: hypertappers reach 38"
+      ],
+      "say": "In 2011, Thor Aackerlund showed level twenty nine could be beaten. Joseph Saelee reached level thirty one in 2018, and hypertappers hit thirty eight by 2020."
+    },
+    {
+      "kind": "big",
+      "big": "Level 29",
+      "sub": "pieces fall 1 row per frame",
+      "say": "On level twenty nine, pieces fall one row every frame. That's too fast for almost everyone, so for years it looked like a hard wall."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "> rolling.technique()",
+        "dev: Chris Martinez, 2020",
+        "result: level 29 speed, sustained",
+        "next: level 148...157"
+      ],
+      "say": "A technique called rolling, developed in 2020, let players survive that speed. On December twenty first, 2023, thirteen year old Willis Gibson played past level one forty eight, and the game crashed at level one fifty seven."
+    },
+    {
+      "kind": "big",
+      "big": "157",
+      "sub": "crash level, Dec 2023",
+      "say": "That crash is popularly counted as beating Tetris, since the game can't truly be won. Follow for more record breakers and gaming history."
+    }
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Tetris_(NES_video_game)"
+  ]
+}

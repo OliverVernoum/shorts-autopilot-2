@@ -1,0 +1,68 @@
+{
+  "id": "t028-latency-vs-bandwidth",
+  "title": "Fast internet isn't just speed: latency vs bandwidth explained",
+  "description": "Bandwidth is how much data fits through, and latency is how long it takes to arrive. Gamers and video callers feel the difference.",
+  "tags": [
+    "latency",
+    "bandwidth",
+    "ping",
+    "internet speed",
+    "networking basics"
+  ],
+  "series_tag": "#T028",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "Fast internet is two things",
+      "sub": "and most people only check one",
+      "say": "Internet speed isn't one number. It's two. And a speed test only checks one of them."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Bandwidth",
+        "items": [
+          "How much data fits through",
+          "Like a pipe's width"
+        ]
+      },
+      "right": {
+        "label": "Latency",
+        "items": [
+          "Time for data to arrive",
+          "Like a pipe's length"
+        ]
+      },
+      "say": "Bandwidth is capacity, the maximum data at once. Latency is time, how long one piece takes to get there. A wide pipe can still be a long one."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "ping near-server",
+        "reply from 203.0.113.5: 8 ms",
+        "ping far-server",
+        "reply from 198.51.100.7: 45 ms"
+      ],
+      "say": "Ping measures latency. Distance matters most. Cloudflare says users around a hundred miles from a server see roughly five to ten milliseconds, but around twenty-two hundred miles away, forty to fifty."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Distance to the server",
+        "Networks crossed on the way",
+        "Equipment along the path",
+        "Wi-Fi instead of cable"
+      ],
+      "say": "Several things add delay. Distance, the number of networks crossed, equipment on the path, and even using Wi-Fi instead of Ethernet."
+    },
+    {
+      "kind": "big",
+      "big": "Both matter",
+      "sub": "bandwidth for streams, latency for games",
+      "say": "So streaming loves bandwidth, but games and video calls care far more about latency. Next time your connection feels slow, ask which one is the problem. Follow for more networking basics, explained simply."
+    }
+  ],
+  "sources": [
+    "https://www.cloudflare.com/learning/performance/glossary/what-is-latency/"
+  ]
+}

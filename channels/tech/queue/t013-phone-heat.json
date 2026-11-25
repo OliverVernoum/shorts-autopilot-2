@@ -1,0 +1,69 @@
+{
+  "id": "t013-phone-heat",
+  "title": "Why your phone gets hot, and what it does about it",
+  "description": "Your phone has no fan, so heat has to go somewhere. Here's why it warms up and how it protects itself.",
+  "tags": [
+    "phone overheating",
+    "thermal throttling",
+    "phone heat",
+    "tech explained",
+    "hardware"
+  ],
+  "series_tag": "#T013",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "No fan, so where does heat go?",
+      "sub": "your phone's cooling problem",
+      "say": "Your phone can get uncomfortably hot, and it has no fan. Here's why, and what it does about it."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Chip works hard and draws power",
+        "Electricity turns into heat",
+        "Heat spreads through the frame",
+        "Hot phone slows itself down"
+      ],
+      "say": "Chips turn electricity into heat. Gaming, video calls and charging all add more. Most phones are too thin for fans, so heat has to spread through internal parts and out the body. When it builds up, the phone slows its processor to protect itself."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "[thermal] temp: high",
+        "charging: on hold",
+        "display: dimming",
+        "app frame rate: reduced"
+      ],
+      "say": "Then you start to notice. Apple says a hot iPhone may slow or pause charging, dim the display, and lower app frame rates. Even the cellular signal can weaken."
+    },
+    {
+      "kind": "big",
+      "big": "0-35 C",
+      "sub": "Apple's ideal range",
+      "say": "Apple lists zero to thirty-five degrees Celsius as the ideal ambient range for iPhones. That's thirty-two to ninety-five Fahrenheit. Heat also ages the battery, so a hot dashboard does double damage."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Do",
+        "items": [
+          "Remove a thick case",
+          "Move out of direct sun"
+        ]
+      },
+      "right": {
+        "label": "Avoid",
+        "items": [
+          "Gaming in a hot car",
+          "Charging in direct sun"
+        ]
+      },
+      "say": "A warm phone is normal. A phone that stays hot is worth checking. Follow for more."
+    }
+  ],
+  "sources": [
+    "https://support.apple.com/118431",
+    "https://www.androidcentral.com/phones/tech-talk-why-does-my-phone-get-hot"
+  ]
+}

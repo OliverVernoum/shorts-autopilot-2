@@ -1,0 +1,71 @@
+{
+  "id": "014-public-key",
+  "title": "Public-key encryption explained with paint",
+  "description": "How can two strangers agree a secret while everyone watches? The classic paint-mixing analogy for public-key key exchange, and how HTTPS uses it.",
+  "tags": [
+    "public key cryptography",
+    "Diffie-Hellman",
+    "encryption",
+    "HTTPS",
+    "TLS"
+  ],
+  "series_tag": "#014",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "How strangers share a secret in public",
+      "sub": "the paint trick behind HTTPS",
+      "say": "How can two strangers agree on a secret while everyone is listening? With paint."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Public",
+        "items": [
+          "Starting colour: yellow",
+          "Your mix, sent openly",
+          "Their mix, sent openly"
+        ]
+      },
+      "right": {
+        "label": "Private",
+        "items": [
+          "Your own secret colour",
+          "Never sent to anyone",
+          "Their own secret colour"
+        ]
+      },
+      "say": "You both agree on a public colour, say yellow. Each of you also picks a private colour, and never shares it."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Mix your private colour into yellow",
+        "Swap the mixtures in the open",
+        "Add your private colour again",
+        "Both end with the same shade"
+      ],
+      "say": "Mix your private colour into the yellow, then swap mixtures in the open. Now add your private colour once more. You both end up with the exact same shade, but a spy can't unmix paint to find it."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "$ curl -v https://example.com",
+        "* TLSv1.3 handshake done",
+        "* Key exchange: X25519",
+        "* Cipher: AES-256-GCM"
+      ],
+      "say": "That's the Diffie-Hellman idea. Computers do it with maths instead of paint. Your browser does it whenever you connect over HTTPS, then uses the shared secret as a fast key for the rest of the chat."
+    },
+    {
+      "kind": "big",
+      "big": "No secret sent",
+      "sub": "the hard part is unmixing",
+      "say": "The secret itself never travels. Only the mixes do, and reversing them is the hard part. Follow for more security, minus the jargon."
+    }
+  ],
+  "sources": [
+    "https://www.cloudflare.com/learning/ssl/what-is-asymmetric-encryption/",
+    "https://www.cloudflare.com/learning/ssl/what-happens-in-a-tls-handshake/"
+  ]
+}

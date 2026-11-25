@@ -1,0 +1,70 @@
+{
+  "id": "t015-ssd-storage",
+  "title": "How an SSD remembers your files with no power",
+  "description": "SSDs and phone storage trap electrons in tiny cells. Here's how that stores bits, and why cells wear out.",
+  "tags": [
+    "SSD",
+    "flash memory",
+    "NAND",
+    "phone storage",
+    "tech explained"
+  ],
+  "series_tag": "#T015",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "SSDs store data as trapped electrons",
+      "sub": "no moving parts, no power needed",
+      "say": "An SSD has no spinning parts and needs no power to remember your files. So what is it actually storing?"
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "type  bits/cell  erase cycles",
+        "SLC   1          ~100,000",
+        "MLC   2          fewer",
+        "TLC   3          ~3,000",
+        "QLC   4          fewer still"
+      ],
+      "say": "Each cell has a floating gate. Electrons get pushed in through a thin oxide layer and stay trapped. That charge is your data. Pack more charge levels into a cell and it holds more bits. That's cheaper and denser, but it endures fewer erases."
+    },
+    {
+      "kind": "big",
+      "big": "P/E cycles",
+      "sub": "how flash wear is rated",
+      "say": "Every program and erase cycle wears a cell a little. Endurance is rated in those cycles, and the numbers shown are rough figures."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "SSD",
+        "items": [
+          "Trapped electrons",
+          "No moving parts",
+          "Wear-leveling controller"
+        ]
+      },
+      "right": {
+        "label": "HDD",
+        "items": [
+          "Magnetized spinning platters",
+          "Moving read/write head"
+        ]
+      },
+      "say": "Unlike a hard drive's spinning platters, flash has no moving parts. A controller spreads writes around, called wear leveling, so no block dies first."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Controller sends a write command",
+        "Electrons tunnel into the gate",
+        "Charge stays when power is off",
+        "Erasing pulls the charge back out"
+      ],
+      "say": "Saving a file pushes electrons into cells. They stay even without power. Erasing pulls them back out. Your phone's storage works on the same flash idea. Follow for more."
+    }
+  ],
+  "sources": [
+    "https://www.ibm.com/think/topics/nand-flash"
+  ]
+}

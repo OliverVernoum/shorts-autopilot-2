@@ -1,0 +1,69 @@
+{
+  "id": "t006-chatbot-next-word",
+  "title": "How a chatbot decides what to say, one piece at a time",
+  "description": "A chatbot builds its reply by predicting the next token, again and again. Here's the loop behind every AI answer.",
+  "tags": [
+    "how chatbots work",
+    "large language models",
+    "ai explained",
+    "next token",
+    "tech explained"
+  ],
+  "series_tag": "#T006",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "Chatbots predict the next word",
+      "sub": "one piece at a time",
+      "say": "A chatbot doesn't know the whole answer before it starts. It predicts what comes next, one piece at a time."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "prompt: The cat sat on the",
+        "mat    -> likely",
+        "sofa   -> possible",
+        "piano  -> unlikely"
+      ],
+      "say": "Give it the start of a sentence, like the cat sat on the. The model scores every possible next piece of text. Mat might score high, sofa lower, and piano lower still. These scores are just an illustration."
+    },
+    {
+      "kind": "big",
+      "big": "Token by token",
+      "sub": "not whole answers at once",
+      "say": "Those pieces are called tokens, and they can be whole words or fragments of words."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Read the text so far",
+        "Score every possible token",
+        "Pick one",
+        "Add it and repeat"
+      ],
+      "say": "Then it picks one, adds it to the text, and runs again. Pick, add, repeat, until the answer is done. Your whole reply is built by that loop."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Myth",
+        "items": [
+          "Retrieves a ready answer",
+          "Follows a stored script"
+        ]
+      },
+      "right": {
+        "label": "Fact",
+        "items": [
+          "Scores possible next tokens",
+          "Builds replies in pieces"
+        ]
+      },
+      "say": "So it isn't pulling a script off a shelf. Training on huge amounts of text taught it patterns, and it uses them to score what comes next. Next time a chatbot surprises you, remember this loop. Follow for more."
+    }
+  ],
+  "sources": [
+    "https://developers.google.com/machine-learning/crash-course/llm/transformers",
+    "https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them"
+  ]
+}

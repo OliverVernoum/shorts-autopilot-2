@@ -1,0 +1,70 @@
+{
+  "id": "009-passkeys",
+  "title": "Passkeys vs passwords: what actually changes?",
+  "description": "Passkeys replace a shared secret with a pair of cryptographic keys. Here's why that makes phishing and password leaks far less useful to attackers.",
+  "tags": [
+    "passkeys",
+    "passwords",
+    "fido alliance",
+    "phishing resistant",
+    "authentication"
+  ],
+  "series_tag": "#009",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "No password to steal",
+      "sub": "passkeys, explained",
+      "say": "What if there was no password for a hacker to steal? That's the idea behind passkeys."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Password",
+        "items": [
+          "A secret you share",
+          "Can be phished or reused",
+          "Exposed in site breaches"
+        ]
+      },
+      "right": {
+        "label": "Passkey",
+        "items": [
+          "Private key stays with you",
+          "Tied to the real website",
+          "Site holds public key only"
+        ]
+      },
+      "say": "A password is a secret you hand to the website, so anyone who learns it can use it. With a passkey, your device holds a private key, and the site keeps only the matching public key."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "$ login bank.example",
+        "> Site sends a random challenge",
+        "> Device signs it: private key",
+        "> Fingerprint or PIN approves",
+        "> Site checks signature: OK"
+      ],
+      "say": "Logging in goes like this. The site sends a random challenge. Your device signs it, after you approve with a fingerprint, face or PIN. Nothing reusable crosses the internet."
+    },
+    {
+      "kind": "big",
+      "big": "Bound to site",
+      "sub": "a fake page gets nothing usable",
+      "say": "Each passkey is tied to the real website, so a lookalike phishing page can't trigger a login. That's why passkeys resist phishing."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Open your account security settings",
+        "Choose Create a passkey",
+        "Keep your device backup switched on"
+      ],
+      "say": "To try one, open your account's security settings and create a passkey. Keep your backup on, so you don't get locked out. Follow for the next one."
+    }
+  ],
+  "sources": [
+    "https://fidoalliance.org/passkeys/"
+  ]
+}

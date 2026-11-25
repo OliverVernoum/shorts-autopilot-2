@@ -1,0 +1,69 @@
+{
+  "id": "t022-undersea-internet-cables",
+  "title": "The internet crosses oceans on cables, not satellites",
+  "description": "Over 99% of intercontinental data travels through cables on the seabed. Here is how light and electricity make that work.",
+  "tags": [
+    "undersea cables",
+    "submarine cables",
+    "internet infrastructure",
+    "fiber optic",
+    "how the internet works"
+  ],
+  "series_tag": "#T022",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "Your internet lives underwater",
+      "sub": "not in the sky",
+      "say": "You might think satellites carry the internet across oceans. They don't. Submarine cables carry over ninety-nine percent of intercontinental data."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Data becomes pulses of light",
+        "Light travels through glass fiber",
+        "Repeaters boost the signal",
+        "Landing station hands it to land"
+      ],
+      "say": "Inside each cable are optical fibers. Your data is turned into flashes of light that race through glass. Over thousands of kilometers, the light fades, so repeaters along the cable boost it."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "Landing station A: +power",
+        "  ==> DC runs along the cable",
+        "  repeater ... repeater ...",
+        "Landing station B: +power"
+      ],
+      "say": "Those repeaters sit on the seabed, far from any plug. So power is fed from the landing stations on shore, as a steady direct current running along the cable itself."
+    },
+    {
+      "kind": "big",
+      "big": "17-24 mm",
+      "sub": "typical cable width",
+      "say": "And the cable is thin. Typically just seventeen or twenty-four millimeters across. Wider means more expensive, which limits how many fibers fit inside, and how much power can be shared."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Satellite",
+        "items": [
+          "Tiny share of traffic",
+          "Long signal trip"
+        ]
+      },
+      "right": {
+        "label": "Cable",
+        "items": [
+          "Over 99% of traffic",
+          "Light through glass"
+        ]
+      },
+      "say": "So the next time you stream something from another continent, thank a cable on the ocean floor. Follow for more of how the internet really works."
+    }
+  ],
+  "sources": [
+    "https://resources.telegeography.com/2023-mythbusting-part-3",
+    "https://ingenia.org.uk/articles/the-cables-carrying-our-digital-world-underneath-oceans/"
+  ]
+}

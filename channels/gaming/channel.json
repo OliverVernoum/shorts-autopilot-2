@@ -1,0 +1,115 @@
+{
+  "name": "Boss Room Archive",
+  "tagline": "The secrets games never put in the manual.",
+  "voice": "en-US-AndrewNeural",
+  "rate": "+10%",
+  "privacy": "public",
+  "category_id": "20",
+  "made_for_kids": false,
+  "contains_synthetic_media": false,
+  "default_tags": [
+    "gaming secrets",
+    "game facts",
+    "game dev",
+    "gaming history",
+    "boss room archive"
+  ],
+  "hashtags": [
+    "#gaming",
+    "#gamingfacts",
+    "#BossRoomArchive"
+  ],
+  "description_footer": "Hidden mechanics, game dev tricks and gaming history in under a minute.\n\nVoiceover is AI-generated (text-to-speech).",
+  "palettes": [
+    [
+      [
+        10,
+        6,
+        28
+      ],
+      [
+        34,
+        10,
+        66
+      ],
+      [
+        255,
+        46,
+        196
+      ],
+      [
+        0,
+        240,
+        255
+      ]
+    ],
+    [
+      [
+        4,
+        10,
+        26
+      ],
+      [
+        10,
+        30,
+        60
+      ],
+      [
+        57,
+        255,
+        20
+      ],
+      [
+        255,
+        230,
+        0
+      ]
+    ],
+    [
+      [
+        20,
+        4,
+        22
+      ],
+      [
+        48,
+        8,
+        50
+      ],
+      [
+        255,
+        95,
+        31
+      ],
+      [
+        0,
+        200,
+        255
+      ]
+    ],
+    [
+      [
+        6,
+        6,
+        20
+      ],
+      [
+        18,
+        12,
+        56
+      ],
+      [
+        160,
+        100,
+        255
+      ],
+      [
+        0,
+        255,
+        170
+      ]
+    ]
+  ],
+  "glyphs": "+*x#<>^v★♦",
+  "about": "Boss Room Archive digs up the secrets games never put in the manual: hidden mechanics, clever developer tricks, speedrun techniques and gaming history, each one in under a minute.\n\nNew secret every day. Facts are checked and sources are listed in every description.\n\nVoiceover is AI-generated (text-to-speech). No gameplay footage; all visuals are original graphics."
+}

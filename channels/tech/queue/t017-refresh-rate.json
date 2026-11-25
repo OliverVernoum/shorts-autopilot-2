@@ -1,0 +1,69 @@
+{
+  "id": "t017-refresh-rate",
+  "title": "60Hz vs 120Hz: what your phone screen is really doing",
+  "description": "A 120Hz screen redraws twice as often as a 60Hz one. Here's what that buys you and what it costs.",
+  "tags": [
+    "refresh rate",
+    "120Hz",
+    "LTPO",
+    "phone display",
+    "tech explained"
+  ],
+  "series_tag": "#T017",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "120Hz means 120 redraws a second",
+      "sub": "twice as often as 60Hz",
+      "say": "Your phone screen is redrawing itself right now. At 120 hertz, it does that 120 times every second."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "60 Hz  = 16.7 ms per frame",
+        "90 Hz  = 11.1 ms per frame",
+        "120 Hz =  8.3 ms per frame",
+        "LTPO: 120 Hz down to 1 Hz"
+      ],
+      "say": "At 60 hertz, each frame lasts about 16.7 milliseconds. At 120, about 8.3. Faster redraws make scrolling look smoother and cut display latency."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Busy motion? Rate jumps to the top",
+        "Reading text? Rate drops lower",
+        "Static page? Drops far lower",
+        "Less redrawing, less power"
+      ],
+      "say": "But redrawing costs battery. In one test, battery life dropped about nine percent going from 60 to 120. So LTPO panels vary the rate on the fly, saving power on static content."
+    },
+    {
+      "kind": "big",
+      "big": "24 fps",
+      "sub": "most films, any screen",
+      "say": "Most films are shot at twenty-four frames per second. A 120Hz screen divides evenly by 24, so it can show them without judder."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Helps",
+        "items": [
+          "Smoother scrolling",
+          "Lower display latency"
+        ]
+      },
+      "right": {
+        "label": "Limits",
+        "items": [
+          "Needs app support",
+          "Capped games gain nothing"
+        ]
+      },
+      "say": "It only helps if the app produces enough frames. A 120Hz screen gains nothing from a game capped at thirty. Follow for more."
+    }
+  ],
+  "sources": [
+    "https://www.androidauthority.com/phone-refresh-rate-120hz-1086643/",
+    "https://www.techradar.com/news/ltpo-phone-screens-explained"
+  ]
+}

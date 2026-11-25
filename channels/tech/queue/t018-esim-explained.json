@@ -1,0 +1,69 @@
+{
+  "id": "t018-esim-explained",
+  "title": "eSIM explained: a SIM card you download",
+  "description": "An eSIM is a chip soldered into your phone that holds downloadable carrier profiles. Here's how it replaces the plastic card.",
+  "tags": [
+    "eSIM",
+    "SIM card",
+    "mobile carrier",
+    "phone setup",
+    "tech explained"
+  ],
+  "series_tag": "#T018",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "An eSIM is a SIM you download",
+      "sub": "no tiny card to swap",
+      "say": "That tiny SIM card tray might be disappearing. In its place is a chip already inside your phone."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Physical",
+        "items": [
+          "Removable plastic card",
+          "Swap it by hand"
+        ]
+      },
+      "right": {
+        "label": "Embedded",
+        "items": [
+          "Soldered-in chip",
+          "Profiles arrive over the air"
+        ]
+      },
+      "say": "A normal SIM is a removable card that proves to a carrier that your phone may join its network. An eSIM is a chip soldered into the phone. Your identity is a software profile, not a piece of plastic."
+    },
+    {
+      "kind": "big",
+      "big": "eUICC",
+      "sub": "the chip's formal name",
+      "say": "The chip's technical name is eUICC. The industry body GSMA defines an eSIM as a SIM with remote provisioning, meaning profiles can be installed over the air."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Carrier gives you a QR code or app",
+        "Phone scans or confirms it",
+        "Profile downloads over the internet",
+        "Phone joins the network"
+      ],
+      "say": "To set one up, you usually scan a QR code from your carrier. The phone downloads your profile and installs it. Switching carriers means swapping a profile, not a card."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "Settings > Cellular",
+        "Plan 1: Home    [active]",
+        "Plan 2: Travel  [off]",
+        "# example screen"
+      ],
+      "say": "Many phones can hold more than one profile, so a home plan and a travel plan can sit side by side. Follow for more."
+    }
+  ],
+  "sources": [
+    "https://www.st.com/content/st_com/en/ecosystems/st4sim-cellular-connectivity/back-to-basics.html",
+    "https://www.gsma.com/solutions-and-impact/technologies/esim/about/"
+  ]
+}

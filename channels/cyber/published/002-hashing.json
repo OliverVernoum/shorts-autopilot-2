@@ -1,0 +1,75 @@
+{
+  "id": "002-hashing",
+  "title": "Why websites don't actually know your password",
+  "description": "A well-built website never stores your real password. It stores a hash, a one-way fingerprint. Here's how that works and where it falls short.",
+  "tags": [
+    "hashing",
+    "password storage",
+    "salt",
+    "data breach",
+    "cybersecurity basics"
+  ],
+  "series_tag": "#002",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "Websites don't know your password",
+      "sub": "and that's on purpose",
+      "say": "Here's a strange fact. A properly built website doesn't actually know your password."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "$ echo -n hello | sha256sum",
+        "2cf24dba5fb0a30e26e83b2ac5b9e29e",
+        "$ echo -n hellp | sha256sum",
+        "fdd7585e08c4e2afd71dcabdb4636c89"
+      ],
+      "say": "Instead, it stores a hash. A hash is a fingerprint made by a maths function. The same input always gives the same fingerprint. Change one letter, and it looks completely different. And you can't run it backwards."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "You type your password",
+        "Site salts and hashes it",
+        "Compares with the stored hash",
+        "Match? You're in"
+      ],
+      "say": "When you log in, the site hashes what you typed and compares fingerprints. It never needs the original."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Bad",
+        "items": [
+          "Plain text storage",
+          "Whole list leaks at once",
+          "Staff can read it"
+        ]
+      },
+      "right": {
+        "label": "Good",
+        "items": [
+          "Unique salt per user",
+          "Slow hash, like Argon2",
+          "Reversing is infeasible"
+        ]
+      },
+      "say": "So if a site is breached, attackers get hashes, not passwords. Good sites add a random salt to each one, and use deliberately slow algorithms like Argon2."
+    },
+    {
+      "kind": "big",
+      "big": "Weak = guessed",
+      "sub": "hash 'password123' and compare",
+      "say": "But a hash isn't magic. Attackers can still guess common passwords, hash them, and compare. So a strong, unique password still matters. Follow for more plain text threats."
+    }
+  ],
+  "sources": [
+    "https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html",
+    "https://pages.nist.gov/800-63-4/sp800-63b.html"
+  ],
+  "video_id": "ibbtPEvdBxI",
+  "url": "https://youtube.com/shorts/ibbtPEvdBxI",
+  "published_at": "2026-11-21T17:20:27+00:00",
+  "privacy": "public"
+}

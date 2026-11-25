@@ -1,0 +1,67 @@
+{
+  "id": "g004-pacman-ghost-ai",
+  "title": "Pac-Man's ghosts aren't random. Each has a rule",
+  "description": "Each Pac-Man ghost picks its target differently, and one rule even includes a famous bug.",
+  "tags": [
+    "Pac-Man",
+    "ghost AI",
+    "game design",
+    "arcade history",
+    "gaming facts"
+  ],
+  "series_tag": "#G004",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "Pac-Man's ghosts aren't random",
+      "sub": "each one has its own rule",
+      "say": "Pac-Man's ghosts look chaotic, but they aren't. Each one follows a different rule, and that's why you can't shake them."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "blinky: your exact tile",
+        "pinky : 4 tiles ahead of you",
+        "inky  : Blinky vector x2",
+        "clyde : far=chase, near=flee"
+      ],
+      "say": "Blinky targets your tile. Pinky aims four tiles ahead of you. Inky uses Blinky's position to build a pincer. Clyde chases you from far away, but retreats when he gets close."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Pinky aims 4 tiles ahead",
+        "Facing up? Target shifts 4 left",
+        "Same bug hits Inky: 2 left"
+      ],
+      "say": "There's also a bug. When Pac-Man faces up, an overflow in the offset code shifts Pinky's target four tiles left, and Inky's two."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Blinky",
+        "items": [
+          "Targets your tile",
+          "Speeds up late"
+        ]
+      },
+      "right": {
+        "label": "Clyde",
+        "items": [
+          "Chases at 8+ tiles",
+          "Retreats inside 8"
+        ]
+      },
+      "say": "Blinky is the relentless one, and Clyde is the unpredictable one. Together, four simple rules create a surprisingly smart chase."
+    },
+    {
+      "kind": "big",
+      "big": "8 tiles",
+      "sub": "Clyde's switch distance",
+      "say": "Eight tiles is Clyde's magic number, and it's why he seems to lose his nerve. Follow for more arcade secrets, one a day."
+    }
+  ],
+  "sources": [
+    "https://pacman.holenet.info/"
+  ]
+}

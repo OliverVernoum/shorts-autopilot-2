@@ -1,0 +1,68 @@
+{
+  "id": "t011-touchscreen",
+  "title": "How your phone screen knows exactly where you touched",
+  "description": "Your screen doesn't sense pressure. It senses your finger's effect on an electric field. Here's how that becomes a tap.",
+  "tags": [
+    "touchscreen",
+    "capacitive touch",
+    "multi-touch",
+    "tech explained",
+    "how it works"
+  ],
+  "series_tag": "#T011",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "How a screen finds your finger",
+      "sub": "it senses electricity, not pressure",
+      "say": "Your phone screen doesn't feel pressure. It feels electricity. Here's how it finds your finger."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Grid of clear electrodes under glass",
+        "Chip measures the field at each crossing",
+        "Your finger disturbs the field nearby",
+        "Biggest change marks the touch point"
+      ],
+      "say": "Under the glass is a grid of transparent electrodes, in rows and columns. A chip measures the electric field at every crossing. Your finger conducts, so it disturbs the field and changes the capacitance there. The spot with the change is where you touched."
+    },
+    {
+      "kind": "big",
+      "big": "Capacitance",
+      "sub": "the thing being measured",
+      "say": "Most phones use mutual capacitance, which measures the coupling between each pair of crossing electrodes. Because every crossing is read separately, the screen can track several fingers at once. That's what makes pinch-to-zoom possible."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Works",
+        "items": [
+          "Bare fingertips",
+          "Several fingers at once"
+        ]
+      },
+      "right": {
+        "label": "Struggles",
+        "items": [
+          "Water on the glass",
+          "Heavy fingerprints"
+        ]
+      },
+      "say": "It has limits, though. Direct contact matters. Water and smudges can confuse the grid, which is why a wet screen sometimes acts possessed."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "touches: 2",
+        "x1: 412  y1: 1088",
+        "x2: 640  y2: 905",
+        "# example touch report"
+      ],
+      "say": "Each report is just coordinates. Software turns them into taps, swipes and pinches. Follow for more everyday tech, decoded."
+    }
+  ],
+  "sources": [
+    "https://arxiv.org/pdf/1612.08227"
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "id": "g006-mario-bushes-are-clouds",
+  "title": "Super Mario's bushes are secretly clouds",
+  "description": "Super Mario Bros. squeezed into a tiny cartridge using clever tricks, like recolouring clouds into bushes.",
+  "tags": [
+    "Super Mario Bros",
+    "Nintendo",
+    "game dev tricks",
+    "NES",
+    "gaming facts"
+  ],
+  "series_tag": "#G006",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "Mario's bushes are secretly clouds",
+      "sub": "a recolour saved space",
+      "say": "The bushes in Super Mario Bros. are secretly clouds. Nintendo reused the same sprite with new colours to save space."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Cloud",
+        "items": [
+          "White palette",
+          "Floats in the sky"
+        ]
+      },
+      "right": {
+        "label": "Bush",
+        "items": [
+          "Green palette",
+          "Sits on the ground"
+        ]
+      },
+      "say": "Same shape, different colours. On the NES, every byte mattered, so artists reused everything they possibly could."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "cloud == bush (recolour)",
+        "goomba: 1 frame, flipped",
+        "pipe_sfx == damage_sfx",
+        "bytes_left: ~20 -> crown"
+      ],
+      "say": "Goombas are one image flipped back and forth. Getting hurt reuses the pipe sound. And with about twenty bytes left, Miyamoto added a crown beside your life counter at ten lives."
+    },
+    {
+      "kind": "big",
+      "big": "~40 KB",
+      "sub": "code plus graphics",
+      "say": "The whole game used roughly forty kilobytes for code and graphics combined. That is smaller than a single photo on your phone."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "32 KiB for code and data",
+        "8 KiB for sprites and tiles",
+        "Multi-coin blocks began as glitches"
+      ],
+      "say": "Some features were even inspired by glitches, like blocks that hold multiple coins. Limits made the game creative. Follow for more clever tricks."
+    }
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Super_Mario_Bros."
+  ]
+}

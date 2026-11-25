@@ -1,0 +1,68 @@
+{
+  "id": "t031-satellite-internet-geo-vs-leo",
+  "title": "Why Starlink is faster to respond than old satellite internet",
+  "description": "The difference is altitude. Closer satellites mean far less delay for each signal.",
+  "tags": [
+    "satellite internet",
+    "starlink",
+    "leo",
+    "geostationary",
+    "latency"
+  ],
+  "series_tag": "#T031",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "Why old satellite internet lagged",
+      "sub": "it's the altitude",
+      "say": "Old satellite internet felt slow, even when the speed looked fine. The culprit wasn't bandwidth. It was distance."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "GEO",
+        "items": [
+          "About 35,786 km up",
+          "Round trip ~500-700 ms"
+        ]
+      },
+      "right": {
+        "label": "LEO",
+        "items": [
+          "Around 550 km for Starlink",
+          "Round trip ~20-60 ms"
+        ]
+      },
+      "say": "Traditional satellites sit in geostationary orbit, about thirty-five thousand, seven hundred kilometers above the equator. Starlink's main shell flies around five hundred fifty kilometers up. Typical round trips differ hugely."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "GEO: 4 x 35,786 km = 143,144 km",
+        "  light alone: ~0.48 s",
+        "LEO: 4 x 550 km = 2,200 km",
+        "  light alone: ~0.007 s"
+      ],
+      "say": "Why four legs? Your request goes up and down, then the reply goes up and down again. Even light alone takes about half a second on the high route."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Dish sends request to a satellite",
+        "Ground station joins the internet",
+        "Reply makes the same trip back"
+      ],
+      "say": "In practice, your dish sends the request up, a ground station joins the internet, and the reply returns the same way."
+    },
+    {
+      "kind": "big",
+      "big": "Swarm needed",
+      "sub": "low satellites move fast",
+      "say": "The catch is that low satellites move fast, so you need many, handing you off. Follow for more satellite explainers."
+    }
+  ],
+  "sources": [
+    "https://www.esa.int/Enabling_Support/Space_Transportation/Types_of_orbits",
+    "https://speedtesthq.com/guides/satellite/geostationary-vs-leo-satellite"
+  ]
+}

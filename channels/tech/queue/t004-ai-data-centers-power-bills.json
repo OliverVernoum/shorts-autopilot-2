@@ -1,0 +1,69 @@
+{
+  "id": "t004-ai-data-centers-power-bills",
+  "title": "Why AI data centers became an electricity bill fight",
+  "description": "AI runs in power-hungry data centers, and communities are arguing over who pays for the grid upgrades. Here's how a chat answer ends up on the grid.",
+  "tags": [
+    "data centers",
+    "ai energy",
+    "electricity",
+    "tech news",
+    "tech explained"
+  ],
+  "series_tag": "#T004",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "AI data centers: who pays?",
+      "sub": "the electricity bill fight",
+      "say": "AI runs in data centers, and those data centers are now at the center of an electricity bill fight."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "You send a prompt",
+        "Thousands of chips compute",
+        "Heat needs cooling, too",
+        "The local grid supplies power"
+      ],
+      "say": "You send a prompt. Thousands of chips in a data center work out the answer. Those chips give off heat, so cooling takes power too. And it all comes from the local grid."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "wholesale power near some sites",
+        "up to +267% in 5 yrs (Bloomberg)",
+        "operators pay ~38% of grid costs",
+        "(Cornell estimate)"
+      ],
+      "say": "A Bloomberg analysis found wholesale electricity prices near some data centers rose as much as two hundred sixty-seven percent over five years. Cornell researchers estimate operators cover about thirty-eight percent of the grid costs tied to their growth."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Supporters",
+        "items": [
+          "Investment and tax revenue",
+          "Some firms pledge to pay"
+        ]
+      },
+      "right": {
+        "label": "Critics",
+        "items": [
+          "Bills could rise nearby",
+          "Noise and land use"
+        ]
+      },
+      "say": "Supporters point to investment and tax revenue, and some big companies have pledged to cover their own power costs. Critics worry about higher bills, noise, and land use."
+    },
+    {
+      "kind": "big",
+      "big": "Who pays?",
+      "sub": "that's the debate",
+      "say": "A Gallup poll in March found seventy-one percent of Americans oppose a data center in their area. Follow for the tech behind the headlines."
+    }
+  ],
+  "sources": [
+    "https://fortune.com/2026/11/17/democrats-ai-data-center-backlash-electricity-costs-regulation-economic-growth/",
+    "https://wjla.com/news/nation-world/ai-data-centers-spark-local-backlash-across-the-us-artificial-intelligence-electricity-utilities-noise-land-use-tax-incentives"
+  ]
+}

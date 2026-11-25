@@ -1,0 +1,70 @@
+{
+  "id": "t023-what-happens-typing-a-url",
+  "title": "What really happens in the second after you type a URL",
+  "description": "Typing a web address triggers a chain of lookups and handshakes before any page appears. Here are the main steps.",
+  "tags": [
+    "dns",
+    "url",
+    "https",
+    "how the internet works",
+    "tls"
+  ],
+  "series_tag": "#T023",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "You typed a URL. Now what?",
+      "sub": "about a second of hidden work",
+      "say": "You type a web address and press enter. Before anything appears, your device runs through a chain of steps. Most take only milliseconds."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "$ lookup example.com",
+        "> asking resolver...",
+        "> 203.0.113.9  (illustrative)",
+        "> TTL: cached for a while"
+      ],
+      "say": "First, DNS. Computers use numbers, not names, so a resolver turns the name into an IP address. If it already knows the answer, it reuses its cached copy, and skips the trip."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "DNS finds the IP address",
+        "Your device connects to the server",
+        "TLS handshake sets up encryption",
+        "Browser sends the page request",
+        "Server replies, page renders"
+      ],
+      "say": "Next, your device connects to that address. Then comes a TLS handshake. The server shows a certificate to prove who it is, and both sides agree on secret session keys. Only then is your request sent, and the page comes back."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Cached",
+        "items": [
+          "Answer already saved",
+          "Skips the lookup chain"
+        ]
+      },
+      "right": {
+        "label": "Fresh",
+        "items": [
+          "Asks the resolver",
+          "Walks the DNS chain"
+        ]
+      },
+      "say": "Caching makes repeat visits faster. A saved answer skips the whole lookup chain."
+    },
+    {
+      "kind": "big",
+      "big": "Many steps",
+      "sub": "one blink",
+      "say": "All of that happens before you've finished blinking, and it repeats for nearly everything on the page. Images, scripts, fonts, each can need its own request. Follow if you like seeing the hidden machinery."
+    }
+  ],
+  "sources": [
+    "https://www.cloudflare.com/learning/dns/what-is-dns/",
+    "https://www.cloudflare.com/learning/ssl/what-happens-in-a-tls-handshake/"
+  ]
+}

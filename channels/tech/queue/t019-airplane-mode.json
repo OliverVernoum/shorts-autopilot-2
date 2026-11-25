@@ -1,0 +1,69 @@
+{
+  "id": "t019-airplane-mode",
+  "title": "Why airplane mode exists, and what it actually does",
+  "description": "Airplane mode switches off your phone's transmitters. The rule behind it is older than smartphones.",
+  "tags": [
+    "airplane mode",
+    "FCC",
+    "FAA",
+    "phone radios",
+    "tech explained"
+  ],
+  "series_tag": "#T019",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "Why airplane mode exists",
+      "sub": "the rule is older than smartphones",
+      "say": "Every flight, you switch on airplane mode. But why does it exist at all?"
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Tap airplane mode",
+        "Cellular radio stops transmitting",
+        "Wi-Fi and Bluetooth pause too",
+        "You can switch Wi-Fi back on"
+      ],
+      "say": "Airplane mode turns off your phone's transmitters. Cellular, and by default Wi-Fi and Bluetooth. Many phones let you turn Wi-Fi or Bluetooth back on afterward, for in-flight Wi-Fi or headphones."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "FCC",
+        "items": [
+          "In-flight cell ban, 1991",
+          "Worry: ground networks"
+        ]
+      },
+      "right": {
+        "label": "FAA",
+        "items": [
+          "Own rules on devices",
+          "Worry: aircraft systems"
+        ]
+      },
+      "say": "Two rules sit behind it. In 1991, the FCC banned most in-flight cell use, citing interference with ground networks. The FAA separately says signals could interfere with aircraft communication and navigation."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "1991 FCC: no airborne cell use",
+        "2006 FAA study: none found",
+        "2007 FCC keeps ban: play safe",
+        "2012 FAA study: none found"
+      ],
+      "say": "Studies commissioned by the FAA in 2006 and 2012 found no evidence that cell signals interfere with aircraft systems. Even so, regulators kept the rules, citing caution."
+    },
+    {
+      "kind": "big",
+      "big": "Obey crew",
+      "sub": "rules vary by airline and country",
+      "say": "Rules do vary now, so follow the crew's instructions. Caution, built on old rules. Follow for more everyday tech explained."
+    }
+  ],
+  "sources": [
+    "https://www.livescience.com/technology/091221-airline-devices.html",
+    "https://www.popsci.com/science/is-airplane-mode-necessary/"
+  ]
+}

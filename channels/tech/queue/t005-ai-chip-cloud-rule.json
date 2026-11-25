@@ -1,0 +1,69 @@
+{
+  "id": "t005-ai-chip-cloud-rule",
+  "title": "The US now regulates renting AI chips, not just buying",
+  "description": "A new US interim rule targets remote access to advanced AI chips in overseas data centers. Here's the cloud loophole it aims to close.",
+  "tags": [
+    "ai chips",
+    "export controls",
+    "cloud computing",
+    "tech news",
+    "tech explained"
+  ],
+  "series_tag": "#T005",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "Renting AI chips is now regulated",
+      "sub": "not just buying them",
+      "say": "The US is now regulating who can rent advanced AI chips, not just who can buy them."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Data center abroad owns chips",
+        "Company rents compute online",
+        "Trains its model remotely",
+        "Chips never ship to renter"
+      ],
+      "say": "Regulators describe a loophole. A data center abroad holds legally exported chips. A company rents that computing power over the internet and trains its models remotely. The chips never ship to them."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Buy",
+        "items": [
+          "Chips shipped to buyer",
+          "Export licenses apply"
+        ]
+      },
+      "right": {
+        "label": "Rent",
+        "items": [
+          "Chips stay in data center",
+          "Rule now reaches this"
+        ]
+      },
+      "say": "On November sixteenth, the Commerce Department's Bureau of Industry and Security announced an interim final rule. Exporters now need a license to ship advanced chips to data centers worldwide that supply large amounts of computing power to companies in China and other restricted places."
+    },
+    {
+      "kind": "big",
+      "big": "Interim rule",
+      "sub": "comments come after",
+      "say": "It's an interim rule, meaning it takes effect first and opens public comment afterward. Data centers already serving restricted firms get a window to apply for licenses."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "agency: Commerce Dept (BIS)",
+        "type: interim final rule",
+        "public comment: 60 days",
+        "license window: 90 days"
+      ],
+      "say": "The key numbers, as reported. Sixty days for public comment, ninety days for affected facilities to get licenses. Follow for more of how this stuff really works."
+    }
+  ],
+  "sources": [
+    "https://www.bankinfosecurity.com/us-pulls-cloud-into-its-ai-chip-fight-china-a-33413",
+    "https://www.scmp.com/tech/article/3374639/us-tightens-ai-chip-export-curbs-close-chinas-overseas-data-centre-loophole"
+  ]
+}

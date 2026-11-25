@@ -1,0 +1,74 @@
+{
+  "id": "006-public-wifi",
+  "title": "Public Wi-Fi: what's real and what's myth",
+  "description": "Is public Wi-Fi really dangerous? HTTPS changed the picture. Here's what still matters and what's outdated advice.",
+  "tags": [
+    "public wifi",
+    "evil twin",
+    "HTTPS",
+    "VPN",
+    "cybersecurity basics"
+  ],
+  "series_tag": "#006",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "Is public Wi-Fi really dangerous?",
+      "sub": "less than you've been told",
+      "say": "Everyone says never use public Wi-Fi. That advice is mostly out of date."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Myth",
+        "items": [
+          "Anyone can read your logins",
+          "Every cafe network is a trap",
+          "HTTPS sites are see-through"
+        ]
+      },
+      "right": {
+        "label": "Real",
+        "items": [
+          "Fake hotspots exist",
+          "Fake login pages",
+          "Outdated, unpatched devices"
+        ]
+      },
+      "say": "Most sites use HTTPS, so someone on the same network can't read your logins or messages. The real risks are different, and a bit sneakier."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "$ nmcli dev wifi list",
+        "SSID             SIGNAL",
+        "CoffeeShop_Free    82",
+        "CoffeeShop_Free    61"
+      ],
+      "say": "A fake hotspot copies a real network's name. Join it, and an attacker sits in the middle, and can try to send you to fake login pages. Two networks with the same name should make you pause."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Ask staff for the exact name",
+        "Stick to HTTPS sites",
+        "Keep your device updated",
+        "Never click past warnings"
+      ],
+      "say": "So confirm the network name, keep your phone updated, and never click past browser warnings. For everyday browsing, HTTPS and updates do most of the work."
+    },
+    {
+      "kind": "big",
+      "big": "Mostly fine",
+      "sub": "if you join the right network",
+      "say": "So, mostly fine, if you join the right network. Follow for more myth busting."
+    }
+  ],
+  "sources": [
+    "https://www.eff.org/deeplinks/2020/01/why-public-wi-fi-lot-safer-you-think"
+  ],
+  "video_id": "AybAnwKjwXA",
+  "url": "https://youtube.com/shorts/AybAnwKjwXA",
+  "published_at": "2026-11-21T22:09:34+00:00",
+  "privacy": "public"
+}

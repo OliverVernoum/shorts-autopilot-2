@@ -1,0 +1,69 @@
+{
+  "id": "t032-how-cdns-make-websites-fast",
+  "title": "Why websites load fast: a copy is usually nearby",
+  "description": "A CDN keeps copies of site files on servers close to you, which cuts the distance data has to travel.",
+  "tags": [
+    "cdn",
+    "web performance",
+    "caching",
+    "edge servers",
+    "how the internet works"
+  ],
+  "series_tag": "#T032",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "Why sites load fast",
+      "sub": "a copy of it is probably nearby",
+      "say": "Why does a website hosted on another continent load so quickly? Often, you aren't talking to that server at all."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "You request the page",
+        "Nearby edge server checks its cache",
+        "Cached copy? It replies right away",
+        "Otherwise it asks the origin server"
+      ],
+      "say": "You're talking to a CDN, a content delivery network. It's a geographically spread group of servers that cache content close to users. If the nearby server has a copy, it answers instantly."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Origin",
+        "items": [
+          "The site's main server",
+          "One location"
+        ]
+      },
+      "right": {
+        "label": "Edge",
+        "items": [
+          "Cached copies",
+          "Close to you"
+        ]
+      },
+      "say": "The origin still holds the real content, but fewer requests reach it. That saves bandwidth, and eases the strain when traffic spikes. It also helps keep a site up if something fails."
+    },
+    {
+      "kind": "big",
+      "big": "Less distance",
+      "sub": "means less delay",
+      "say": "Shorter distance means lower latency."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "you -> edge: 8 ms (illustrative)",
+        "you -> origin: 140 ms",
+        "edge hit: serves in one hop",
+        "miss: fetch, then cache it"
+      ],
+      "say": "Distance is the whole point. Shorter trips mean less delay, and less delay means a faster page. Popular files get cached again and again. Follow for more on how the web works."
+    }
+  ],
+  "sources": [
+    "https://www.cloudflare.com/learning/cdn/what-is-a-cdn/",
+    "https://www.cloudflare.com/learning/performance/glossary/what-is-latency/"
+  ]
+}

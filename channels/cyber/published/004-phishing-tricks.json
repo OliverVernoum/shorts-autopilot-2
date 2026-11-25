@@ -1,0 +1,72 @@
+{
+  "id": "004-phishing-tricks",
+  "title": "The 3 tricks hiding in most phishing emails",
+  "description": "Phishing messages look different, but most lean on the same psychological levers. Learn them and you'll spot scams faster.",
+  "tags": [
+    "phishing",
+    "scam emails",
+    "social engineering",
+    "NCSC",
+    "cybersecurity basics"
+  ],
+  "series_tag": "#004",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "This email wants you to panic",
+      "sub": "panic is the whole trick",
+      "say": "That urgent email from your bank? It wants you to panic. Because panicking people don't stop to check things."
+    },
+    {
+      "kind": "big",
+      "big": "Same 3 tricks",
+      "sub": "reused again and again",
+      "say": "Phishing emails look different, but most reuse the same three tricks."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Authority: bank, boss, HMRC",
+        "Urgency: act within 24 hours",
+        "Emotion: fear, panic, curiosity"
+      ],
+      "say": "First, authority. It pretends to be someone important. Second, urgency. A tight deadline, or a threat. Third, emotion. Fear, excitement, or curiosity, anything to rush you."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "Shown: www.yourbank.co.uk",
+        "Real:  yourbank-verify.example"
+      ],
+      "say": "Then there's the link. The text you see can say one thing, while the real address behind it says another. On a computer, hover over it to check before you click."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Do",
+        "items": [
+          "Pause and breathe",
+          "Open the app yourself",
+          "Report it to the NCSC"
+        ]
+      },
+      "right": {
+        "label": "Don't",
+        "items": [
+          "Click the link",
+          "Reply with codes",
+          "Act under pressure"
+        ]
+      },
+      "say": "If something feels off, stop, and contact the company using details you already trust. Forward scam emails to report at phishing dot gov dot U K. Follow for the next one."
+    }
+  ],
+  "sources": [
+    "https://www.ncsc.gov.uk/collection/phishing-scams/spot-scams",
+    "https://www.ncsc.gov.uk/collection/phishing-scams/report-scam-email"
+  ],
+  "video_id": "wOiV5I9j4Xo",
+  "url": "https://youtube.com/shorts/wOiV5I9j4Xo",
+  "published_at": "2026-11-21T21:32:39+00:00",
+  "privacy": "public"
+}

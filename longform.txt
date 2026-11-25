@@ -1,0 +1,2 @@
+channels: cyber, gaming, tech
+every_hours: 4

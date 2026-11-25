@@ -1,0 +1,71 @@
+{
+  "id": "t010-fast-charging",
+  "title": "How fast charging works without cooking your battery",
+  "description": "Fast charging is more power plus a negotiation between charger and phone. Here's how it works and why it slows near the end.",
+  "tags": [
+    "fast charging",
+    "USB Power Delivery",
+    "phone charger",
+    "tech explained",
+    "battery"
+  ],
+  "series_tag": "#T010",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "Fast charging isn't magic",
+      "sub": "it's volts times amps",
+      "say": "Fast charging isn't magic. It's more power, plus a quick negotiation before any of it flows."
+    },
+    {
+      "kind": "big",
+      "big": "Watts = V x A",
+      "sub": "the whole trick",
+      "say": "Power is voltage multiplied by current. Nine volts at three amps is twenty-seven watts. Raise either one, and the battery fills faster, as long as it can take it."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "> Charger: I offer 5V, 9V, 15V",
+        "> Phone: request 9V at 3A",
+        "> Charger: accepted",
+        "> Power: 27 W"
+      ],
+      "say": "When you plug in, the charger and phone talk first. The charger lists what it can offer. The phone picks what its battery can safely handle. That's how standards like USB Power Delivery work."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Constant current: battery fills fast",
+        "Around 80%, voltage holds steady",
+        "Current tapers off, charging slows",
+        "Full, and charging stops"
+      ],
+      "say": "Charging has two phases. Fast charging mainly exploits the first, constant current. Then the current tapers off. That's why the last stretch past about eighty percent feels slow."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Helps",
+        "items": [
+          "Dual-cell batteries",
+          "Charger-phone negotiation",
+          "Cool surroundings"
+        ]
+      },
+      "right": {
+        "label": "Hurts",
+        "items": [
+          "High charging currents",
+          "Warm environments",
+          "Long time at full"
+        ]
+      },
+      "say": "Some phones split current across two cells. But Battery University says high currents shorten battery life, and heat adds to it. Phones also slow charging themselves when hot. Follow for more."
+    }
+  ],
+  "sources": [
+    "https://www.androidauthority.com/fast-charging-explained-889780/",
+    "https://batteryuniversity.com/article/how-to-prolong-lithium-based-batteries"
+  ]
+}

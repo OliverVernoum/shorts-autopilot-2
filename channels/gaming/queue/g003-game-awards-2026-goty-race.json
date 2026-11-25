@@ -1,0 +1,71 @@
+{
+  "id": "g003-game-awards-2026-goty-race",
+  "title": "Game Awards 2026: the six Game of the Year nominees",
+  "description": "The Game Awards 2026 nominees are out. Here are the six Game of the Year contenders and when the show airs.",
+  "tags": [
+    "Game Awards 2026",
+    "Game of the Year",
+    "GTA VI",
+    "Ocarina of Time",
+    "gaming news"
+  ],
+  "series_tag": "#G003",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "Six games. One GOTY trophy.",
+      "sub": "Game Awards 2026",
+      "say": "The Game Awards nominees are out, and the Game of the Year race has just six names. Here they are."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "> goty_2026.nominees",
+        "007 First Light",
+        "CONTROL Resonant",
+        "Grand Theft Auto VI",
+        "Zelda: Ocarina of Time",
+        "Phantom Blade Zero",
+        "Resident Evil Requiem"
+      ],
+      "say": "The nominees are: double oh seven First Light, Control Resonant, Grand Theft Auto Six, Ocarina of Time, Phantom Blade Zero, and Resident Evil Requiem."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Date: December 10, 2026",
+        "Venue: Peacock Theater, LA",
+        "Format: live ceremony"
+      ],
+      "say": "The ceremony is set for December tenth, live from the Peacock Theater in Los Angeles."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Classic",
+        "items": [
+          "Ocarina of Time",
+          "Original: 1998"
+        ]
+      },
+      "right": {
+        "label": "Fresh",
+        "items": [
+          "Grand Theft Auto VI",
+          "Launched Nov 2026"
+        ]
+      },
+      "say": "It's an unusual list. A game with 1998 roots sits beside one that launched this month, so two eras are competing for one trophy. Which one feels like the winner to you? Say it in the comments, and follow for more awards coverage."
+    },
+    {
+      "kind": "big",
+      "big": "Your pick?",
+      "sub": "comment your winner",
+      "say": "Who do you think wins? Drop your pick in the comments, and follow for more gaming news."
+    }
+  ],
+  "sources": [
+    "https://www.gematsu.com/2026/11/the-game-awards-2026-nominees-announced",
+    "https://www.dexerto.com/gaming/the-game-awards-2026-3428374"
+  ]
+}

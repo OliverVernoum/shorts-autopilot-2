@@ -1,0 +1,71 @@
+{
+  "id": "t021-wifi-5ghz-vs-2-4ghz",
+  "title": "Why 5GHz Wi-Fi is faster but dies behind a wall",
+  "description": "Wi-Fi is just radio, and the two bands trade speed for reach. Here is why.",
+  "tags": [
+    "wifi",
+    "5ghz",
+    "2.4ghz",
+    "router",
+    "how wifi works"
+  ],
+  "series_tag": "#T021",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "Why 5GHz Wi-Fi is faster",
+      "sub": "but dies behind a wall",
+      "say": "Why is 5 gigahertz Wi-Fi faster, but worse through walls? Wi-Fi is just radio. Your router sends data by tweaking a radio wave billions of times every second."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "2.4 GHz band: ~70 MHz wide",
+        "  -> about 3 channels",
+        "5 GHz band: ~500 MHz wide",
+        "  -> up to 6 wide channels"
+      ],
+      "say": "The key is spectrum space. The 2.4 band is narrow, so it only fits about three standard channels, and old gadgets crowd it. The 5 band is far wider, with room for much wider channels. Wider channels carry more data at once."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "2.4GHz",
+        "items": [
+          "Better through walls",
+          "Longer reach",
+          "Typically ~100 Mbps"
+        ]
+      },
+      "right": {
+        "label": "5GHz",
+        "items": [
+          "Up to ~1 Gbps",
+          "Less crowded",
+          "Walls absorb it more"
+        ]
+      },
+      "say": "The trade-off is range. Higher frequency waves get soaked up more by walls and floors, so the signal fades sooner. Lower frequencies push through obstacles better, but with less room for speed."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Sit where you use Wi-Fi most",
+        "Try 5GHz and check the signal",
+        "Weak? Switch to 2.4GHz",
+        "Run a speed test in each spot"
+      ],
+      "say": "Test it yourself. Try 5 gigahertz where you sit most. If it drops, switch to 2.4."
+    },
+    {
+      "kind": "big",
+      "big": "Close = 5GHz",
+      "sub": "Far = 2.4GHz",
+      "say": "So use 5 near the router, and 2.4 a few walls away. Follow for more everyday tech, explained."
+    }
+  ],
+  "sources": [
+    "https://www.intel.com/content/www/us/en/products/docs/wireless/2-4-vs-5ghz.html",
+    "https://www.netgear.com/hub/wifi/routers/difference-2-4-ghz-5-ghz-and-6-ghz/"
+  ]
+}

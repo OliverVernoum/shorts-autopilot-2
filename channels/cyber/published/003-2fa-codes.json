@@ -1,0 +1,74 @@
+{
+  "id": "003-2fa-codes",
+  "title": "Your 2FA app code is never sent to you",
+  "description": "Authenticator app codes aren't delivered by the website. Your phone calculates them from a shared secret and the clock. Here's how that works.",
+  "tags": [
+    "two-factor authentication",
+    "TOTP",
+    "authenticator app",
+    "2FA",
+    "cybersecurity basics"
+  ],
+  "series_tag": "#003",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "Your 2FA code is never sent",
+      "sub": "your phone calculates it",
+      "say": "The six digit code in your authenticator app is never sent to you. Your phone works it out by itself."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Site shows a QR code once",
+        "App saves the secret key inside",
+        "Later: secret + clock = code"
+      ],
+      "say": "At setup, the site shows a QR code. Hidden inside is a secret key, which your app saves. After that, it needs no internet at all."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "secret: saved at setup",
+        "window: 30 seconds",
+        "HMAC-SHA1(secret, window)",
+        "> keep 6 digits: 482913"
+      ],
+      "say": "Every thirty seconds, your phone mixes that secret with the current time, using a cryptographic function, and keeps six digits. The website does the same sum and checks they match. It's an open standard, called R F C six two three eight."
+    },
+    {
+      "kind": "big",
+      "big": "30 seconds",
+      "sub": "then the code changes",
+      "say": "Because time keeps moving, a stolen code goes stale quickly."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "App",
+        "items": [
+          "Works offline",
+          "Never travels by network",
+          "Secret stays on phone"
+        ]
+      },
+      "right": {
+        "label": "SMS",
+        "items": [
+          "Can be SIM-swapped",
+          "Sent over phone network",
+          "Still beats no 2FA"
+        ]
+      },
+      "say": "Authenticator apps beat text messages, which can be hijacked by SIM swap fraud. But either is far better than a password alone. Switch it on, and follow for more."
+    }
+  ],
+  "sources": [
+    "https://www.rfc-editor.org/rfc/rfc6238",
+    "https://www.rfc-editor.org/rfc/rfc4226"
+  ],
+  "video_id": "mFATB-OrB4c",
+  "url": "https://youtube.com/shorts/mFATB-OrB4c",
+  "published_at": "2026-11-21T21:10:52+00:00",
+  "privacy": "public"
+}

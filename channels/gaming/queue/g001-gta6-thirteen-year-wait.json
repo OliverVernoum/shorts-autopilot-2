@@ -1,0 +1,68 @@
+{
+  "id": "g001-gta6-thirteen-year-wait",
+  "title": "GTA VI: the 13-year wait, in one timeline",
+  "description": "GTA VI finally launched in November 2026, thirteen years after GTA V. Here is the timeline of the delays and the launch.",
+  "tags": [
+    "GTA VI",
+    "Rockstar Games",
+    "gaming news",
+    "game delays",
+    "video game history"
+  ],
+  "series_tag": "#G001",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "GTA VI took 13 years",
+      "sub": "GTA V came out in 2013",
+      "say": "GTA Six finally launched, thirteen years after GTA Five. That is a very long wait for fans, so here is the road it took, step by step."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Aimed at 2025 first",
+        "Moved to May 26, 2026",
+        "Moved again to Nov 19, 2026"
+      ],
+      "say": "Rockstar first aimed for 2025. Then it moved the game to May twenty sixth, 2026. Then it slipped again, to November nineteenth. Rockstar apologised for the extra wait."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "> gta_vi --launch",
+        "date: 2026-11-19",
+        "studio: Rockstar Games",
+        "est. cost: over $1 billion"
+      ],
+      "say": "It arrived on November nineteenth, built by Rockstar Games. Press reports put the estimated cost at more than one billion dollars."
+    },
+    {
+      "kind": "big",
+      "big": "99",
+      "sub": "Metacritic score on launch day",
+      "say": "On launch day, it opened with a Metacritic score of ninety nine, from more than a hundred and fifty critic reviews."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "2013",
+        "items": [
+          "GTA V launches",
+          "PS3 and Xbox 360"
+        ]
+      },
+      "right": {
+        "label": "2026",
+        "items": [
+          "GTA VI launches",
+          "PS5 and Xbox Series"
+        ]
+      },
+      "say": "Two console generations later, the series is back on the shelves. Follow for more gaming stories, explained fast."
+    }
+  ],
+  "sources": [
+    "https://www.aljazeera.com/news/2026/11/19/grand-theft-auto-vi-launches-to-rave-reviews-after-13-year-wait",
+    "https://www.gamesradar.com/games/grand-theft-auto/gta-6-delayed-6-more-months-as-rockstar-commits-to-november-2026-and-says-sorry"
+  ]
+}

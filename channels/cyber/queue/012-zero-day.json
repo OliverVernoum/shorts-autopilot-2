@@ -1,0 +1,72 @@
+{
+  "id": "012-zero-day",
+  "title": "What is a zero-day, and why do they sell for millions?",
+  "description": "A zero-day is a flaw attackers know about and the vendor doesn't. Here's why working exploits are worth so much, and how to shrink your risk.",
+  "tags": [
+    "zero-day",
+    "vulnerability",
+    "bug bounty",
+    "software updates",
+    "cybersecurity basics"
+  ],
+  "series_tag": "#012",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "Attackers found it before the vendor",
+      "sub": "that's a zero-day",
+      "say": "A zero-day is a flaw that attackers know about, and the company behind the software doesn't."
+    },
+    {
+      "kind": "big",
+      "big": "0 days",
+      "sub": "of warning to fix it",
+      "say": "It's called zero-day because the developer has had zero days to fix it. No patch exists yet, so even a fully updated device can be exposed."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "$ check-for-updates",
+        "> You are up to date",
+        "> Known flaw: none reported",
+        "> Attackers: may already know"
+      ],
+      "say": "Your phone says it's up to date. But a flaw the vendor has never heard of can't be fixed, so there's nothing to install."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Report",
+        "items": [
+          "Vendor builds a patch",
+          "Public bug bounty paid",
+          "Everyone gets safer"
+        ]
+      },
+      "right": {
+        "label": "Sell",
+        "items": [
+          "Private brokers buy",
+          "Kept secret for attacks",
+          "Nobody gets a patch"
+        ]
+      },
+      "say": "So why the huge prices? A working exploit that quietly beats a fully patched phone is rare. Apple's public bounty tops out at two million dollars for the most advanced attack chains. Brokers have advertised similar sums."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Turn on automatic updates",
+        "Install patches the day they land",
+        "Restart when asked",
+        "Delete apps you don't use"
+      ],
+      "say": "You can't stop a zero-day, but you can shrink the window. Turn on automatic updates, and install patches the day they land. Follow for more threats, explained plainly."
+    }
+  ],
+  "sources": [
+    "https://www.cloudflare.com/learning/security/threats/zero-day-exploit/",
+    "https://security.apple.com/blog/apple-security-bounty-evolved/",
+    "https://www.securityweek.com/zerodium-offers-2-million-ios-hacks-1-million-chat-app-exploits/"
+  ]
+}

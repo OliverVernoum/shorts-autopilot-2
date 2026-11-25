@@ -1,0 +1,72 @@
+{
+  "id": "005-https-padlock",
+  "title": "The padlock doesn't mean a website is safe",
+  "description": "The HTTPS padlock proves your connection is encrypted, not that the site is honest. Here's what it really tells you.",
+  "tags": [
+    "HTTPS",
+    "padlock",
+    "TLS certificates",
+    "phishing",
+    "cybersecurity basics"
+  ],
+  "series_tag": "#005",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "The padlock doesn't mean safe",
+      "sub": "it proves something narrower",
+      "say": "That little padlock in your browser? It does not mean a website is safe."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Proves",
+        "items": [
+          "Connection is encrypted",
+          "Nobody can alter it en route",
+          "You reached that domain"
+        ]
+      },
+      "right": {
+        "label": "Doesn't",
+        "items": [
+          "The site is honest",
+          "The owner is who they say",
+          "No scams or malware"
+        ]
+      },
+      "say": "It proves your connection to that domain is encrypted, and can't be tampered with on the way. It says nothing about who runs the site, or what they'll do with your data."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "Domain: yourbank-login.example",
+        "Issuer: automated, free CA",
+        "Check done: domain control only"
+      ],
+      "say": "Certificates are often issued automatically, after a check that you control the domain. So scammers get padlocks too. Plenty of phishing sites use HTTPS."
+    },
+    {
+      "kind": "big",
+      "big": "Read the URL",
+      "sub": "Chrome ditched the padlock icon",
+      "say": "Chrome even replaced its padlock with a neutral settings icon, because most people misunderstood it. What matters is the address itself."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Type the address yourself",
+        "Check the exact domain spelling",
+        "Use bookmarks or official apps"
+      ],
+      "say": "So type addresses yourself, check the domain carefully, and use bookmarks or official apps. Follow for more plain text threats."
+    }
+  ],
+  "sources": [
+    "https://www.bitdefender.com/blog/hotforsecurity/chrome-to-drop-familiar-lock-icon-as-it-might-be-actually-helping-scammers-google-says"
+  ],
+  "video_id": "cSV8zD3ZBM8",
+  "url": "https://youtube.com/shorts/cSV8zD3ZBM8",
+  "published_at": "2026-11-21T21:34:18+00:00",
+  "privacy": "public"
+}

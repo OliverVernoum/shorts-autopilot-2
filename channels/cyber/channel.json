@@ -1,0 +1,24 @@
+{
+  "name": "Plain Text Threats",
+  "tagline": "One cybersecurity concept per Short. No jargon.",
+  "voice": "en-GB-RyanNeural",
+  "rate": "+8%",
+  "privacy": "public",
+  "category_id": "28",
+  "made_for_kids": false,
+  "contains_synthetic_media": false,
+  "default_tags": [
+    "cybersecurity",
+    "infosec",
+    "hacking explained",
+    "tech explained",
+    "plain text threats"
+  ],
+  "hashtags": [
+    "#cybersecurity",
+    "#infosec",
+    "#PlainTextThreats"
+  ],
+  "description_footer": "New cybersecurity explainer every day. Educational content only: learn how attacks work so you can defend against them.\n\nVoiceover is AI-generated (text-to-speech).",
+  "about": "Plain Text Threats explains one cybersecurity concept per Short: how real attacks work and how to defend against them, in plain English. No jargon, no fearmongering.\n\nNew Short every hour: passwords, phishing, 2FA, encryption, scams, privacy, Wi-Fi, malware, and how to get into a cyber career.\n\nEducational content only. Every Short lists its sources in the description. Voiceover is AI-generated (text-to-speech)."
+}

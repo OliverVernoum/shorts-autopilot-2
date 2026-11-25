@@ -1,0 +1,67 @@
+{
+  "id": "g005-space-invaders-speedup",
+  "title": "Space Invaders speeds up because of a hardware limit",
+  "description": "Space Invaders' aliens speed up as you shoot them because the processor drew each frame faster. The designer kept it.",
+  "tags": [
+    "Space Invaders",
+    "arcade history",
+    "game dev",
+    "Tomohiro Nishikado",
+    "gaming facts"
+  ],
+  "series_tag": "#G005",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "A bug made Space Invaders iconic",
+      "sub": "1978, Tomohiro Nishikado",
+      "say": "Space Invaders gets harder as you win. That wasn't planned. It was a hardware quirk, and the creator decided to keep it."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Fewer aliens on screen",
+        "Less to draw each frame",
+        "Processor finishes sooner"
+      ],
+      "say": "Here's the chain. Shoot some aliens, and the processor has less to draw each frame. It finishes sooner, so the next frame arrives faster, and the whole swarm speeds up as you win."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "aliens: many | speed: slow",
+        "aliens: some | speed: faster",
+        "aliens: one  | speed: FAST",
+        "status: bug -> feature"
+      ],
+      "say": "Because the aliens move after each frame, the last few zip across the screen. Designer Tomohiro Nishikado didn't fix it, and called it a gameplay mechanism."
+    },
+    {
+      "kind": "big",
+      "big": "July 1978",
+      "sub": "Japanese release",
+      "say": "The game came out in Japan in July nineteen seventy eight, and this one accident helped define how arcade games build tension."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Planned",
+        "items": [
+          "Constant speed",
+          "Smooth difficulty"
+        ]
+      },
+      "right": {
+        "label": "Actual",
+        "items": [
+          "Speed climbs as you win",
+          "Tension from hardware"
+        ]
+      },
+      "say": "A limit became the thrill. Follow for more accidental game design."
+    }
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Space_Invaders"
+  ]
+}

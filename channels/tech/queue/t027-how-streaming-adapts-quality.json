@@ -1,0 +1,68 @@
+{
+  "id": "t027-how-streaming-adapts-quality",
+  "title": "Why streaming video drops quality mid-play, on purpose",
+  "description": "Streaming sites cut video into short chunks at several qualities, then switch between them as your connection changes.",
+  "tags": [
+    "streaming",
+    "adaptive bitrate",
+    "video quality",
+    "buffering",
+    "how streaming works"
+  ],
+  "series_tag": "#T027",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "Why video quality keeps changing",
+      "sub": "it's a choice, made every few seconds",
+      "say": "Your video suddenly gets blurry, then sharp again. That's not a glitch. It's your player making a decision every few seconds."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Video is encoded at several qualities",
+        "Each version is cut into short segments",
+        "Player starts with a low quality",
+        "Player checks speed, moves up or down"
+      ],
+      "say": "Before you press play, the video is saved in several versions, from low to high quality. Each one is chopped into segments a few seconds long. Your player often starts low, then climbs if your connection can handle it."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "seg_041  1080p  ok",
+        "seg_042  1080p  ok",
+        "seg_043   480p  slow wifi!",
+        "seg_044   720p  recovering"
+      ],
+      "say": "Switching only happens between segments. If your connection slows, the next segment comes from a smaller, lower quality file. If it recovers, you go back up."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Strong",
+        "items": [
+          "Climbs the ladder",
+          "Sharper picture"
+        ]
+      },
+      "right": {
+        "label": "Weak",
+        "items": [
+          "Drops a rung",
+          "Softer, still plays"
+        ]
+      },
+      "say": "Strong connection, the player climbs to sharper versions. Weak connection, it drops down a rung."
+    },
+    {
+      "kind": "big",
+      "big": "Blur > freeze",
+      "sub": "a trade worth making",
+      "say": "The goal is simple. Keep playing, even if the picture dips. A little blur is better than a spinning wheel. Follow for more everyday tech explained."
+    }
+  ],
+  "sources": [
+    "https://www.cloudflare.com/learning/video/what-is-adaptive-bitrate-streaming/"
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "id": "008-ransomware-stages",
+  "title": "The 5 stages of a ransomware attack, and how to stop each",
+  "description": "Ransomware rarely hits instantly. It moves through five stages, and every one is a chance to stop it before your files are locked.",
+  "tags": [
+    "ransomware",
+    "ransomware stages",
+    "backups",
+    "multi-factor authentication",
+    "incident response"
+  ],
+  "series_tag": "#008",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "5 stages. 5 chances to stop it.",
+      "sub": "ransomware, step by step",
+      "say": "Ransomware doesn't strike instantly. It usually moves through five stages, and each one is a chance to stop it."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "1 Get in: phishing, weak logins",
+        "2 Spread: gain admin access",
+        "3 Steal: copy data out first",
+        "4 Lock: encrypt the files",
+        "5 Demand: the ransom note"
+      ],
+      "say": "One, get in, often through phishing or an exposed login. Two, spread and gain admin rights. Three, quietly copy data out. Four, encrypt files. Five, show the ransom demand."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "$ review_alerts --last 24h",
+        "> New admin account created",
+        "> Huge upload to unknown server",
+        "> Backups switched off"
+      ],
+      "say": "Stages two and three leave clues. New admin accounts, huge uploads, switched off backups. Spot those, and you may stop the attack before a single file is locked."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Prevent",
+        "items": [
+          "Multi-factor authentication",
+          "Patch exposed systems",
+          "Filter phishing emails"
+        ]
+      },
+      "right": {
+        "label": "Recover",
+        "items": [
+          "Offline backups",
+          "Segmented network",
+          "Practised response plan"
+        ]
+      },
+      "say": "Prevent early with multi-factor authentication, patching and email filtering. Recover late with offline backups, and a network split into sections so attackers can't roam freely."
+    },
+    {
+      "kind": "big",
+      "big": "Test backups",
+      "sub": "an untested backup is just a hope",
+      "say": "And test those backups. If they won't restore, they won't save you. See you in the next one."
+    }
+  ],
+  "sources": [
+    "https://www.cisa.gov/stopransomware/ransomware-guide",
+    "https://www.ncsc.gov.uk/ransomware/home"
+  ]
+}

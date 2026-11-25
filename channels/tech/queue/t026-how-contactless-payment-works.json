@@ -1,0 +1,69 @@
+{
+  "id": "t026-how-contactless-payment-works",
+  "title": "How tap to pay works without sending your real card number",
+  "description": "Contactless payments use a short-range radio link and a stand-in code instead of your real card number.",
+  "tags": [
+    "nfc",
+    "contactless payment",
+    "apple pay",
+    "tokenization",
+    "how tap to pay works"
+  ],
+  "series_tag": "#T026",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "Tap to pay: no card number sent",
+      "sub": "your phone sends a stand-in",
+      "say": "When you tap your phone to pay, your real card number usually isn't what gets sent. Something clever is."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Radio",
+        "items": [
+          "13.56 MHz",
+          "Works about 4 cm away"
+        ]
+      },
+      "right": {
+        "label": "Reason",
+        "items": [
+          "Short range limits snooping",
+          "No battery needed in cards"
+        ]
+      },
+      "say": "First, the link. Near field communication is a short-range radio at 13.56 megahertz. It typically works within a few centimeters, which makes eavesdropping harder. It can even power a battery-less tag."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Phone holds a token, not your card",
+        "Terminal asks for payment details",
+        "Phone creates a one-time code",
+        "Bank checks it and approves"
+      ],
+      "say": "Second, the data. Your phone sends a token, a digital stand-in for your card. Each payment also creates its own one-time code. So an intercepted token is useless for another purchase."
+    },
+    {
+      "kind": "big",
+      "big": "About 4 cm",
+      "sub": "typical NFC range",
+      "say": "Typical range is about four centimeters, so a snoop would need to be nearly touching your phone."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "card: 4111 1111 1111 1111",
+        "token: stored on device",
+        "code: valid for ONE payment",
+        "stolen token = dead end"
+      ],
+      "say": "Even if someone grabbed it, they couldn't replay it elsewhere. The short range, the token, and the one-time code all work together. So your phone stays useful, and your real number stays hidden. Follow for more tech, explained simply."
+    }
+  ],
+  "sources": [
+    "https://stripe.com/en-dk/resources/more/nfc-security-101-a-guide-for-businesses-using-contactless-payments",
+    "https://fin.plaid.com/articles/how-does-nfc-payment-work"
+  ]
+}

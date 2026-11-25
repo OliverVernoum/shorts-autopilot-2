@@ -1,0 +1,69 @@
+{
+  "id": "t014-face-id-3d",
+  "title": "How Face ID-style 3D face scanning actually works",
+  "description": "Face unlock on phones like iPhones doesn't just compare photos. It builds a depth map with invisible infrared dots.",
+  "tags": [
+    "Face ID",
+    "face unlock",
+    "3D scanning",
+    "infrared",
+    "tech explained"
+  ],
+  "series_tag": "#T014",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "Face unlock reads depth, not a photo",
+      "sub": "that's why a picture fails",
+      "say": "Face unlock doesn't just take a picture of you. It builds a three-D map of your face."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Photo",
+        "items": [
+          "No depth data",
+          "Flat, two dimensions"
+        ]
+      },
+      "right": {
+        "label": "Face",
+        "items": [
+          "Has real depth",
+          "Dot pattern bends"
+        ]
+      },
+      "say": "Apple says Face ID needs depth data, which a flat photo doesn't contain. It also checks that your eyes are open and you're paying attention."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Projector casts 30,000+ invisible dots",
+        "Infrared camera reads the pattern",
+        "Neural engine builds a math model",
+        "Secure Enclave compares it to yours"
+      ],
+      "say": "A projector casts more than thirty thousand invisible infrared dots on your face. A camera reads how the pattern bends. A neural network turns it into a mathematical model, and a secure chip compares it with the one you enrolled."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "random match: < 1 in 1,000,000",
+        "failed tries before passcode: 5",
+        "stored on device only: yes",
+        "backed up to iCloud: no"
+      ],
+      "say": "Apple quotes odds under one in a million for a random person. Twins and young children raise that. Five failed tries and it wants your passcode. The data stays on the device, encrypted."
+    },
+    {
+      "kind": "big",
+      "big": "On-device",
+      "sub": "your face data stays put",
+      "say": "So it's a depth scan, not a selfie. Follow for more hardware, explained."
+    }
+  ],
+  "sources": [
+    "https://support.apple.com/102381",
+    "https://www.apple.com/newsroom/2017/09/the-future-is-here-iphone-x/"
+  ]
+}

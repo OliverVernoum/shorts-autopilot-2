@@ -1,0 +1,69 @@
+{
+  "id": "t003-ai-overviews-fact-check",
+  "title": "Google's AI answers cite sources. Do the sources agree?",
+  "description": "Researchers checked nearly 98,000 claims in Google AI Overviews against the pages they cited. Here's what they found and how to check one yourself.",
+  "tags": [
+    "ai overviews",
+    "google search",
+    "ai accuracy",
+    "fact checking",
+    "tech explained"
+  ],
+  "series_tag": "#T003",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "Do the AI's sources agree?",
+      "sub": "researchers checked",
+      "say": "Google's AI answers show sources, but do the sources actually say that? Researchers checked."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "searches run: 55,393",
+        "claims checked: 98,020",
+        "backed by source: ~89%",
+        "not backed: ~11%"
+      ],
+      "say": "Researchers from Washington University ran about fifty-five thousand Google searches last spring, then checked almost ninety-eight thousand claims in AI Overviews against the pages they cited."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Missing",
+        "items": [
+          "Claim not on cited page",
+          "About 7% of claims"
+        ]
+      },
+      "right": {
+        "label": "Contradicted",
+        "items": [
+          "Page says something else",
+          "About 4% of claims"
+        ]
+      },
+      "say": "About eleven percent weren't backed up. Roughly seven percent weren't found on the cited page, and about four percent were contradicted by it. The team says eleven is an upper limit, since forum pages were hard to capture."
+    },
+    {
+      "kind": "big",
+      "big": "42%",
+      "sub": "of overviews fully supported",
+      "say": "Only about forty-two percent of overviews had every checkable claim supported, a figure the researchers say is likely conservative."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "Click the cited link",
+        "Find the exact claim there",
+        "Check the date",
+        "Compare with a second source"
+      ],
+      "say": "So how do you check one? Open the citation, find the claim on that page, and check the date. The lead researcher's point: readers still need to check, even when citations look trustworthy. Save this for the next time an AI answer sounds too sure."
+    }
+  ],
+  "sources": [
+    "https://source.washu.edu/2026/09/washu-research-finds-gaps-in-google-ai-overview-citations-claims/",
+    "https://arxiv.org/html/2605.14021v1"
+  ]
+}

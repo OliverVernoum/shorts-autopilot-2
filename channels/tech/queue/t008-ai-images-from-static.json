@@ -1,0 +1,70 @@
+{
+  "id": "t008-ai-images-from-static",
+  "title": "How AI makes a picture from random static",
+  "description": "Many AI image generators start with pure noise and clean it up step by step. Here's the idea behind diffusion models.",
+  "tags": [
+    "ai image generation",
+    "diffusion models",
+    "how ai works",
+    "ai explained",
+    "tech explained"
+  ],
+  "series_tag": "#T008",
+  "scenes": [
+    {
+      "kind": "title",
+      "big": "AI images start as static",
+      "sub": "then get cleaned up",
+      "say": "Many AI image generators start with pure static, then clean it up until a picture appears."
+    },
+    {
+      "kind": "big",
+      "big": "Remove noise",
+      "sub": "one small step at a time",
+      "say": "The core idea behind many image models, called diffusion, is removing noise. Not drawing from scratch, but cleaning up static in many small steps."
+    },
+    {
+      "kind": "versus",
+      "left": {
+        "label": "Training",
+        "items": [
+          "Add noise to real images",
+          "Learn to undo the noise"
+        ]
+      },
+      "right": {
+        "label": "Generating",
+        "items": [
+          "Start from random noise",
+          "Refine in small steps"
+        ]
+      },
+      "say": "In training, the model sees images with different amounts of noise added, and learns to estimate the cleaner version. To generate, it starts from random noise and applies that skill again and again until an image emerges."
+    },
+    {
+      "kind": "terminal",
+      "lines": [
+        "example: 4 of many steps",
+        "1: random static",
+        "2: vague blobs",
+        "3: rough shapes",
+        "4: clear image"
+      ],
+      "say": "Picture it like this. Each pass removes a little noise, and because every step is small, mistakes from earlier passes can be corrected later."
+    },
+    {
+      "kind": "steps",
+      "steps": [
+        "You type a prompt",
+        "Text becomes numbers",
+        "Numbers steer each cleanup",
+        "Static becomes your image"
+      ],
+      "say": "And your prompt? In many systems, it guides the cleanup, so the static turns into what you asked for, not just any image. Follow for more AI, one idea at a time."
+    }
+  ],
+  "sources": [
+    "https://huggingface.co/learn/diffusion-course/unit1/1",
+    "https://www.deeplearning.ai/short-courses/how-diffusion-models-work/"
+  ]
+}

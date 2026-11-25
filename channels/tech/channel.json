@@ -1,0 +1,115 @@
+{
+  "name": "Pocket Silicon",
+  "tagline": "How AI and everyday tech actually work, explained simply.",
+  "voice": "en-US-AvaNeural",
+  "rate": "+8%",
+  "privacy": "public",
+  "category_id": "28",
+  "made_for_kids": false,
+  "contains_synthetic_media": false,
+  "default_tags": [
+    "tech explained",
+    "AI explained",
+    "how it works",
+    "artificial intelligence",
+    "pocket silicon"
+  ],
+  "hashtags": [
+    "#tech",
+    "#ai",
+    "#PocketSilicon"
+  ],
+  "description_footer": "New AI and tech explainer every day, in plain English.\n\nVoiceover is AI-generated (text-to-speech).",
+  "palettes": [
+    [
+      [
+        8,
+        10,
+        26
+      ],
+      [
+        22,
+        26,
+        64
+      ],
+      [
+        110,
+        140,
+        255
+      ],
+      [
+        180,
+        120,
+        255
+      ]
+    ],
+    [
+      [
+        6,
+        14,
+        24
+      ],
+      [
+        10,
+        38,
+        56
+      ],
+      [
+        60,
+        200,
+        255
+      ],
+      [
+        170,
+        150,
+        255
+      ]
+    ],
+    [
+      [
+        14,
+        8,
+        22
+      ],
+      [
+        36,
+        14,
+        52
+      ],
+      [
+        190,
+        130,
+        255
+      ],
+      [
+        90,
+        200,
+        255
+      ]
+    ],
+    [
+      [
+        6,
+        16,
+        18
+      ],
+      [
+        14,
+        40,
+        44
+      ],
+      [
+        80,
+        225,
+        225
+      ],
+      [
+        120,
+        150,
+        255
+      ]
+    ]
+  ],
+  "glyphs": "01+-=<>{}·",
+  "about": "Pocket Silicon explains how AI and everyday tech actually work: chatbots, phones, batteries, Wi-Fi, GPS and the tech news everyone's talking about, minus the hype.\n\nNew explainer every day, with sources in every description.\n\nVoiceover is AI-generated (text-to-speech)."
+}
