@@ -49,7 +49,9 @@ Server cron (server/tick.sh)  ── next script → edge-tts voice → animated
    ```
    Logs on the server: `~/shorts-short.log` and `~/shorts-long.log`.
 
-No GitHub Actions: the server does all rendering and uploading, and commits queue changes back here.
+**Or run it on a Mac instead of a server:** `bash server/mac-setup.sh` (launchd; `bash server/mac-setup.sh remove` to stop).
+
+No GitHub Actions: the server (or Mac) does all rendering and uploading, and commits queue changes back here.
 
 ## Adding another channel
 

@@ -5,7 +5,7 @@
 
 The client_secret*.json from Google Cloud is picked up from this folder or ~/Downloads.
 For each channel a browser tab opens: pick that channel's account and click Allow.
-Then copy the file to the server:   scp shorts.env ubuntu@SERVER_IP:~/.shorts.env
+On a server: scp shorts.env ubuntu@SERVER_IP:~/.shorts.env  (running on the Mac: leave it where it is)
 shorts.env is git-ignored; never commit it.
 """
 import glob

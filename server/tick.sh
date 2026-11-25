@@ -6,15 +6,23 @@
 set -uo pipefail
 cd "$(dirname "$0")/.."
 mode=${1:-short}
-exec 9>"/tmp/shorts-$mode.lock"
-flock -n 9 || { echo "previous $mode run still going"; exit 0; }
+# lock (mkdir is atomic and works on macOS and Linux, unlike flock)
+lock="/tmp/shorts-$mode.lock"
+if ! mkdir "$lock" 2>/dev/null; then
+  # stale lock from a crash/reboot? clear it if older than 2 hours
+  if [ -n "$(find "$lock" -maxdepth 0 -mmin +120 2>/dev/null)" ]; then rm -rf "$lock"; mkdir "$lock"
+  else echo "previous $mode run still going"; exit 0; fi
+fi
+trap 'rm -rf "$lock"' EXIT
 
-set -a; . "$HOME/.shorts.env"; set +a
+for f in "$HOME/.shorts.env" shorts.env; do
+  [ -f "$f" ] && { set -a; . "$f"; set +a; break; }
+done
 . .venv/bin/activate
 
 git pull --rebase -q || { git rebase --abort 2>/dev/null; echo "git pull failed, skipping this run"; exit 1; }
 
-h=$(date -u +%-H)
+h=$((10#$(date -u +%H)))
 case "$mode" in
   test)
     python -m shorts.run --channel cyber --dry-run; exit $? ;;
