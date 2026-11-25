@@ -1,15 +1,21 @@
 #!/usr/bin/env bash
-# Run by cron on the server (see setup.sh). Replaces the old GitHub Actions ticker/publish workflows.
-#   tick.sh short   :07 every hour -> cyber on even UTC hours; gaming at 01/07/13/19, tech at 03/09/15/21
-#   tick.sh long    :37 every hour -> long-form when UTC hour % every_hours (longform.txt) == 0
-#   tick.sh test    render one cyber Short without uploading (check the setup works)
+# Run every hour by cron (server) or launchd (Mac). Replaces the old GitHub Actions workflows.
+#   tick.sh short   :07 -> 2 Shorts a day per channel (slots below)
+#   tick.sh long    :37 -> 1 long-form a day per channel (hours in longform.txt)
+#   tick.sh test    render one cyber Short without uploading
+# Each slot counts as due once its UTC hour has passed, so if the machine was asleep the
+# missed upload happens at the next tick that day (one per channel per tick).
 set -uo pipefail
 cd "$(dirname "$0")/.."
 mode=${1:-short}
-# lock (mkdir is atomic and works on macOS and Linux, unlike flock)
+
+# Shorts slots (UTC hours) per channel
+SHORT_SLOTS_cyber="8 17"
+SHORT_SLOTS_gaming="10 19"
+SHORT_SLOTS_tech="12 21"
+
 lock="/tmp/shorts-$mode.lock"
 if ! mkdir "$lock" 2>/dev/null; then
-  # stale lock from a crash/reboot? clear it if older than 2 hours
   if [ -n "$(find "$lock" -maxdepth 0 -mmin +120 2>/dev/null)" ]; then rm -rf "$lock"; mkdir "$lock"
   else echo "previous $mode run still going"; exit 0; fi
 fi
@@ -20,43 +26,46 @@ for f in "$HOME/.shorts.env" shorts.env; do
 done
 . .venv/bin/activate
 
-git pull --rebase -q || { git rebase --abort 2>/dev/null; echo "git pull failed, skipping this run"; exit 1; }
+if [ "$mode" = test ]; then python -m shorts.run --channel cyber --dry-run; exit $?; fi
+
+git pull --rebase --autostash -q || { git rebase --abort 2>/dev/null; echo "git pull failed, skipping this run"; exit 1; }
 
 h=$((10#$(date -u +%H)))
+today=$(date -u +%F)
+mkdir -p .state status out
+done_today() { f=".state/$1"; [ "$(sed -n 1p "$f" 2>/dev/null)" = "$today" ] && sed -n 2p "$f" || echo 0; }
+mark_done()  { n=$(( $(done_today "$1") + 1 )); printf '%s\n%s\n' "$today" "$n" > ".state/$1"; }
+due_count()  { n=0; for s in $1; do [ "$h" -ge "$s" ] && n=$((n+1)); done; echo $n; }
+
 case "$mode" in
-  test)
-    python -m shorts.run --channel cyber --dry-run; exit $? ;;
   short)
-    ch=""
-    [ $((h % 2)) -eq 0 ] && ch=cyber
-    case "$h" in 1|7|13|19) ch="${ch:+$ch,}gaming" ;; 3|9|15|21) ch="${ch:+$ch,}tech" ;; esac
-    [ -z "$ch" ] && exit 0
-    args="--channel $ch --count 1"; log=status/last-run.txt ;;
+    log=status/last-run.txt; : > "$log"
+    for c in cyber gaming tech; do
+      slots_var="SHORT_SLOTS_$c"; slots=${!slots_var}
+      [ "$(done_today short-$c)" -ge "$(due_count "$slots")" ] && continue
+      python -m shorts.run --channel "$c" --count 1 2>&1 | tee -a "$log" && mark_done "short-$c"
+    done ;;
   long)
-    lch=$(sed -n 's/^channels:[[:space:]]*//p' longform.txt 2>/dev/null | head -1 | tr -s ' ,' ',' | sed 's/^,//; s/,$//')
-    every=$(sed -n 's/^every_hours:[[:space:]]*//p' longform.txt 2>/dev/null | head -1 | tr -dc '0-9')
-    every=${every:-0}
-    { [ -z "$lch" ] || [ "$lch" = none ] || [ "$every" -lt 1 ]; } && exit 0
-    [ $((h % every)) -ne 0 ] && exit 0
-    go=""
-    for c in ${lch//,/ }; do
-      ls channels/$c/longform/queue/*.json >/dev/null 2>&1 && go="$go,$c"
-    done
-    go=${go#,}; [ -z "$go" ] && exit 0
-    args="--channel $go --longform --count 1"; log=status/last-run-long.txt ;;
+    log=status/last-run-long.txt; : > "$log"
+    while IFS=: read -r c hr; do
+      c=$(echo "$c" | tr -d ' '); hr=$(echo "$hr" | tr -dc '0-9')
+      case "$c" in ''|\#*) continue ;; esac
+      [ -z "$hr" ] && continue
+      [ "$(done_today long-$c)" -ge "$(due_count "$hr")" ] && continue
+      ls channels/$c/longform/queue/*.json >/dev/null 2>&1 || continue
+      python -m shorts.run --channel "$c" --longform --count 1 2>&1 | tee -a "$log" && mark_done "long-$c"
+    done < longform.txt ;;
   *) echo "usage: tick.sh short|long|test"; exit 2 ;;
 esac
 
-mkdir -p status out
-python -m shorts.run $args 2>&1 | tee "$log"
-echo "run at $(date -u +%FT%TZ) args: $args" >> "$log"
-
+[ -s "$log" ] || exit 0
+echo "run at $(date -u +%FT%TZ) ($mode)" >> "$log"
 git add channels status
 if ! git diff --cached --quiet; then
-  git commit -qm "Publish: $(date -u +%F) $args"
+  git commit -qm "Publish: $(date -u +%F) $mode"
   for i in 1 2 3 4 5; do
-    git pull --rebase -q && git push -q && break
+    git pull --rebase --autostash -q && git push -q && break
     sleep $((i * 7))
   done
 fi
-find out -type f -mtime +2 -delete 2>/dev/null   # keep the disk from filling up
+find out -type f -mtime +2 -delete 2>/dev/null

@@ -1,2 +1,5 @@
-channels: cyber, gaming, tech
-every_hours: 4
+# One long-form video a day per channel, from <hour>:37 UTC onwards (catches up later that day if missed).
+# Delete a line to switch that channel's long-form off.
+cyber: 15
+gaming: 16
+tech: 18

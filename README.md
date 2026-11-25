@@ -2,11 +2,11 @@
 
 Automatically makes and uploads YouTube Shorts for several faceless channels.
 
-| Channel folder | Channel | Topic | Uploads (UTC) |
+| Channel folder | Channel | Topic | Uploads (UTC, 2 Shorts + 1 long-form a day) |
 |---|---|---|---|
-| `channels/cyber`  | Plain Text Threats | One cybersecurity concept per Short | every 2 hours at :07 (even UTC hours) |
-| `channels/gaming` | Boss Room Archive | Gaming facts, mechanics and history | 01:07, 07:07, 13:07, 19:07 |
-| `channels/tech` | Pocket Silicon | How AI and everyday tech work | 03:07, 09:07, 15:07, 21:07 |
+| `channels/cyber`  | Plain Text Threats | One cybersecurity concept per Short | 08:07 and 17:07 |
+| `channels/gaming` | Boss Room Archive | Gaming facts, mechanics and history | 10:07 and 19:07 |
+| `channels/tech` | Pocket Silicon | How AI and everyday tech work | 12:07 and 21:07 |
 
 ## How it works
 
@@ -81,9 +81,9 @@ kinds as Shorts. Total narration 900-1500 words; max 90 words per scene.
 - Upload: the description gets a `Chapters` list with timestamps from the real render, and the
   thumbnail is set with `thumbnails.set`. Custom thumbnails need a phone-verified channel
   (youtube.com/verify); until then the upload still works and the run logs a warning.
-- Schedule: `server/tick.sh long` reads `longform.txt` every hour at :37 and runs when
-  `UTC hour % every_hours == 0`, only for listed channels with something in their long-form queue.
-  Use `channels: none` to switch it off. Channels without a token are skipped quietly.
+- Schedule: one a day per channel. `longform.txt` lists `channel: UTC hour`; `server/tick.sh long`
+  runs at :37 every hour and publishes once that hour has passed (catching up if the machine was
+  asleep). Delete a channel's line to switch its long-form off. Channels without a token are skipped quietly.
 - Manual: on the server, `.venv/bin/python -m shorts.run --channel cyber --longform`.
 
 ```
