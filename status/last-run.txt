@@ -1,2 +1,2 @@
-::warning::[gaming] no YT_REFRESH_TOKEN_GAMING secret yet, skipping
-run at 2026-11-25T19:08:58Z (short)
+::warning::[tech] no YT_REFRESH_TOKEN_TECH secret yet, skipping
+run at 2026-11-25T21:07:03Z (short)
