@@ -218,39 +218,119 @@ def health_bar(d, x0, y, w, fill_frac=0.72):
         d.line([(x, y - 2), (x, y - 1)], fill=GOLD2)
 
 
+BAYER = [[0, 2], [3, 1]]
+
+
+def dither_light(img, cx, cy, radius, colour, mix=0.28, squash=0.8):
+    """Pixel-art light: solid / checker / sparse dither rings that tint stone but not mortar."""
+    px = img.load()
+    for y in range(max(0, cy - radius), min(img.height, cy + radius + 1)):
+        for x in range(max(0, cx - radius), min(img.width, cx + radius + 1)):
+            if px[x, y] == MORT2:
+                continue
+            dd = math.hypot(x - cx, (y - cy) * squash) / radius
+            level = 4 if dd < 0.4 else 2 if dd < 1 else 0  # solid core, checker edge
+            if level and BAYER[y % 2][x % 2] < level:
+                r, g, b = px[x, y]
+                px[x, y] = tuple(int(c + (t - c) * mix) for c, t in zip((r, g, b), colour))
+
+
+def arch_ring(d, cx, cy, r_in, r_out, n=9):
+    """Voussoir stones around an arch (top half circle), mortar lines between stones."""
+    for yy in range(cy - r_out, cy + 1):
+        for xx in range(cx - r_out, cx + r_out + 1):
+            dist = math.hypot(xx - cx, yy - cy)
+            if r_in < dist <= r_out:
+                ang = math.atan2(cy - yy, xx - cx)  # 0..pi
+                seam = abs((ang / math.pi * n) % 1 - 0.5) > 0.42
+                edge = dist > r_out - 1
+                d.point((xx, yy), fill=MORT2 if seam else STONE_HI if edge else STONE)
+
+
+def pixel_label(art, text, x, y, fill, outline):
+    """Unifont drawn at the art's own pixel size, with a 1px outline and drop shadow."""
+    t = pixel_text(text, 1, fill)
+    sil = Image.new("RGBA", t.size, (*outline, 255))
+    sil.putalpha(t.getchannel("A"))
+    for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1), (1, 1), (2, 2), (1, 2), (2, 1)]:
+        art.alpha_composite(sil, (x + dx, y + dy))
+    art.alpha_composite(t, (x, y))
+
+
 def gaming_banner():
     u = 8
-    gw, gh = BW // u, BH // u  # 320 x 180
-    art = stone_wall(gw, gh, seed=7)
+    gw, gh = BW // u, BH // u  # 320 x 180; everything is drawn on this one grid
+    rng = random.Random(11)
+    art = Image.new("RGB", (gw, gh), MORT2)
     d = ImageDraw.Draw(art)
-    floor = 128
-    d.rectangle([0, floor, gw, gh], fill=MORT2)
-    for y in range(floor + 2, gh, 5):  # floor flagstones in perspective
-        d.line([(0, y), (gw, y)], fill=STONE_LO)
-    for x in range(-200, gw + 200, 24):
-        d.line([(gw // 2 + (x - gw // 2) // 3, floor), (x, gh)], fill=STONE_LO)
-    boss_door(d, gw // 2, 18, 40, 46)  # behind the title, visible above it on TV/desktop
-    for tx in (SX0 // u - 6, SX1 // u + 6):
-        light(art, tx, 72, 34, TORCH)
-        torch(ImageDraw.Draw(art), tx, 74)
-    light(art, gw // 2, 66, 30, BOSSRED, 0.35)
+    # back wall: hand-varied block widths per course, not one repeating tile
+    y = 0
+    while y < 140:
+        bh = rng.choice([7, 8, 8, 9])
+        x = -rng.randint(0, 12)
+        while x < gw:
+            bw = rng.choice([12, 14, 16, 18, 22])
+            c = rng.choice([STONE, STONE, STONE, STONE_LO])
+            d.rectangle([x, y, x + bw - 2, y + bh - 2], fill=c)
+            d.line([(x, y), (x + bw - 2, y)], fill=STONE_HI)
+            d.line([(x + bw - 2, y + 1), (x + bw - 2, y + bh - 2)], fill=STONE_LO)
+            x += bw
+        y += bh
+    for _ in range(9):  # cracks
+        cx, cy = rng.randint(0, gw), rng.randint(5, 130)
+        for i in range(rng.randint(4, 9)):
+            d.point((cx, cy), fill=MORT2)
+            cx += rng.choice([-1, 0, 1]); cy += 1
+    # floor, side-on like a 2D game: slab line, uneven slabs, rubble
+    fy = 121
+    d.rectangle([0, fy, gw, gh], fill=STONE_LO)
+    d.line([(0, fy), (gw, fy)], fill=STONE_HI)
+    x = 0
+    while x < gw:
+        d.line([(x, fy + 1), (x, fy + 8)], fill=MORT2)
+        x += rng.randint(14, 30)
+    d.rectangle([0, fy + 9, gw, gh], fill=MORT2)
+    for _ in range(18):
+        rx = rng.randint(0, gw)
+        d.rectangle([rx, fy - 1, rx + rng.randint(0, 2), fy - 1], fill=STONE_HI)
+    # the boss door, right of the title, in a voussoir arch
+    cx, w = SX1 // u - 24, 28
+    top = fy - 4 - 50
+    arch_ring(d, cx, top + w // 2, w // 2 + 1, w // 2 + 6, n=7)
+    for side in (-1, 1):
+        x0 = cx - w // 2 - 6 if side < 0 else cx + w // 2
+        d.rectangle([x0, top + w // 2, x0 + 6, fy - 1], fill=STONE)
+        d.line([(x0 + (6 if side < 0 else 0), top + w // 2), (x0 + (6 if side < 0 else 0), fy - 1)], fill=STONE_LO)
+        for yy in range(top + w // 2 + 6, fy, 7):
+            d.line([(x0, yy), (x0 + 6, yy)], fill=MORT2)
+    boss_door(d, cx, top, w, fy - 4 - top)
+    for i in range(0, 40, 3):  # one chain, off-centre
+        d.rectangle([SX0 // u + 30, i, SX0 // u + 31, i + 1], outline=IRON)
+    torches = [(SX0 // u - 10, 84), (cx + 30, 80)]
+    for tx, ty in torches:
+        dither_light(art, tx, ty - 4, 18, TORCH, 0.22)
+    dither_light(art, cx, fy, 22, BOSSRED, 0.35, squash=2.2)  # flat spill along the floor
     d = ImageDraw.Draw(art)
-    bar_x, bar_w = SX0 // u + 4, (SX1 - SX0) // u - 8
-    health_bar(d, bar_x, 103, bar_w)
-    img = art.resize((BW, BH), Image.NEAREST).convert("RGBA")
-    img.alpha_composite(pixel_text("Boss Room Archive", 7, BONE, MORT2), (bar_x * u, 700))
-    img.alpha_composite(pixel_text("The secrets games never put in the manual.", 3, BONE, MORT2),
-                       (bar_x * u, 103 * u + 70))
-    return img.convert("RGB")
+    for tx, ty in torches:
+        torch(d, tx, ty)
+    # boss intro: name over a health bar, on the same grid as the art
+    art = art.convert("RGBA")
+    bar_x = SX0 // u + 4
+    pixel_label(art, "Boss Room Archive", bar_x, 72, BONE, MORT2)
+    health_bar(ImageDraw.Draw(art), bar_x, 92, 136)
+    return art.resize((BW, BH), Image.NEAREST).convert("RGB")
 
 
 def gaming_pfp():
     g = 40
-    art = stone_wall(g, g, seed=3, block=(8, 5))
-    light(art, 20, 36, 22, BOSSRED, 0.5)
+    art = stone_wall(g, g, seed=3, block=(9, 5))
     d = ImageDraw.Draw(art)
-    d.rectangle([0, 33, g, g], fill=MORT2)
-    boss_door(d, 20, 8, 20, 24)
+    d.rectangle([0, 34, g, g], fill=MORT2)
+    d.line([(0, 34), (g, 34)], fill=STONE_HI)
+    dither_light(art, 20, 35, 18, BOSSRED, 0.35, squash=2.5)
+    d = ImageDraw.Draw(art)
+    arch_ring(d, 20, 19, 10, 14, n=7)
+    boss_door(d, 20, 9, 20, 22)
     return art.resize((800, 800), Image.NEAREST)
 
 
