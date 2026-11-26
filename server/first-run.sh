@@ -8,7 +8,9 @@ git pull -q --rebase || true
 .venv/bin/pip install -q -r requirements.txt google-auth-oauthlib
 if [ ! -f shorts.env ] && [ -f "$HOME/.shorts.env" ]; then cp "$HOME/.shorts.env" shorts.env; fi
 if [ ! -f shorts.env ]; then
-  if ! ls client_secret*.json "$HOME"/Downloads/client_secret*.json >/dev/null 2>&1; then
+  found=""
+  for f in client_secret*.json "$HOME"/Downloads/client_secret*.json; do [ -f "$f" ] && found="$f"; done
+  if [ -z "$found" ]; then
     echo
     echo "Need the Google OAuth client file first:"
     echo "  console.cloud.google.com -> your YouTube project -> APIs & Services -> Credentials"
