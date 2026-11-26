@@ -2,7 +2,7 @@
 
 Uses the same visual language and fonts as branding/make_branding.py:
   cyber  - green-bar printout, key word knocked out of a redaction bar  (Anonymous Pro)
-  gaming - pixel sky + brick wall with a glowing secret brick           (Unifont, hard pixels)
+  gaming - stone boss arena, torch, sealed boss door, boss health bar    (Unifont, hard pixels)
   tech   - purple PCB, gold pads, white silkscreen, key word in gold    (TeX Gyre Heros Cn)
 Any other channel gets a flat card in its first palette.
 
@@ -97,51 +97,65 @@ def _cyber(w, h, kicker, text, highlight):
 
 
 # ------------------------------------------------------------------ gaming
+def _px_word(word, col, scale):
+    """Unifont word with a 1px outline + drop shadow, drawn on its own grid then scaled whole."""
+    t = mb.pixel_text(word, 1, col)
+    out = Image.new("RGBA", (t.width + 3, t.height + 3), (0, 0, 0, 0))
+    sil = Image.new("RGBA", t.size, (*mb.MORT2, 255))
+    sil.putalpha(t.getchannel("A"))
+    for dx, dy in [(0, 1), (2, 1), (1, 0), (1, 2), (2, 2), (3, 3), (2, 3), (3, 2)]:
+        out.alpha_composite(sil, (dx, dy))
+    out.alpha_composite(t, (1, 1))
+    return out.resize((out.width * scale, out.height * scale), Image.NEAREST)
+
+
 def _gaming(w, h, kicker, text, highlight):
+    """Boss Room Archive: stone arena, torch, sealed boss door, boss health bar under the title."""
     gw, gh = 160, 90
     u = max(1, w // gw)
-    art = Image.new("RGB", (gw, gh), mb.SKY)
+    art = mb.stone_wall(gw, gh, seed=len(text), block=(12, 7))
     d = ImageDraw.Draw(art)
-    for y in range(0, 12):
-        for x in range((y // 2) % 2, gw, 2):
-            if y % 2 == 0:
-                d.point((x, y), fill=mb.SKY2)
-    import math
-    hill = [(0, 70)] + [(x, 64 + int(4 * math.sin(x / 9)) + int(2 * math.sin(x / 3.3)))
-                        for x in range(0, gw + 1, 2)] + [(gw, gh), (0, gh)]
-    d.polygon(hill, fill=mb.HILL)
-    for y in range(78, gh):
-        d.line([(0, y), (gw, y)], fill=mb.BRICK if y > 78 else mb.BRICK_HI)
-    for x in range(0, gw, 6):
-        d.rectangle([x, 80, x + 4, 82], fill=mb.MORTAR)
-    wx0 = gw - 32
-    art.paste(mb.brick_wall(24, 51, hole=(8, 17, 16, 27), seed=len(text)), (wx0, 28))
-    for (px, py) in [(wx0 - 3, 77), (wx0 - 6, 77), (wx0 - 4, 76)]:
-        d.rectangle([px, py, px + 1, py], fill=mb.BRICK_HI)
+    fy = 76
+    d.rectangle([0, fy, gw, gh], fill=mb.STONE_LO)
+    d.line([(0, fy), (gw, fy)], fill=mb.STONE_HI)
+    d.rectangle([0, fy + 6, gw, gh], fill=mb.MORT2)
+    cx, dw = gw - 20, 22
+    top = fy - 4 - 40
+    mb.arch_ring(d, cx, top + dw // 2, dw // 2 + 1, dw // 2 + 5, n=7)
+    for x0 in (cx - dw // 2 - 5, cx + dw // 2):
+        d.rectangle([x0, top + dw // 2, x0 + 5, fy - 1], fill=mb.STONE)
+    tx = cx - dw // 2 - 12
+    mb.dither_light(art, tx, 40, 16, mb.TORCH, 0.22)
+    mb.dither_light(art, cx, fy, 16, mb.BOSSRED, 0.35, squash=2.2)
+    d = ImageDraw.Draw(art)
+    mb.boss_door(d, cx, top, dw, fy - 4 - top)
+    mb.torch(d, tx, 44)
     img = art.resize((gw * u, gh * u), Image.NEAREST).convert("RGBA")
     x0 = 6 * u
-    max_w = (wx0 - 6) * u - x0
-    ks = max(2, u // 2)
-    img.alpha_composite(mb.pixel_text(kicker, ks, mb.GLOW, mb.NAVY), (x0, 5 * u))
-    # Unifont is 8px per character at 16px: choose the biggest whole-number scale that fits
+    max_w = (tx - 8) * u - x0
+    img.alpha_composite(_px_word(kicker, mb.TORCH, max(1, u // 2)), (x0, 5 * u))
+    # biggest whole-number Unifont scale that fits: the grid's own pixel size first, then half
     words = text.split()
     best = None
-    for scale in range(16, 2, -1):
+    for scale in range(u, max(1, u // 3) - 1, -1):
         lines = _wrap(words, lambda s: len(s) * 8 * scale, max_w)
         if len(lines) <= 3 and all(len(" ".join(l)) * 8 * scale <= max_w for l in lines) \
-                and len(lines) * 18 * scale * 1.05 <= 56 * u:
+                and len(lines) * 17 * scale <= 51 * u:
             best = scale, lines
             break
-    scale, lines = best or (3, _wrap(words, lambda s: len(s) * 24, max_w))
-    lh = int(18 * scale * 1.05)
-    top = 14 * u + (56 * u - len(lines) * lh) // 2
+    scale, lines = best or (max(1, u // 3), _wrap(words, lambda s: len(s) * 8 * max(1, u // 3), max_w))
+    lh = 17 * scale
+    top_y = 13 * u + (51 * u - len(lines) * lh) // 2
     for i, line in enumerate(lines):
         x = x0
         for word in line:
-            col = mb.GLOW if highlight and _clean(word) == highlight else mb.WHITE
-            t = mb.pixel_text(word, scale, col, mb.NAVY)
-            img.alpha_composite(t, (x, top + i * lh))
+            col = mb.TORCH if highlight and _clean(word) == highlight else mb.BONE
+            img.alpha_composite(_px_word(word, col, scale), (x, top_y + i * lh))
             x += (len(word) + 1) * 8 * scale
+    bar = Image.new("RGBA", (gw, gh), (0, 0, 0, 0))
+    mb.health_bar(ImageDraw.Draw(bar), 6, min(fy - 9, (top_y + len(lines) * lh) // u + 3),
+                  (tx - 14) - 6, fill_frac=0.3 + (len(text) % 5) / 10)
+    img.alpha_composite(bar.resize((gw * u, gh * u), Image.NEAREST))
     out = img.convert("RGB")
     return out if out.size == (w, h) else out.resize((w, h), Image.NEAREST)
 
