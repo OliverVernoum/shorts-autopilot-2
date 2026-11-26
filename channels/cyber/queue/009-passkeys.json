@@ -38,13 +38,12 @@
       "say": "A password is a secret you hand to the website, so anyone who learns it can use it. With a passkey, your device holds a private key, and the site keeps only the matching public key."
     },
     {
-      "kind": "terminal",
+      "kind": "notes",
       "lines": [
-        "$ login bank.example",
-        "> Site sends a random challenge",
-        "> Device signs it: private key",
-        "> Fingerprint or PIN approves",
-        "> Site checks signature: OK"
+        "The site sends a random challenge",
+        "Your device signs it with a private key",
+        "Your fingerprint or PIN approves it",
+        "The site checks the signature"
       ],
       "say": "Logging in goes like this. The site sends a random challenge. Your device signs it, after you approve with a fingerprint, face or PIN. Nothing reusable crosses the internet."
     },

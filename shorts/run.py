@@ -136,7 +136,23 @@ def main():
                     help="publish from channels/<slug>/longform/queue instead (16:9, 5-10 min)")
     ap.add_argument("--batch", action="store_true",
                     help="render + upload ahead of time with YouTube scheduled publishing (schedule.json)")
+    ap.add_argument("--showcase", metavar="SCRIPT",
+                    help="render SCRIPT and upload it UNLISTED to --channel (queue untouched)")
     a = ap.parse_args()
+    if a.showcase:
+        ch_dir = os.path.join(CH_ROOT, a.channel)
+        channel = dict(json.load(open(os.path.join(ch_dir, "channel.json"))), privacy="unlisted")
+        script = json.load(open(a.showcase))
+        out = os.path.join(ROOT, "out", f"{a.channel}-{script['id']}.mp4")
+        os.makedirs(os.path.dirname(out), exist_ok=True)
+        rend = render.Renderer(script, channel)
+        dur = rend.render(out, out + ".work", a.tts)
+        script["credits"] = rend.credits
+        print(f"rendered {out} ({dur:.1f}s); media: {rend.credits or 'none found'}")
+        if not a.dry_run:
+            vid, privacy = upload.upload(out, script, channel, a.channel)
+            print(f"UPLOADED ({privacy}): https://youtube.com/shorts/{vid}")
+        sys.exit(0)
     if a.batch:
         from . import batch
         sys.exit(batch.main(dry_run=a.dry_run, tts_mode=a.tts))

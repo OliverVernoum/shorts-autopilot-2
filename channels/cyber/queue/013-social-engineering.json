@@ -54,12 +54,11 @@
       "say": "If in doubt, don't reply. Hang up, then contact the organisation using a number you already trust, not the one in the message."
     },
     {
-      "kind": "terminal",
+      "kind": "notes",
       "lines": [
-        "$ forward scam-text to 7726",
-        "> Provider can investigate, block",
-        "$ forward scam-email to",
-        "> report@phishing.gov.uk"
+        "Forward scam texts to 7726",
+        "Your mobile provider can block the sender",
+        "Forward scam emails to report@phishing.gov.uk"
       ],
       "say": "Got a scam text? Forward it to seven seven two six. Got a scam email? Send it to report at phishing dot gov dot UK. Follow, and stay one step ahead."
     }

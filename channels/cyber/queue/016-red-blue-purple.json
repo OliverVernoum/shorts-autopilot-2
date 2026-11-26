@@ -44,12 +44,12 @@
       "say": "The blue team defends. They watch the systems, spot attacks, and respond. Job titles you'll see include penetration tester on the red side, and security operations analyst on the blue."
     },
     {
-      "kind": "terminal",
+      "kind": "notes",
       "lines": [
-        "red   : fake phish sent, 3 clicked",
-        "blue  : alert missed",
-        "purple: write new detection rule",
-        "red   : retest, blue catches it"
+        "Red team sends a fake phish: 3 people click",
+        "Blue team misses the alert",
+        "Together they write a new detection rule",
+        "Retest: blue team catches it"
       ],
       "say": "Purple isn't always a separate team. It's red and blue working together. Red shares how it got in, blue tunes its detection, and they test again."
     },

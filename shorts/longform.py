@@ -164,10 +164,10 @@ class LongRenderer:
                 d.rectangle([sx, y, sx + sw * p, y + 6], fill=self.pal[2])
         num = text_img(f"{ci + 1:02d}", HEAD, 40, (*self.pal[2], 255))
         frame.alpha_composite(num, (60, 26))
-        title = self.script["chapters"][ci]["title"].upper()
+        title = self.script["chapters"][ci]["title"]
         lab = text_img(title, BODY, 28, (255, 255, 255, 230))
         frame.alpha_composite(lab, (60 + num.width + 16, 26 + (num.height - lab.height) // 2 + 1))
-        name = text_img(self.ch["name"].upper(), BODY, 26, (*self.pal[2], 220))
+        name = text_img(self.ch["name"], BODY, 26, (*self.pal[2], 220))
         frame.alpha_composite(name, (LW - 60 - name.width, 26 + (num.height - name.height) // 2 + 1))
 
     def particles_at(self, frame, t):
@@ -201,7 +201,6 @@ class LongRenderer:
         if t < self.timeline[first][0] - 0.08:      # card window before the chapter's narration
             return self.card_frame(ci, t)
         frame = self.bg.copy()
-        self.particles_at(frame, t)
         layer = Image.new("RGBA", (VW, VY1), (0, 0, 0, 0))
         idx = max(self.r.scene_index(t, self.timeline), first)
         self.r.draw_scene(layer, idx, t, self.timeline)

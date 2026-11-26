@@ -33,12 +33,12 @@
       "say": "On level twenty nine, pieces fall one row every frame. That's too fast for almost everyone, so for years it looked like a hard wall."
     },
     {
-      "kind": "terminal",
+      "kind": "notes",
       "lines": [
-        "> rolling.technique()",
-        "dev: Chris Martinez, 2020",
-        "result: level 29 speed, sustained",
-        "next: level 148...157"
+        "Rolling: tapping the controller from behind",
+        "Found by Chris Martinez in 2020",
+        "Players can now survive level 29 speed",
+        "Runs now reach the game's crash levels"
       ],
       "say": "A technique called rolling, developed in 2020, let players survive that speed. On December twenty first, 2023, thirteen year old Willis Gibson played past level one forty eight, and the game crashed at level one fifty seven."
     },

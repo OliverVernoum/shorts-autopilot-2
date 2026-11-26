@@ -27,12 +27,12 @@
       "say": "Here's the chain. Shoot some aliens, and the processor has less to draw each frame. It finishes sooner, so the next frame arrives faster, and the whole swarm speeds up as you win."
     },
     {
-      "kind": "terminal",
+      "kind": "notes",
       "lines": [
-        "aliens: many | speed: slow",
-        "aliens: some | speed: faster",
-        "aliens: one  | speed: FAST",
-        "status: bug -> feature"
+        "Lots of aliens: the game runs slowly",
+        "Fewer aliens: they speed up",
+        "One alien left: it races across",
+        "A hardware limit became the difficulty curve"
       ],
       "say": "Because the aliens move after each frame, the last few zip across the screen. Designer Tomohiro Nishikado didn't fix it, and called it a gameplay mechanism."
     },

@@ -62,7 +62,11 @@ case "$mode" in
     done < longform.txt ;;
   batch)
     log=status/last-run-batch.txt; : > "$log"
-    python -m shorts.run --batch 2>&1 | tee -a "$log" ;;
+    python -m shorts.run --batch 2>&1 | tee -a "$log"
+    # viewer comments for the script writers, once a day
+    if [ "$(sed -n 1p .state/comments 2>/dev/null)" != "$today" ]; then
+      python -m shorts.comments 2>&1 | tee -a "$log" && echo "$today" > .state/comments
+    fi ;;
   *) echo "usage: tick.sh short|long|batch|test"; exit 2 ;;
 esac
 

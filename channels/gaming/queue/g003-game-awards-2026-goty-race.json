@@ -18,11 +18,10 @@
       "say": "The Game Awards nominees are out, and the Game of the Year race has just six names. Here they are."
     },
     {
-      "kind": "terminal",
+      "kind": "notes",
       "lines": [
-        "> goty_2026.nominees",
         "007 First Light",
-        "CONTROL Resonant",
+        "Control Resonant",
         "Grand Theft Auto VI",
         "Zelda: Ocarina of Time",
         "Phantom Blade Zero",

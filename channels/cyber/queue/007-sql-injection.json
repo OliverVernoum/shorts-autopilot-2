@@ -18,12 +18,12 @@
       "say": "One line typed into a login box can trick a website into handing over its database. This is SQL injection."
     },
     {
-      "kind": "terminal",
+      "kind": "notes",
       "lines": [
-        "$ username: ' OR '1'='1",
-        "> WHERE name='' OR '1'='1'",
-        "> '1'='1' is always true",
-        "> Every user row comes back"
+        "The attacker types a trick into the login box",
+        "It turns the check into 'always true'",
+        "The database stops filtering",
+        "Every user's record comes back"
       ],
       "say": "Here's the classic textbook example. The site glues your typing into its database question. Add an apostrophe, then OR one equals one, and the question becomes: is the name blank, or is one equal to one? That's always true."
     },

@@ -18,12 +18,12 @@
       "say": "You can check a link without ever clicking it. Here's how."
     },
     {
-      "kind": "terminal",
+      "kind": "notes",
       "lines": [
-        "$ hover over the link",
-        "> mybank.com.login-check.xyz/pay",
-        "> Real site: login-check.xyz",
-        "> Not mybank.com"
+        "Hover before you click",
+        "The link shows mybank.com.login-check.xyz",
+        "The real site is login-check.xyz",
+        "Not your bank"
       ],
       "say": "First, hover over it. On a phone, press and hold. The real address appears. Read the part just before the first single slash. In this fake, the real site is login-check dot xyz, not the bank."
     },

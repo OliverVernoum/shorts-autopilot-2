@@ -27,12 +27,12 @@
       "say": "The trick is repeated backwards long jumps on a steep slope or stairs. Each jump builds more speed."
     },
     {
-      "kind": "terminal",
+      "kind": "notes",
       "lines": [
-        "> blj.repeat()",
-        "speed: climbing...",
-        "speed: way past intended",
-        "use: speedrun skips"
+        "Jump backwards over and over",
+        "Your speed keeps climbing",
+        "Far past what the game intended",
+        "Speedrunners use it to skip stairs"
       ],
       "say": "Mario reaches very high speed values, far beyond what the designers intended. Speedrunners use that speed to skip huge parts of the game."
     },

@@ -3,7 +3,10 @@
 Scene kinds (vary them per video, YouTube penalises same-template spam):
   title    : {"big": "HOOK TEXT", "sub": "optional"}
   big      : {"big": "0.3s", "sub": "to crack 'password123'"}
-  terminal : {"lines": ["$ whois evil.com", "> Registered 2 days ago"]}
+  notes    : {"lines": ["Registered two days ago", "Hosted abroad", "Copies the bank's logo"]}
+             2-6 short plain-English facts, revealed one by one. NO console/code styling:
+             no prompts ($, >), commands, file names, variable_names or "key: value" readouts.
+             ("terminal" is an old name for the same scene; don't use it in new scripts.)
   steps    : {"steps": ["Recon", "Phish", "Payload"]}
   versus   : {"left": {"label": "Myth", "items": [...]}, "right": {"label": "Fact", "items": [...]}}
   bars     : {"bars": [{"label": "Phishing", "value": 36}, ...], "unit": "%", "title": "Breach causes"}
@@ -31,6 +34,7 @@ import json
 import math
 import os
 import random
+import re
 import subprocess
 import sys
 import wave
@@ -189,12 +193,6 @@ class Renderer:
         glow = small.filter(ImageFilter.GaussianBlur(18)).resize((W, H), Image.BILINEAR)
         frame = self.bg_base.copy()
         frame.alpha_composite(glow)
-        frame.alpha_composite(self.grid)
-        d = ImageDraw.Draw(frame)
-        f = font(MONO, 26)
-        for (x, y, sp, ch) in self.particles:
-            yy = (y - t * sp) % H
-            d.text((x, yy), ch, font=f, fill=(*self.pal[2], 40))
         return frame
 
     # ---------- chrome ----------
@@ -202,7 +200,7 @@ class Renderer:
         d = ImageDraw.Draw(frame)
         d.rounded_rectangle([60, 70, W - 60, 82], 6, fill=(255, 255, 255, 40))
         d.rounded_rectangle([60, 70, 60 + (W - 120) * min(t / total, 1), 82], 6, fill=self.pal[2])
-        tag = text_img(self.ch["name"].upper(), BODY, 34, (*self.pal[2], 255))
+        tag = text_img(self.ch["name"], BODY, 34, (*self.pal[2], 255))
         frame.alpha_composite(tag, (60, 110))
         ep = self.s.get("series_tag")
         if ep:
@@ -313,38 +311,40 @@ class Renderer:
                 paste_center(frame, text_img(line, BODY, sf.size, (255, 255, 255, 255)),
                              self.W / 2, 1000 + i * sf.size * 1.2 + 20 * (1 - a), 1.0, a)
 
-    def scene_terminal(self, frame, sc, p, dur):
-        x0, y0, x1, y1 = 70, 330, self.W - 70, 1180
-        a = ease_out(p * dur / 0.25)
-        self.panel(frame, x0, y0 + 40 * (1 - a), x1, y1 + 40 * (1 - a), a)
-        d = ImageDraw.Draw(frame)
-        for i, c in enumerate([(255, 95, 86), (255, 189, 46), (39, 201, 63)]):
-            d.ellipse([x0 + 34 + i * 44, y0 + 30, x0 + 62 + i * 44, y0 + 58], fill=c)
-        f = font(MONO, 44)
-        maxc = int((x1 - x0 - 80) / f.getlength("M"))
-        rows = []
-        for line in sc["lines"]:
-            while len(line) > maxc:
-                rows.append(line[:maxc])
-                line = "  " + line[maxc:]
-            rows.append(line)
-        total = sum(len(r) for r in rows)
-        shown = int(total * min(1, p / 0.75))
-        y = y0 + 100
-        cursor = (x0 + 40, y)
-        for r in rows:
-            n = min(len(r), shown)
-            shown -= n
-            col = self.pal[2] if r.startswith("$") else (225, 225, 225)
-            d.text((x0 + 40, y), r[:n], font=f, fill=col)
-            if n < len(r):
-                cursor = (x0 + 44 + f.getlength(r[:n]), y)
-                break
-            y += 62
-            cursor = (x0 + 40, y)
-        if p < 0.75 or int(p * dur * 2.5) % 2 == 0:
-            cx, cy = cursor
-            d.rectangle([cx, cy + 6, cx + 24, cy + 52], fill=self.pal[2])
+    @staticmethod
+    def _plain_line(line):
+        """Strip console dressing from old 'terminal' lines: prompts, underscores, operators."""
+        line = re.sub(r"^\s*[$>#%]+\s*", "", line)
+        line = re.sub(r"\s*(\*=|\+=|-=|==|=)\s*", " = ", line)
+        line = line.replace("_", " ").replace("--", "")
+        return line[:1].upper() + line[1:] if line else line
+
+    def scene_notes(self, frame, sc, p, dur):
+        """A short list of facts, one per line, revealed in turn. Plain type, no window chrome."""
+        lines = [self._plain_line(l) for l in sc["lines"] if l.strip()]
+        x0, y0, x1, y1 = 80, 340, self.W - 80, 1180
+        a = ease_out(p * dur / 0.3)
+        self.panel(frame, x0, y0 + 30 * (1 - a), x1, y1 + 30 * (1 - a), a)
+        n = len(lines)
+        maxw = x1 - x0 - 120
+        size = min(fit_font(l, BODY, maxw, (y1 - y0 - 120) / n - 30, 64, 34)[0].size for l in lines)
+        f = font(BODY, size)
+        wrapped = [wrap(l, f, maxw) for l in lines]
+        lh = size * 1.2
+        gap = size * 0.7
+        total = sum(len(w) for w in wrapped) * lh + (n - 1) * gap
+        y = (y0 + y1) / 2 - total / 2
+        for i, rows in enumerate(wrapped):
+            ai = ease_out((p - i / n * 0.6) * dur / 0.35)
+            if ai > 0:
+                d = ImageDraw.Draw(frame)
+                d.rectangle([x0 + 50, y + 8, x0 + 58, y + len(rows) * lh - 8], fill=(*self.pal[2], int(255 * ai)))
+                for j, row in enumerate(rows):
+                    img = text_img(row, BODY, size, (255, 255, 255, 255))
+                    frame.alpha_composite(_fade(img, ai), (int(x0 + 80 + 20 * (1 - ai)), int(y + j * lh)))
+            y += len(rows) * lh + gap
+
+    scene_terminal = scene_notes  # old scripts: same plain look
 
     def scene_steps(self, frame, sc, p, dur):
         steps = sc["steps"]
@@ -747,7 +747,7 @@ class Renderer:
 
     def draw_scene(self, frame, idx, t, timeline):
         """Draw scene idx's visual (no background, chrome or captions) onto frame."""
-        draw = {"title": self.scene_title, "big": self.scene_big, "terminal": self.scene_terminal,
+        draw = {"title": self.scene_title, "big": self.scene_big, "terminal": self.scene_notes, "notes": self.scene_notes,
                 "steps": self.scene_steps, "versus": self.scene_versus, "bars": self.scene_bars,
                 "quiz": self.scene_quiz, "timeline": self.scene_timeline,
                 "photo": lambda f, s, p, d: self.scene_photo(f, s, p, d, idx),

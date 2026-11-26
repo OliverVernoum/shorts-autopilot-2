@@ -18,12 +18,12 @@
       "say": "Pac-Man's ghosts look chaotic, but they aren't. Each one follows a different rule, and that's why you can't shake them."
     },
     {
-      "kind": "terminal",
+      "kind": "notes",
       "lines": [
-        "blinky: your exact tile",
-        "pinky : 4 tiles ahead of you",
-        "inky  : Blinky vector x2",
-        "clyde : far=chase, near=flee"
+        "Blinky chases your exact spot",
+        "Pinky aims 4 tiles ahead of you",
+        "Inky uses Blinky's position to cut you off",
+        "Clyde chases, then runs when close"
       ],
       "say": "Blinky targets your tile. Pinky aims four tiles ahead of you. Inky uses Blinky's position to build a pincer. Clyde chases you from far away, but retreats when he gets close."
     },

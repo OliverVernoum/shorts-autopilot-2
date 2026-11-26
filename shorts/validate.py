@@ -3,9 +3,10 @@ Usage: python -m shorts.validate channels/*/queue/*.json channels/*/longform/que
 Files with a "chapters" key are checked as long-form scripts (check_long).
 """
 import json
+import re
 import sys
 
-KINDS = {"title", "big", "terminal", "steps", "versus", "bars", "quiz", "timeline", "photo", "clip", "game"}
+KINDS = {"title", "big", "terminal", "notes", "steps", "versus", "bars", "quiz", "timeline", "photo", "clip", "game"}
 
 
 def check_scene(i, sc):
@@ -20,10 +21,13 @@ def check_scene(i, sc):
         errs.append(f"scene {i}: needs big")
     if k == "big" and len(sc.get("big", "")) > 18:
         errs.append(f"scene {i}: big text > 18 chars")
-    if k == "terminal":
+    if k in ("terminal", "notes"):
         ls = sc.get("lines", [])
         if not 2 <= len(ls) <= 9 or any(len(l) > 60 for l in ls):
-            errs.append(f"scene {i}: terminal needs 2-9 lines <= 60 chars")
+            errs.append(f"scene {i}: {k} needs 2-9 lines <= 60 chars")
+    if k == "notes" and any(re.match(r"\s*[$>#]", l) or re.search(r"\w_\w|--\w|\(\)|;$", l)
+                            for l in sc.get("lines", [])):
+        errs.append(f"scene {i}: notes must be plain English (no prompts, commands or code)")
     if k == "steps":
         st = sc.get("steps", [])
         if not 2 <= len(st) <= 5 or any(len(x) > 48 for x in st):

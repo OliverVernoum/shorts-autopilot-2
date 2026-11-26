@@ -24,12 +24,11 @@
       "say": "First, the myth. A VPN doesn't make you anonymous. Log in to an account, and the site knows exactly who you are."
     },
     {
-      "kind": "terminal",
+      "kind": "notes",
       "lines": [
-        "$ curl ifconfig.me",
-        "> 203.0.113.42",
-        "> That's the VPN server's address",
-        "> Not your home connection"
+        "Websites see the VPN server's address",
+        "Not your home connection",
+        "Your VPN provider can still see your traffic"
       ],
       "say": "What it does change is your address. Websites see the VPN server's address, not your home one. Handy for privacy, but it only covers that one thing."
     },

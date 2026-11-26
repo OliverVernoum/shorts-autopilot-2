@@ -24,12 +24,11 @@
       "say": "It's called zero-day because the developer has had zero days to fix it. No patch exists yet, so even a fully updated device can be exposed."
     },
     {
-      "kind": "terminal",
+      "kind": "notes",
       "lines": [
-        "$ check-for-updates",
-        "> You are up to date",
-        "> Known flaw: none reported",
-        "> Attackers: may already know"
+        "Your device says it's up to date",
+        "No fix exists yet",
+        "Attackers may already be using the flaw"
       ],
       "say": "Your phone says it's up to date. But a flaw the vendor has never heard of can't be fixed, so there's nothing to install."
     },
