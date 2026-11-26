@@ -34,12 +34,9 @@
       "say": "The defence is HTTPS. It encrypts your traffic, and certificates prove the site is genuine. So a middleman sees scrambled data, and can't easily pose as the real site."
     },
     {
-      "kind": "notes",
-      "lines": [
-        "Your browser warns the connection isn't private",
-        "The certificate can't be trusted",
-        "That's your cue to stop"
-      ],
+      "kind": "photo",
+      "query": "Man in the middle attack",
+      "caption": "Someone in between",
       "say": "If your browser shows a warning like this, stop. It might be harmless, but it's exactly what interception can look like. Don't click through."
     },
     {

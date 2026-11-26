@@ -27,13 +27,9 @@
       "say": "Here's the chain. Shoot some aliens, and the processor has less to draw each frame. It finishes sooner, so the next frame arrives faster, and the whole swarm speeds up as you win."
     },
     {
-      "kind": "notes",
-      "lines": [
-        "Lots of aliens: the game runs slowly",
-        "Fewer aliens: they speed up",
-        "One alien left: it races across",
-        "A hardware limit became the difficulty curve"
-      ],
+      "kind": "photo",
+      "query": "Space Invaders",
+      "caption": "Space Invaders, 1978",
       "say": "Because the aliens move after each frame, the last few zip across the screen. Designer Tomohiro Nishikado didn't fix it, and called it a gameplay mechanism."
     },
     {

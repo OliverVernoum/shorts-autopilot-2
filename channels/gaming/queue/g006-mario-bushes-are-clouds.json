@@ -36,13 +36,9 @@
       "say": "Same shape, different colours. On the NES, every byte mattered, so artists reused everything they possibly could."
     },
     {
-      "kind": "notes",
-      "lines": [
-        "The bushes are the clouds, recoloured",
-        "A Goomba walks with one flipped image",
-        "The pipe sound is reused for taking damage",
-        "About 20 bytes were left at the end"
-      ],
+      "kind": "photo",
+      "query": "Nintendo Entertainment System",
+      "caption": "Built for the NES",
       "say": "Goombas are one image flipped back and forth. Getting hurt reuses the pipe sound. And with about twenty bytes left, Miyamoto added a crown beside your life counter at ten lives."
     },
     {

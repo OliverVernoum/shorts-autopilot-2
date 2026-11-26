@@ -24,12 +24,9 @@
       "say": "It's called zero-day because the developer has had zero days to fix it. No patch exists yet, so even a fully updated device can be exposed."
     },
     {
-      "kind": "notes",
-      "lines": [
-        "Your device says it's up to date",
-        "No fix exists yet",
-        "Attackers may already be using the flaw"
-      ],
+      "kind": "photo",
+      "query": "Zero day",
+      "caption": "No patch yet",
       "say": "Your phone says it's up to date. But a flaw the vendor has never heard of can't be fixed, so there's nothing to install."
     },
     {

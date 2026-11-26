@@ -18,15 +18,9 @@
       "say": "The Game Awards nominees are out, and the Game of the Year race has just six names. Here they are."
     },
     {
-      "kind": "notes",
-      "lines": [
-        "007 First Light",
-        "Control Resonant",
-        "Grand Theft Auto VI",
-        "Zelda: Ocarina of Time",
-        "Phantom Blade Zero",
-        "Resident Evil Requiem"
-      ],
+      "kind": "photo",
+      "query": "The Game Awards",
+      "caption": "The Game Awards",
       "say": "The nominees are: double oh seven First Light, Control Resonant, Grand Theft Auto Six, Ocarina of Time, Phantom Blade Zero, and Resident Evil Requiem."
     },
     {

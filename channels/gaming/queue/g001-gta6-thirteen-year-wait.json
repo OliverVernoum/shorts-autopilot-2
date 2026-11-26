@@ -27,12 +27,9 @@
       "say": "Rockstar first aimed for 2025. Then it moved the game to May twenty sixth, 2026. Then it slipped again, to November nineteenth. Rockstar apologised for the extra wait."
     },
     {
-      "kind": "notes",
-      "lines": [
-        "Released November 19, 2026",
-        "Made by Rockstar Games",
-        "Estimated cost: over $1 billion"
-      ],
+      "kind": "game",
+      "query": "Grand Theft Auto VI",
+      "caption": "Grand Theft Auto VI",
       "say": "It arrived on November nineteenth, built by Rockstar Games. Press reports put the estimated cost at more than one billion dollars."
     },
     {

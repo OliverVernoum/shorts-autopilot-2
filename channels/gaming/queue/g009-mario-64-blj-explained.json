@@ -27,13 +27,9 @@
       "say": "The trick is repeated backwards long jumps on a steep slope or stairs. Each jump builds more speed."
     },
     {
-      "kind": "notes",
-      "lines": [
-        "Jump backwards over and over",
-        "Your speed keeps climbing",
-        "Far past what the game intended",
-        "Speedrunners use it to skip stairs"
-      ],
+      "kind": "photo",
+      "query": "Nintendo 64",
+      "caption": "Super Mario 64, 1996",
       "say": "Mario reaches very high speed values, far beyond what the designers intended. Speedrunners use that speed to skip huge parts of the game."
     },
     {

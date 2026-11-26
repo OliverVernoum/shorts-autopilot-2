@@ -54,12 +54,9 @@
       "say": "If in doubt, don't reply. Hang up, then contact the organisation using a number you already trust, not the one in the message."
     },
     {
-      "kind": "notes",
-      "lines": [
-        "Forward scam texts to 7726",
-        "Your mobile provider can block the sender",
-        "Forward scam emails to report@phishing.gov.uk"
-      ],
+      "kind": "photo",
+      "query": "Text message",
+      "caption": "Report it, don't reply",
       "say": "Got a scam text? Forward it to seven seven two six. Got a scam email? Send it to report at phishing dot gov dot UK. Follow, and stay one step ahead."
     }
   ],

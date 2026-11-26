@@ -27,13 +27,9 @@
       "say": "Press Z, and the camera follows your target while Link keeps facing it. Arrows and other projectiles even aim at it for you."
     },
     {
-      "kind": "notes",
-      "lines": [
-        "Press Z and the camera locks on",
-        "Link always faces the enemy",
-        "Arrows aim themselves",
-        "You circle the enemy instead of walking past"
-      ],
+      "kind": "photo",
+      "query": "Nintendo 64 controller",
+      "caption": "The Z trigger",
       "say": "That lets you circle around an enemy without losing sight of it, which was tricky to do in early three D games, where camera control was a real puzzle."
     },
     {

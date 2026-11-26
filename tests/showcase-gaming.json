@@ -42,13 +42,9 @@
       "say": "You can jump a moment after running off a ledge, and wall jump from two pixels away."
     },
     {
-      "kind": "notes",
-      "lines": [
-        "Jump just after leaving a ledge",
-        "Press jump early and it still counts",
-        "Clip a corner and you get nudged past",
-        "Gravity halves at the top of a jump"
-      ],
+      "kind": "game",
+      "query": "Celeste",
+      "caption": "Every jump is quietly forgiving",
       "say": "Press jump slightly early, and it still counts. Clip a corner, and the game nudges you past it. Gravity is halved at the top of a held jump."
     },
     {

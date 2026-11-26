@@ -24,12 +24,9 @@
       "say": "First, the myth. A VPN doesn't make you anonymous. Log in to an account, and the site knows exactly who you are."
     },
     {
-      "kind": "notes",
-      "lines": [
-        "Websites see the VPN server's address",
-        "Not your home connection",
-        "Your VPN provider can still see your traffic"
-      ],
+      "kind": "photo",
+      "query": "Virtual private network",
+      "caption": "What a VPN hides",
       "say": "What it does change is your address. Websites see the VPN server's address, not your home one. Handy for privacy, but it only covers that one thing."
     },
     {

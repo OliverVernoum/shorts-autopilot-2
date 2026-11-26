@@ -18,13 +18,9 @@
       "say": "You can check a link without ever clicking it. Here's how."
     },
     {
-      "kind": "notes",
-      "lines": [
-        "Hover before you click",
-        "The link shows mybank.com.login-check.xyz",
-        "The real site is login-check.xyz",
-        "Not your bank"
-      ],
+      "kind": "photo",
+      "query": "Hyperlink",
+      "caption": "Check before you click",
       "say": "First, hover over it. On a phone, press and hold. The real address appears. Read the part just before the first single slash. In this fake, the real site is login-check dot xyz, not the bank."
     },
     {

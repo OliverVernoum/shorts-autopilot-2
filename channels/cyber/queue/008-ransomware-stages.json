@@ -29,12 +29,9 @@
       "say": "One, get in, often through phishing or an exposed login. Two, spread and gain admin rights. Three, quietly copy data out. Four, encrypt files. Five, show the ransom demand."
     },
     {
-      "kind": "notes",
-      "lines": [
-        "A new admin account appears overnight",
-        "A huge upload to an unknown server",
-        "Backups are quietly switched off"
-      ],
+      "kind": "photo",
+      "query": "Ransomware",
+      "caption": "The warning signs",
       "say": "Stages two and three leave clues. New admin accounts, huge uploads, switched off backups. Spot those, and you may stop the attack before a single file is locked."
     },
     {

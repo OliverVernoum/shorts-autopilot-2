@@ -48,12 +48,9 @@
       "say": "Mix your private colour into the yellow, then swap mixtures in the open. Now add your private colour once more. You both end up with the exact same shade, but a spy can't unmix paint to find it."
     },
     {
-      "kind": "notes",
-      "lines": [
-        "Your browser and the site agree a secret key",
-        "Nobody watching can work it out",
-        "Everything after that is scrambled"
-      ],
+      "kind": "photo",
+      "query": "Public key cryptography",
+      "caption": "Two keys, one lock",
       "say": "That's the Diffie-Hellman idea. Computers do it with maths instead of paint. Your browser does it whenever you connect over HTTPS, then uses the shared secret as a fast key for the rest of the chat."
     },
     {

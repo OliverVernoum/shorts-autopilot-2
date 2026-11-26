@@ -45,13 +45,9 @@
       "say": "Diggers returned on April twenty sixth, 2014, for the documentary Atari: Game Over. They recovered about thirteen hundred cartridges."
     },
     {
-      "kind": "notes",
-      "lines": [
-        "Dig site: Alamogordo, New Mexico",
-        "About 1,300 cartridges recovered",
-        "59 different games found",
-        "How many were E.T. is unknown"
-      ],
+      "kind": "photo",
+      "query": "Alamogordo",
+      "caption": "Alamogordo, New Mexico",
       "say": "The E.T. share is unknown. Designer Howard Scott Warshaw doubted millions were ever destroyed, and Atari made about five million copies, selling roughly one and a half million."
     },
     {

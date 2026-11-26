@@ -141,7 +141,9 @@ class Renderer:
         for i, sc in enumerate(script.get("scenes", [])):
             if sc.get("kind") == "game":
                 hit = media.fetch_game(sc.get("query", ""))
-                if hit and self._load_clip(i, hit[0], hit[2]):
+                nth = sum(1 for s2 in script["scenes"][:i] if s2.get("kind") == "game"
+                          and s2.get("query") == sc.get("query"))
+                if hit and self._load_clip(i, hit[0], hit[2] + 9 * nth):
                     self.credits.append(hit[1])
                     continue
                 sc = dict(sc, kind="clip")  # no trailer found: try Commons instead
@@ -221,7 +223,7 @@ class Renderer:
         """Decode up to CLIP_MAX s of a clip to frames (cover-cropped to the photo box)."""
         import glob
         import tempfile
-        pw, ph = self.W - 160, 800
+        _, _, pw, ph, _ = self._media_box()
         d = tempfile.mkdtemp(prefix=f"clip{idx}_")
         r = subprocess.run(
             ["ffmpeg", "-y", "-loglevel", "error", "-ss", str(ss), "-t", str(self.CLIP_MAX), "-i", path, "-an",
@@ -234,19 +236,38 @@ class Renderer:
         self.clips[idx] = files
         return True
 
-    def scene_clip(self, frame, sc, p, dur, idx=None):
-        files = self.clips.get(idx)
-        if not files:
-            return self.scene_photo(frame, sc, p, dur, idx)
-        a = ease_out(p * dur / 0.4)
-        pw, ph = self.W - 160, 800
-        i = int(p * dur * self.CLIP_FPS)
-        i = i % len(files) if len(files) < dur * self.CLIP_FPS else min(i, len(files) - 1)  # loop short clips
-        crop = Image.open(files[i]).convert("RGBA")
+    def _media_box(self):
+        """Shorts: full screen. Long-form (wide virtual canvas): a framed box."""
+        if self.W == W:
+            return 0, 0, W, H, True
+        return 80, 300, self.W - 160, 800, False
+
+    def _show_media(self, frame, sc, p, dur, crop):
+        x0, y0, pw, ph, full = self._media_box()
+        a = ease_out(p * dur / 0.3)
+        if full:
+            frame.alpha_composite(_fade(crop, a), (0, 0))
+            shade = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+            sd = ImageDraw.Draw(shade)
+            for y in range(H):  # darker at top (chrome) and bottom (captions), clear in the middle
+                k = max(0.0, 1 - y / 360) * 0.75 + max(0.0, (y - 1050) / (H - 1050)) * 0.8
+                if k > 0:
+                    sd.line([(0, y), (W, y)], fill=(0, 0, 0, int(255 * min(k, 0.85) * a)))
+            frame.alpha_composite(shade)
+            cap = sc.get("caption")
+            if cap:
+                t = text_img(cap, BODY, 46, (255, 255, 255, 255), 5)
+                chip = Image.new("RGBA", (t.width + 48, t.height + 28), (0, 0, 0, 0))
+                ImageDraw.Draw(chip).rounded_rectangle([0, 0, chip.width - 1, chip.height - 1], 18,
+                                                       fill=(*self.pal[2], 235))
+                chip.alpha_composite(t, (24, 14))
+                frame.alpha_composite(_fade(chip, a), (60, int(190 + 20 * (1 - a))))
+            return
         mask = Image.new("L", (pw, ph), 0)
         ImageDraw.Draw(mask).rounded_rectangle([0, 0, pw - 1, ph - 1], 28, fill=int(255 * a))
+        crop = crop.copy()
         crop.putalpha(mask)
-        x0, y0 = 80, int(300 + 30 * (1 - a))
+        y0 = int(y0 + 30 * (1 - a))
         frame.alpha_composite(crop, (x0, y0))
         ImageDraw.Draw(frame).rounded_rectangle([x0, y0, x0 + pw, y0 + ph], 28,
                                                 outline=(*self.pal[2], int(200 * a)), width=4)
@@ -254,29 +275,25 @@ class Renderer:
             paste_center(frame, text_img(sc["caption"], BODY, 44, (255, 255, 255, 255), 5),
                          self.W / 2, y0 + ph + 60, 1, a)
 
+    def scene_clip(self, frame, sc, p, dur, idx=None):
+        files = self.clips.get(idx)
+        if not files:
+            return self.scene_photo(frame, sc, p, dur, idx)
+        i = int(p * dur * self.CLIP_FPS)
+        i = i % len(files) if len(files) < dur * self.CLIP_FPS else min(i, len(files) - 1)  # loop short clips
+        self._show_media(frame, sc, p, dur, Image.open(files[i]).convert("RGBA"))
+
     def scene_photo(self, frame, sc, p, dur, idx=None):
         im = self.photos.get(idx)
         if im is None:  # no photo found: degrade to a big-text scene
             return self.scene_big(frame, {"big": sc.get("caption", sc.get("query", ""))[:18],
                                           "sub": ""}, p, dur)
-        a = ease_out(p * dur / 0.4)
-        pw, ph = self.W - 160, 800
+        _, _, pw, ph, _ = self._media_box()
         z = 1.0 + 0.08 * p  # slow Ken Burns zoom
         sc_f = max(pw / im.width, ph / im.height) * z
         rs = im.resize((int(im.width * sc_f), int(im.height * sc_f)), Image.BILINEAR)
         l, t = (rs.width - pw) // 2, (rs.height - ph) // 2
-        crop = rs.crop((l, t, l + pw, t + ph)).convert("RGBA")
-        mask = Image.new("L", (pw, ph), 0)
-        ImageDraw.Draw(mask).rounded_rectangle([0, 0, pw - 1, ph - 1], 28, fill=int(255 * a))
-        crop.putalpha(mask)
-        x0, y0 = 80, int(300 + 30 * (1 - a))
-        frame.alpha_composite(crop, (x0, y0))
-        d = ImageDraw.Draw(frame)
-        d.rounded_rectangle([x0, y0, x0 + pw, y0 + ph], 28, outline=(*self.pal[2], int(200 * a)), width=4)
-        cap = sc.get("caption")
-        if cap:
-            paste_center(frame, text_img(cap, BODY, 44, (255, 255, 255, 255), 5), self.W / 2,
-                         y0 + ph + 60, 1, a)
+        self._show_media(frame, sc, p, dur, rs.crop((l, t, l + pw, t + ph)).convert("RGBA"))
 
     def scene_title(self, frame, sc, p, dur):
         k = back_out(p * dur / 0.45)
@@ -763,8 +780,8 @@ class Renderer:
         """One portrait Short frame (RGBA) at time t."""
         idx = self.scene_index(t, timeline)
         frame = self.background(t)
-        self.chrome(frame, t, total)
         self.draw_scene(frame, idx, t, timeline)
+        self.chrome(frame, t, total)  # after the scene so full-screen photos/clips keep the bar
         self.captions(frame, words, t)
         return frame
 
