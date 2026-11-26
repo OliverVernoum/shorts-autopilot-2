@@ -70,3 +70,51 @@ def fetch(query):
     except Exception as e:  # network or API trouble must never break a render
         print(f"[media] {query!r}: {e}")
         return None
+
+
+VIDEO_MIME = {"video/webm", "application/ogg", "video/ogg", "video/mp4", "image/gif"}
+
+
+def _search_clip(query):
+    params = {
+        "action": "query", "format": "json", "generator": "search", "gsrnamespace": 6,
+        "gsrsearch": f"filetype:video {query}", "gsrlimit": 12, "prop": "imageinfo",
+        "iiprop": "url|mime|size|extmetadata",
+    }
+    data = json.loads(_get(API + "?" + urllib.parse.urlencode(params)))
+    pages = sorted(data.get("query", {}).get("pages", {}).values(), key=lambda p: p.get("index", 99))
+    for pg in pages:
+        info = (pg.get("imageinfo") or [{}])[0]
+        meta = info.get("extmetadata", {})
+        lic = meta.get("LicenseShortName", {}).get("value", "")
+        if info.get("mime") not in VIDEO_MIME or not OK_LICENCE.match(lic):
+            continue
+        if info.get("size", 0) > 40_000_000:
+            continue
+        who = _strip(meta.get("Artist", {}).get("value", "")) or "Wikimedia Commons"
+        return info["url"], f"{who[:60]} / {lic} / Wikimedia Commons"
+    return None
+
+
+def fetch_clip(query):
+    """-> (video_path, credit) or None. Licence-safe clip from Commons, cached, never raises."""
+    try:
+        os.makedirs(CACHE, exist_ok=True)
+        key = "v" + hashlib.md5(query.lower().encode()).hexdigest()[:15]
+        meta = os.path.join(CACHE, key + ".json")
+        if os.path.exists(meta):
+            m = json.load(open(meta))
+            if os.path.exists(m["path"]):
+                return m["path"], m["credit"]
+        hit = _search_clip(query)
+        if not hit:
+            return None
+        url, credit = hit
+        path = os.path.join(CACHE, key + os.path.splitext(url)[1].lower())
+        with open(path, "wb") as f:
+            f.write(_get(url, 90))
+        json.dump({"credit": credit, "query": query, "url": url, "path": path}, open(meta, "w"))
+        return path, credit
+    except Exception as e:
+        print(f"[media] clip {query!r}: {e}")
+        return None

@@ -5,7 +5,7 @@ Files with a "chapters" key are checked as long-form scripts (check_long).
 import json
 import sys
 
-KINDS = {"title", "big", "terminal", "steps", "versus", "bars", "quiz", "timeline", "photo"}
+KINDS = {"title", "big", "terminal", "steps", "versus", "bars", "quiz", "timeline", "photo", "clip"}
 
 
 def check_scene(i, sc):
@@ -57,11 +57,11 @@ def check_scene(i, sc):
             errs.append(f"scene {i}: quiz needs 2-4 options <= 28 chars")
         elif not isinstance(ans, int) or isinstance(ans, bool) or not 0 <= ans < len(opts):
             errs.append(f"scene {i}: quiz answer must be an option index 0-{len(opts) - 1}")
-    if k == "photo":
+    if k in ("photo", "clip"):
         if not 3 <= len(sc.get("query", "")) <= 60:
-            errs.append(f"scene {i}: photo needs query 3-60 chars")
+            errs.append(f"scene {i}: {k} needs query 3-60 chars")
         if len(sc.get("caption", "")) > 40:
-            errs.append(f"scene {i}: photo caption > 40 chars")
+            errs.append(f"scene {i}: {k} caption > 40 chars")
     if k == "timeline":
         ev = sc.get("events", [])
         if not isinstance(ev, list) or not 3 <= len(ev) <= 5 or any(

@@ -15,6 +15,9 @@ Scene kinds (vary them per video, YouTube penalises same-template spam):
   photo    : {"query": "Steam Deck", "caption": "Valve's handheld"}
              Real photo from Wikimedia Commons (query <= 60 chars, caption <= 40). Falls back to a
              big-text scene if no licence-safe photo is found.
+  clip     : {"query": "color cycling", "caption": "Water 'animates' by palette"}
+             Short real video/animated GIF from Wikimedia Commons (plays up to 8s). Falls back to a
+             photo, then big text. Use it whenever motion explains the point.
   timeline : {"events": [{"year": "1998", "text": "First worm spreads"}, ...]}
              3-5 events top to bottom, year <= 10 chars, text <= 30 chars.
 Every scene also has "say": the narration.
@@ -127,8 +130,14 @@ class Renderer:
         pals = [tuple(tuple(c) for c in p) for p in channel.get("palettes", [])] or PALETTES
         self.pal = pals[script.get("palette", seed % len(pals))]
         glyphs = channel.get("glyphs", "01{}<>#$/\\:;")
-        self.photos, self.credits = {}, []
+        self.photos, self.credits, self.clips = {}, [], {}
         for i, sc in enumerate(script.get("scenes", [])):
+            if sc.get("kind") == "clip":
+                hit = media.fetch_clip(sc.get("query", ""))
+                if hit and self._load_clip(i, hit[0]):
+                    self.credits.append(f'{sc["query"]}: {hit[1]}')
+                    continue
+                sc = dict(sc, kind="photo")  # no clip found: try a still photo instead
             if sc.get("kind") == "photo":
                 hit = media.fetch(sc.get("query", ""))
                 if hit:
@@ -198,6 +207,45 @@ class Renderer:
         d.rounded_rectangle([x0, y0, x1, y1], 28, fill=(0, 0, 0, int(150 * alpha)),
                             outline=(*self.pal[2], int(160 * alpha)), width=3)
         frame.alpha_composite(layer)
+
+    CLIP_FPS, CLIP_MAX = 15, 8
+
+    def _load_clip(self, idx, path):
+        """Decode up to CLIP_MAX s of a clip to frames (cover-cropped to the photo box)."""
+        import glob
+        import tempfile
+        pw, ph = self.W - 160, 800
+        d = tempfile.mkdtemp(prefix=f"clip{idx}_")
+        r = subprocess.run(
+            ["ffmpeg", "-y", "-loglevel", "error", "-t", str(self.CLIP_MAX), "-i", path, "-an",
+             "-vf", f"fps={self.CLIP_FPS},scale={pw}:{ph}:force_original_aspect_ratio=increase,"
+                    f"crop={pw}:{ph}", "-q:v", "4", os.path.join(d, "%04d.jpg")],
+            capture_output=True)
+        files = sorted(glob.glob(os.path.join(d, "*.jpg")))
+        if r.returncode != 0 or len(files) < 6:
+            return False
+        self.clips[idx] = files
+        return True
+
+    def scene_clip(self, frame, sc, p, dur, idx=None):
+        files = self.clips.get(idx)
+        if not files:
+            return self.scene_photo(frame, sc, p, dur, idx)
+        a = ease_out(p * dur / 0.4)
+        pw, ph = self.W - 160, 800
+        i = int(p * dur * self.CLIP_FPS)
+        i = i % len(files) if len(files) < dur * self.CLIP_FPS else min(i, len(files) - 1)  # loop short clips
+        crop = Image.open(files[i]).convert("RGBA")
+        mask = Image.new("L", (pw, ph), 0)
+        ImageDraw.Draw(mask).rounded_rectangle([0, 0, pw - 1, ph - 1], 28, fill=int(255 * a))
+        crop.putalpha(mask)
+        x0, y0 = 80, int(300 + 30 * (1 - a))
+        frame.alpha_composite(crop, (x0, y0))
+        ImageDraw.Draw(frame).rounded_rectangle([x0, y0, x0 + pw, y0 + ph], 28,
+                                                outline=(*self.pal[2], int(200 * a)), width=4)
+        if sc.get("caption"):
+            paste_center(frame, text_img(sc["caption"], BODY, 44, (255, 255, 255, 255), 5),
+                         self.W / 2, y0 + ph + 60, 1, a)
 
     def scene_photo(self, frame, sc, p, dur, idx=None):
         im = self.photos.get(idx)
@@ -693,7 +741,8 @@ class Renderer:
         draw = {"title": self.scene_title, "big": self.scene_big, "terminal": self.scene_terminal,
                 "steps": self.scene_steps, "versus": self.scene_versus, "bars": self.scene_bars,
                 "quiz": self.scene_quiz, "timeline": self.scene_timeline,
-                "photo": lambda f, s, p, d: self.scene_photo(f, s, p, d, idx)}
+                "photo": lambda f, s, p, d: self.scene_photo(f, s, p, d, idx),
+                "clip": lambda f, s, p, d: self.scene_clip(f, s, p, d, idx)}
         st, dur = timeline[idx]
         span = dur + GAP
         p = min(max((t - st) / span, 0), 1)
