@@ -43,6 +43,8 @@ case "$mode" in
     for c in cyber gaming tech; do
       slots_var="SHORT_SLOTS_$c"; slots=${!slots_var}
       [ "$(done_today short-$c)" -ge "$(due_count "$slots")" ] && continue
+      tok="YT_REFRESH_TOKEN_$(echo "$c" | tr a-z A-Z)"
+      [ -n "${!tok:-}" ] || { echo "[$c] no $tok in shorts.env yet, skipping" >> "$log"; continue; }
       python -m shorts.run --channel "$c" --count 1 2>&1 | tee -a "$log" && mark_done "short-$c"
     done ;;
   long)
@@ -53,6 +55,8 @@ case "$mode" in
       [ -z "$hr" ] && continue
       [ "$(done_today long-$c)" -ge "$(due_count "$hr")" ] && continue
       ls channels/$c/longform/queue/*.json >/dev/null 2>&1 || continue
+      tok="YT_REFRESH_TOKEN_$(echo "$c" | tr a-z A-Z)"
+      [ -n "${!tok:-}" ] || continue
       python -m shorts.run --channel "$c" --longform --count 1 2>&1 | tee -a "$log" && mark_done "long-$c"
     done < longform.txt ;;
   *) echo "usage: tick.sh short|long|test"; exit 2 ;;
