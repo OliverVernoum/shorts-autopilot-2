@@ -8,3 +8,5 @@ token*.json
 shorts.env
 .venv/
 .state/
+shorts-server.key
+shorts-server.key.pub
