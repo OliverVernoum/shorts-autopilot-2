@@ -82,23 +82,51 @@ def render_next(kind, slug, tts_mode="edge"):
     return False
 
 
-def ship(cfg):
-    """rsync out/ready/ to the Pi, deleting local copies that arrived. Videos last."""
+def _rsync(cfg):
     host = cfg.get("pi_host")
-    if not host or not os.path.isdir(READY):
-        return
+    if not host:
+        return False
     dest = f"{host}:{cfg.get('pi_dir', 'shorts-ready')}/"
     ssh = "ssh -o BatchMode=yes -o ConnectTimeout=10"
     base = ["rsync", "-a", "--partial", "--remove-source-files", "-e", ssh, "--exclude", "*.work",
             "--exclude", "*.part.mp4"]
-    for pat in (["--include", "*.json", "--include", "*.png", "--exclude", "*"], []):
+    for pat in (["--include", "*.json", "--include", "*.png", "--exclude", "*"], []):  # videos last
         r = subprocess.run(base + pat + [READY + "/", dest], capture_output=True, text=True)
         if r.returncode != 0:
-            run.gh_summary(f"::warning::couldn't reach the Pi ({host}); videos wait in out/ready: "
-                           f"{r.stderr.strip()[:200]}")
-            return
+            run.gh_summary(f"::warning::Pi not reachable directly ({host}): {r.stderr.strip()[:150]}")
+            return False
+    return True
+
+
+def _rclone(cfg):
+    """Hand over through cloud storage (any network): `rclone move` into rclone_remote."""
+    remote = cfg.get("rclone_remote")
+    if not remote or not shutil.which("rclone"):
+        return False
+    for rules in (["+ *.json", "+ *.png", "- *"], ["- *.part.mp4", "+ *.mp4", "- *"]):  # videos last
+        cmd = ["rclone", "move", READY, remote, "--max-depth", "1"]
+        for r in rules:
+            cmd += ["--filter", r]
+        r = subprocess.run(cmd, capture_output=True, text=True)
+        if r.returncode != 0:
+            run.gh_summary(f"::warning::cloud handover failed ({remote}): {r.stderr.strip()[-200:]}")
+            return False
+    return True
+
+
+def ship(cfg):
+    """Send out/ready/ to the Pi: straight over SSH (same network or Tailscale) if it answers,
+    else via cloud storage (rclone_remote, e.g. a Google Drive folder) that the Pi pulls from."""
+    if not os.path.isdir(READY) or not any(f.endswith((".mp4", ".json")) for f in os.listdir(READY)):
+        return
+    how = cfg.get("transport", "auto")
+    ok = (how in ("auto", "ssh") and _rsync(cfg)) and "direct" or \
+         (how in ("auto", "rclone") and _rclone(cfg)) and "cloud"
     left = [f for f in os.listdir(READY) if f.endswith(".mp4")]
-    run.gh_summary(f"shipped to {host}" + (f" ({len(left)} still local)" if left else ""))
+    if ok:
+        run.gh_summary(f"shipped to the Pi ({ok})" + (f", {len(left)} still local" if left else ""))
+    else:
+        run.gh_summary(f"::warning::couldn't hand over; {len(left)} videos wait in out/ready")
 
 
 def main(tts_mode="edge"):

@@ -22,7 +22,7 @@ fi
 BREW=$(command -v brew || ls "$HOME/.homebrew/bin/brew" /opt/homebrew/bin/brew /usr/local/bin/brew 2>/dev/null | head -1 || true)
 [ -n "$BREW" ] || { echo "Homebrew not found. Install it from https://brew.sh then run this again."; exit 1; }
 BREWBIN="$("$BREW" --prefix)/bin"
-"$BREW" install -q python@3.12 ffmpeg
+"$BREW" install -q python@3.12 ffmpeg rclone
 
 git pull -q --rebase
 git config user.name "Oliver Vernoum"

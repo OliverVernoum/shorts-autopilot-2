@@ -60,10 +60,29 @@ def publish_one(rd, video, t):
     _say(f"[{slug}] scheduled {kind} '{meta['title']}' for {t:%a %d %b %H:%M}Z -> {meta['url']}")
 
 
+def pull_cloud(cfg, rd):
+    """Collect videos the Mac left in cloud storage (rclone_remote). Sidecars first, videos last,
+    so a half-copied video is never picked up (next_ready needs both)."""
+    import shutil
+    import subprocess
+    remote = cfg.get("rclone_remote")
+    if not remote or not shutil.which("rclone"):
+        return
+    for rules in (["+ *.json", "+ *.png", "- *"], ["+ *.mp4", "- *"]):
+        cmd = ["rclone", "move", remote, rd, "--max-depth", "1"]
+        for x in rules:
+            cmd += ["--filter", x]
+        r = subprocess.run(cmd, capture_output=True, text=True)
+        if r.returncode != 0:
+            _say(f"::warning::couldn't pull from {remote}: {r.stderr.strip()[-200:]}")
+            return
+
+
 def main():
     cfg = slots.config()
     rd = ready_dir(cfg)
     os.makedirs(rd, exist_ok=True)
+    pull_cloud(cfg, rd)
     quota = slots.Quota(cfg, "pi-upload.json")
     now = dt.datetime.now(slots.UTC)
     filled = slots.filled()

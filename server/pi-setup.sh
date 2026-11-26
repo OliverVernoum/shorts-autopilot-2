@@ -10,14 +10,14 @@ REPO=OliverVernoum/shorts-autopilot-2
 DIR="$HOME/shorts-autopilot-2"
 
 sudo apt-get update -q
-sudo apt-get install -y -q python3-venv git rsync tzdata
+sudo apt-get install -y -q python3-venv git rsync tzdata rclone
 
 [ -d "$DIR" ] || git clone -q "https://github.com/$REPO.git" "$DIR"
 cd "$DIR"
 python3 -m venv .venv
 .venv/bin/pip install -q --upgrade pip
 .venv/bin/pip install -q -r requirements-pi.txt
-mkdir -p "$HOME/shorts-ready"
+mkdir -p "$HOME/shorts-ready" "$HOME/.config/rclone"
 
 # push access (it commits what it publishes): a deploy key just for this repo
 mkdir -p "$HOME/.ssh"; chmod 700 "$HOME/.ssh"
@@ -40,4 +40,7 @@ cat "$HOME/.ssh/shorts_deploy.pub"
 echo "2. From the Mac: ssh-copy-id $(whoami)@$(hostname).local && scp shorts.env $(whoami)@$(hostname).local:~/.shorts.env"
 echo "3. On the Mac set \"uploader\": \"pi\" and \"pi_host\": \"$(whoami)@$(hostname).local\" in schedule.json,"
 echo "   then: bash server/mac-setup.sh"
+echo "Different networks? Either install Tailscale on both (pi_host = pi@<tailscale name>), or use"
+echo "the Google Drive handover: on the Mac run 'rclone config' (new remote named gdrive, type drive),"
+echo "then: scp ~/.config/rclone/rclone.conf $(whoami)@$(hostname).local:~/.config/rclone/rclone.conf"
 echo "Log: ~/shorts-upload.log"

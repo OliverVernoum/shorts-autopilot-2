@@ -1,5 +1,5 @@
 {
-  "_help": "Uploads: 'uploader' = 'mac' (tick.sh batch: the Mac renders and uploads) or 'pi' (tick.sh render on the Mac renders ahead and ships to pi_host; tick.sh upload on the Pi uploads). Times are UTC hours; long-form hours come from longform.txt.",
+  "_help": "Uploads: 'uploader' = 'mac' (tick.sh batch: the Mac renders and uploads) or 'pi' (tick.sh render on the Mac renders ahead and ships to pi_host; tick.sh upload on the Pi uploads). Times are UTC hours; long-form hours come from longform.txt. Handover to the Pi ('transport'): 'auto' tries SSH to pi_host (same Wi-Fi or Tailscale) and falls back to rclone_remote (a Google Drive folder via rclone) the Pi pulls from; 'ssh' or 'rclone' forces one.",
   "days_ahead": 3,
   "daily_upload_budget": 6,
   "minute": 7,
@@ -22,5 +22,7 @@
   "pi_host": "pi@raspberrypi.local",
   "pi_dir": "shorts-ready",
   "render_days_ahead": 7,
-  "max_render_minutes": 50
+  "max_render_minutes": 50,
+  "transport": "auto",
+  "rclone_remote": "gdrive:shorts-ready"
 }
