@@ -1,2 +1,3 @@
-::warning::[cyber] no YT_REFRESH_TOKEN_CYBER secret yet, skipping
-run at 2026-11-26T08:09:03Z (short)
+[cyber] no YT_REFRESH_TOKEN_CYBER in shorts.env yet, skipping
+[gaming] no YT_REFRESH_TOKEN_GAMING in shorts.env yet, skipping
+run at 2026-11-26T10:07:02Z (short)
