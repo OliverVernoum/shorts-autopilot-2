@@ -2,7 +2,7 @@
 
 Each channel borrows its look from its own subject instead of a shared template:
   cyber  - green-bar printer paper with redaction bars        (Anonymous Pro)
-  gaming - a pixel brick wall with one brick knocked out       (Unifont, real bitmap type)
+  gaming - a sealed boss arena: arched boss door, torches, a boss health bar (Unifont bitmap type)
   tech   - a purple PCB with gold pads and white silkscreen    (TeX Gyre Heros Condensed)
 
 Banner safe area (visible on every device): 1546x423, centred.
@@ -137,35 +137,121 @@ def brick_wall(gw, gh, hole=None, seed=1):
     return img
 
 
+# Boss Room Archive v2: a sealed boss arena, catalogued. (v1 brick wall read too much like Mario.)
+STONE, STONE_HI, STONE_LO, MORT2 = (44, 30, 35), (62, 44, 49), (33, 22, 26), (18, 12, 14)
+TORCH, TORCH_HI, BOSSRED, BOSSRED_HI, BOSSRED_LO = (242, 163, 58), (255, 226, 140), (200, 32, 46), (240, 86, 86), (86, 14, 22)
+GOLD2, GOLD2_LO, BONE, WOOD, WOOD_HI, IRON = (217, 164, 65), (140, 98, 34), (230, 220, 203), (70, 28, 30), (98, 42, 42), (58, 56, 62)
+
+
+def stone_wall(gw, gh, seed=1, block=(10, 6)):
+    """Large ashlar blocks with 1px mortar, top-lit, randomly chipped."""
+    rng = random.Random(seed)
+    bw, bh = block
+    img = Image.new("RGB", (gw, gh), MORT2)
+    d = ImageDraw.Draw(img)
+    for r, y in enumerate(range(0, gh, bh)):
+        off = 0 if r % 2 == 0 else bw // 2
+        for x in range(-off, gw, bw):
+            shade = rng.choice([STONE, STONE, STONE_LO])
+            d.rectangle([x, y, x + bw - 2, y + bh - 2], fill=shade)
+            d.line([(x, y), (x + bw - 2, y)], fill=STONE_HI)
+            for _ in range(rng.randint(0, 2)):
+                d.point((x + rng.randint(1, bw - 3), y + rng.randint(1, bh - 3)), fill=MORT2)
+    return img
+
+
+def light(img, cx, cy, radius, colour, strength=0.55):
+    """Warm pixel-stepped light pool (banded, not a smooth gradient)."""
+    px = img.load()
+    for y in range(max(0, cy - radius), min(img.height, cy + radius)):
+        for x in range(max(0, cx - radius), min(img.width, cx + radius)):
+            dd = math.hypot(x - cx, (y - cy) * 1.2) / radius
+            if dd < 1:
+                k = strength * (round((1 - dd) * 4) / 4)  # 4 hard bands
+                r, g, b = px[x, y]
+                px[x, y] = tuple(int(c + (t - c) * k * 0.5) for c, t in zip((r, g, b), colour))
+
+
+def torch(d, x, y, frame=0):
+    d.rectangle([x - 1, y, x + 1, y + 9], fill=IRON)
+    d.rectangle([x - 2, y, x + 2, y + 1], fill=GOLD2_LO)
+    flame = [(0, -1, 2), (-1, -2, 2), (0, -3, 1), (1, -4, 1), (0, -5, 0)]
+    for dx, dy, w in flame:
+        d.line([(x + dx - w, y + dy), (x + dx + w, y + dy)], fill=TORCH)
+    d.point((x, y - 2), fill=TORCH_HI)
+    d.point((x, y - 1), fill=TORCH_HI)
+
+
+def boss_door(d, cx, top, w, h):
+    """Arched double door with iron bands and red light under it."""
+    x0, x1, y1 = cx - w // 2, cx + w // 2, top + h
+    arch = w // 2
+    d.rectangle([x0 - 2, top + arch - 2, x1 + 2, y1], fill=MORT2)
+    d.ellipse([x0 - 2, top - 2, x1 + 2, top + 2 * arch + 2], fill=MORT2)
+    d.ellipse([x0, top, x1, top + 2 * arch], fill=WOOD)
+    d.rectangle([x0, top + arch, x1, y1 - 1], fill=WOOD)
+    for x in range(x0 + 2, x1, 3):  # planks, clipped to the arch
+        yt = top + arch - math.sqrt(max(arch ** 2 - (x - cx) ** 2, 0)) + 2
+        d.line([(x, int(yt)), (x, y1 - 1)], fill=WOOD_HI)
+    d.line([(cx, top + 1), (cx, y1 - 1)], fill=MORT2)
+    for by in (top + arch + 2, y1 - 5):  # iron bands + rivets
+        d.line([(x0, by), (x1, by)], fill=IRON)
+        for x in range(x0 + 1, x1, 4):
+            d.point((x, by), fill=GOLD2)
+    d.rectangle([cx - 2, top + arch + 5, cx - 1, top + arch + 7], fill=GOLD2)  # handles
+    d.rectangle([cx + 1, top + arch + 5, cx + 2, top + arch + 7], fill=GOLD2)
+    d.line([(x0, y1), (x1, y1)], fill=BOSSRED_HI)  # light leaking under the door
+    for i, c in enumerate((BOSSRED, BOSSRED_LO)):
+        d.line([(x0 + i * 2, y1 + 1 + i), (x1 - i * 2, y1 + 1 + i)], fill=c)
+
+
+def health_bar(d, x0, y, w, fill_frac=0.72):
+    """Boss health bar: gold frame, red fill with a highlight row, chipped-off damage segment."""
+    d.rectangle([x0 - 2, y - 2, x0 + w + 1, y + 6], fill=MORT2)
+    d.rectangle([x0 - 1, y - 1, x0 + w, y + 5], outline=GOLD2)
+    d.rectangle([x0, y, x0 + w - 1, y + 4], fill=BOSSRED_LO)
+    fw = int(w * fill_frac)
+    d.rectangle([x0, y, x0 + fw, y + 4], fill=BOSSRED)
+    d.line([(x0, y), (x0 + fw, y)], fill=BOSSRED_HI)
+    d.rectangle([x0 + fw + 1, y, x0 + fw + 10, y + 4], fill=TORCH)  # recent damage, catching up
+    for x in range(x0 + w // 4, x0 + w, w // 4):  # phase ticks
+        d.line([(x, y - 2), (x, y - 1)], fill=GOLD2)
+
+
 def gaming_banner():
-    u = 16
-    gw, gh = BW // u, BH // u  # 160 x 90
-    art = Image.new("RGB", (gw, gh), SKY)
+    u = 8
+    gw, gh = BW // u, BH // u  # 320 x 180
+    art = stone_wall(gw, gh, seed=7)
     d = ImageDraw.Draw(art)
-    for y in range(0, 18):
-        for x in range((y // 2) % 2, gw, 2):
-            if y % 2 == 0:
-                d.point((x, y), fill=SKY2)
-    hill = [(0, 70)] + [(x, 62 + int(4 * math.sin(x / 9)) + int(2 * math.sin(x / 3.3))) for x in range(0, gw + 1, 2)] + [(gw, gh), (0, gh)]
-    d.polygon(hill, fill=HILL)
-    for y in range(76, gh):
-        d.line([(0, y), (gw, y)], fill=BRICK if y > 76 else BRICK_HI)
-    for x in range(0, gw, 6):
-        d.rectangle([x, 78, x + 4, 80], fill=MORTAR)
-    wx0 = SX1 // u - 24
-    art.paste(brick_wall(24, 50, hole=(8, 17, 16, 27), seed=4), (wx0, 27))
-    for (px, py) in [(wx0 - 3, 75), (wx0 - 6, 75), (wx0 - 4, 74)]:
-        d.rectangle([px, py, px + 1, py], fill=BRICK_HI)
+    floor = 128
+    d.rectangle([0, floor, gw, gh], fill=MORT2)
+    for y in range(floor + 2, gh, 5):  # floor flagstones in perspective
+        d.line([(0, y), (gw, y)], fill=STONE_LO)
+    for x in range(-200, gw + 200, 24):
+        d.line([(gw // 2 + (x - gw // 2) // 3, floor), (x, gh)], fill=STONE_LO)
+    boss_door(d, gw // 2, 18, 40, 46)  # behind the title, visible above it on TV/desktop
+    for tx in (SX0 // u - 6, SX1 // u + 6):
+        light(art, tx, 72, 34, TORCH)
+        torch(ImageDraw.Draw(art), tx, 74)
+    light(art, gw // 2, 66, 30, BOSSRED, 0.35)
+    d = ImageDraw.Draw(art)
+    bar_x, bar_w = SX0 // u + 4, (SX1 - SX0) // u - 8
+    health_bar(d, bar_x, 103, bar_w)
     img = art.resize((BW, BH), Image.NEAREST).convert("RGBA")
-    x = SX0 + 24
-    img.alpha_composite(pixel_text("Boss Room Archive", 6, WHITE, NAVY), (x, SY0 + 50))
-    img.alpha_composite(pixel_text("The secrets games never put in the manual.", 3, WHITE), (x + 6, SY0 + 205))
-    img.alpha_composite(pixel_text("New secret every day.", 3, GLOW), (x + 6, SY0 + 275))
+    img.alpha_composite(pixel_text("Boss Room Archive", 7, BONE, MORT2), (bar_x * u, 700))
+    img.alpha_composite(pixel_text("The secrets games never put in the manual.", 3, BONE, MORT2),
+                       (bar_x * u, 103 * u + 70))
     return img.convert("RGB")
 
 
 def gaming_pfp():
-    return brick_wall(32, 32, hole=(12, 11, 20, 20), seed=2).resize((800, 800), Image.NEAREST)
+    g = 40
+    art = stone_wall(g, g, seed=3, block=(8, 5))
+    light(art, 20, 36, 22, BOSSRED, 0.5)
+    d = ImageDraw.Draw(art)
+    d.rectangle([0, 33, g, g], fill=MORT2)
+    boss_door(d, 20, 8, 20, 24)
+    return art.resize((800, 800), Image.NEAREST)
 
 
 # ======================= Pocket Silicon: purple PCB =======================
