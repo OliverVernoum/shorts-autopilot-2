@@ -2,4 +2,4 @@
 # Delete a line to switch that channel's long-form off.
 cyber: 15
 gaming: 16
-tech: 18
+# tech: 18   (paused)

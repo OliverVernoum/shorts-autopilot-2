@@ -41,7 +41,7 @@ due_count()  { n=0; for s in $1; do [ "$h" -ge "$s" ] && n=$((n+1)); done; echo 
 case "$mode" in
   short)
     log=status/last-run.txt; : > "$log"
-    for c in cyber gaming tech; do
+    for c in gaming cyber; do  # tech paused
       slots_var="SHORT_SLOTS_$c"; slots=${!slots_var}
       [ "$(done_today short-$c)" -ge "$(due_count "$slots")" ] && continue
       tok="YT_REFRESH_TOKEN_$(echo "$c" | tr a-z A-Z)"

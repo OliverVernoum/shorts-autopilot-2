@@ -3,5 +3,19 @@
   "days_ahead": 3,
   "daily_upload_budget": 6,
   "minute": 7,
-  "shorts": {"cyber": [8, 17], "gaming": [10, 19], "tech": [12, 21]}
+  "shorts": {
+    "gaming": [
+      10,
+      19
+    ],
+    "cyber": [
+      8,
+      17
+    ]
+  },
+  "priority": [
+    "gaming",
+    "cyber"
+  ],
+  "_paused": "tech (Pocket Silicon) paused 2026-11-26: add it back to shorts/priority and longform.txt to resume"
 }

@@ -70,7 +70,9 @@ def _slots(cfg, now):
                 t = dt.datetime(day.year, day.month, day.day, h, minute, tzinfo=UTC)
                 if soon <= t <= now + dt.timedelta(days=cfg.get("days_ahead", 3)):
                     out.append((t, kind, slug))
-    return sorted(out)
+    rank = {s: i for i, s in enumerate(cfg.get("priority", []))}
+    # fill day by day; within a day the priority channel gets the quota first
+    return sorted(out, key=lambda x: (x[0].date(), rank.get(x[2], 99), x[0]))
 
 
 def main(dry_run=False, tts_mode="edge"):
