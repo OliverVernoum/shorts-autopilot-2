@@ -12,7 +12,7 @@ AGENTS="$HOME/Library/LaunchAgents"
 LOGS="$HOME/Library/Logs"
 
 if [ "${1:-}" = remove ]; then
-  for m in short long batch; do
+  for m in short long batch render; do
     launchctl unload "$AGENTS/com.olly.shorts.$m.plist" 2>/dev/null || true
     rm -f "$AGENTS/com.olly.shorts.$m.plist"
   done
@@ -33,12 +33,14 @@ git config user.email "oliververnoum@outlook.com"
 .venv/bin/pip install -q -r requirements.txt google-auth-oauthlib
 
 mkdir -p "$AGENTS" "$LOGS"
-# old per-slot jobs are replaced by the batch job
-for m in short long; do
+# schedule.json "uploader": "mac" -> batch job (render + upload here); "pi" -> render job (ship to the Pi)
+JOB=$(python3 -c 'import json;print("render" if json.load(open("schedule.json")).get("uploader")=="pi" else "batch")')
+for m in short long batch render; do
+  [ $m = "$JOB" ] && continue
   launchctl unload "$AGENTS/com.olly.shorts.$m.plist" 2>/dev/null || true
   rm -f "$AGENTS/com.olly.shorts.$m.plist"
 done
-for m in batch; do
+for m in $JOB; do
   min=7
   plist="$AGENTS/com.olly.shorts.$m.plist"
   cat > "$plist" <<PLIST
@@ -65,4 +67,4 @@ echo
 echo "== Mac uploader installed =="
 [ -f shorts.env ] || [ -f "$HOME/.shorts.env" ] || echo "Next: .venv/bin/python make_env.py   (makes shorts.env with your YouTube keys)"
 echo "Test (renders one cyber Short, no upload):  bash server/tick.sh test"
-echo "Logs: ~/Library/Logs/shorts-batch.log  (schedule: schedule.json)"
+echo "Mode: $JOB (schedule.json uploader). Logs: ~/Library/Logs/shorts-$JOB.log"

@@ -12,7 +12,7 @@ import datetime as dt
 import json
 import os
 
-from . import run, upload
+from . import slots, upload
 
 
 def _yt(slug):
@@ -31,7 +31,7 @@ def fetch(slug, days=30, limit=100):
     me = yt.channels().list(part="id", mine=True).execute() if os.environ.get(
         f"YT_REFRESH_TOKEN_{slug.upper()}") else {}
     cid = (me.get("items") or [{}])[0].get("id") or json.load(
-        open(os.path.join(run.CH_ROOT, slug, "channel.json"))).get("channel_id")
+        open(os.path.join(slots.CH_ROOT, slug, "channel.json"))).get("channel_id")
     if not cid:
         raise RuntimeError("no channel id")
     since = dt.datetime.now(dt.timezone.utc) - dt.timedelta(days=days)
@@ -66,7 +66,7 @@ def fetch(slug, days=30, limit=100):
     cut = max(2, sorted([c["score"] for c in out], reverse=True)[min(4, len(out) - 1)]) if out else 0
     for c in out:
         c["breakaway"] = c["score"] >= cut and c["score"] > 0
-    d = os.path.join(run.CH_ROOT, slug, "feedback")
+    d = os.path.join(slots.CH_ROOT, slug, "feedback")
     os.makedirs(d, exist_ok=True)
     json.dump({"fetched": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
                "days": days, "comments": out}, open(os.path.join(d, "comments.json"), "w"),
@@ -78,7 +78,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--channel")
     a = ap.parse_args()
-    cfg = json.load(open(os.path.join(run.ROOT, "schedule.json")))
+    cfg = json.load(open(os.path.join(slots.ROOT, "schedule.json")))
     for slug in ([a.channel] if a.channel else cfg.get("priority") or list(cfg.get("shorts", {}))):
         try:
             print(f"[{slug}] {fetch(slug)} comments saved")

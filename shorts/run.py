@@ -138,7 +138,12 @@ def main():
                     help="render + upload ahead of time with YouTube scheduled publishing (schedule.json)")
     ap.add_argument("--showcase", metavar="SCRIPT",
                     help="render SCRIPT and upload it UNLISTED to --channel (queue untouched)")
+    ap.add_argument("--render-ahead", action="store_true",
+                    help="render ahead and ship to the Pi (schedule.json pi_host); no uploads")
     a = ap.parse_args()
+    if a.render_ahead:
+        from . import ahead
+        sys.exit(ahead.main(tts_mode=a.tts))
     if a.showcase:
         ch_dir = os.path.join(CH_ROOT, a.channel)
         channel = dict(json.load(open(os.path.join(ch_dir, "channel.json"))), privacy="unlisted")

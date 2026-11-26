@@ -3,6 +3,8 @@
 #   tick.sh short   :07 -> 2 Shorts a day per channel (slots below)
 #   tick.sh long    :37 -> 1 long-form a day per channel (hours in longform.txt)
 #   tick.sh batch   upload ahead with YouTube scheduled publishing (schedule.json); Mac default
+#   tick.sh render  Mac half of the Mac/Pi split: render ahead, ship videos to the Pi
+#   tick.sh upload  Pi half: upload shipped videos into schedule slots (no rendering)
 #   tick.sh test    render one cyber Short without uploading
 # Each slot counts as due once its UTC hour has passed, so if the machine was asleep the
 # missed upload happens at the next tick that day (one per channel per tick).
@@ -67,7 +69,16 @@ case "$mode" in
     if [ "$(sed -n 1p .state/comments 2>/dev/null)" != "$today" ]; then
       python -m shorts.comments 2>&1 | tee -a "$log" && echo "$today" > .state/comments
     fi ;;
-  *) echo "usage: tick.sh short|long|batch|test"; exit 2 ;;
+  render)
+    log=status/last-run-render.txt; : > "$log"
+    python -m shorts.run --render-ahead 2>&1 | tee -a "$log" ;;
+  upload)
+    log=status/last-run-upload.txt; : > "$log"
+    python -m shorts.pi_upload 2>&1 | tee -a "$log"
+    if [ "$(sed -n 1p .state/comments 2>/dev/null)" != "$today" ]; then
+      python -m shorts.comments 2>&1 | tee -a "$log" && echo "$today" > .state/comments
+    fi ;;
+  *) echo "usage: tick.sh short|long|batch|render|upload|test"; exit 2 ;;
 esac
 
 [ -s "$log" ] || exit 0
