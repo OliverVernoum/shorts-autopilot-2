@@ -26,6 +26,17 @@ def _get(url, timeout=20):
         return r.read()
 
 
+def _relevant(title, query):
+    """Every meaningful query word must appear in the Commons file title (stops 'Elden Ring' -> a missile video)."""
+    t = re.sub(r"[^a-z0-9]+", " ", title.lower())
+    words = [w for w in re.sub(r"[^a-z0-9]+", " ", query.lower()).split() if len(w) >= 3]
+    return bool(words) and all(w in t for w in words)
+
+
+def _ext(url):
+    return os.path.splitext(urllib.parse.urlparse(url).path)[1].lower() or ".bin"
+
+
 def _strip(html):
     return re.sub(r"<[^>]+>", "", html or "").strip()
 
@@ -42,6 +53,8 @@ def _search(query):
         info = (pg.get("imageinfo") or [{}])[0]
         meta = info.get("extmetadata", {})
         lic = meta.get("LicenseShortName", {}).get("value", "")
+        if not _relevant(pg.get("title", ""), query):
+            continue
         if info.get("mime") not in OK_MIME or not OK_LICENCE.match(lic):
             continue
         if info.get("width", 0) < 800 or info.get("height", 0) < 500:
@@ -87,6 +100,8 @@ def _search_clip(query):
         info = (pg.get("imageinfo") or [{}])[0]
         meta = info.get("extmetadata", {})
         lic = meta.get("LicenseShortName", {}).get("value", "")
+        if not _relevant(pg.get("title", ""), query):
+            continue
         if info.get("mime") not in VIDEO_MIME or not OK_LICENCE.match(lic):
             continue
         if info.get("size", 0) > 40_000_000:
@@ -110,7 +125,7 @@ def fetch_clip(query):
         if not hit:
             return None
         url, credit = hit
-        path = os.path.join(CACHE, key + os.path.splitext(url)[1].lower())
+        path = os.path.join(CACHE, key + _ext(url))
         with open(path, "wb") as f:
             f.write(_get(url, 90))
         json.dump({"credit": credit, "query": query, "url": url, "path": path}, open(meta, "w"))
@@ -131,20 +146,26 @@ STEAM_APP = "https://store.steampowered.com/api/appdetails?cc=us&l=en&appids="
 
 def _steam(query):
     items = json.loads(_get(STEAM_SEARCH + urllib.parse.quote(query))).get("items", [])
-    if not items:
-        return None
-    app = items[0]
-    data = json.loads(_get(STEAM_APP + str(app["id"]))).get(str(app["id"]), {})
-    d = data.get("data") if data.get("success") else None
-    if not d or not d.get("movies"):
-        return None
-    mv = d["movies"][0]
-    url = (mv.get("mp4") or {}).get("max") or (mv.get("mp4") or {}).get("480") or \
-        (mv.get("webm") or {}).get("max") or (mv.get("webm") or {}).get("480")
-    if not url:
-        return None
-    pub = ", ".join(d.get("publishers") or []) or "the publisher"
-    return url, f'Footage: {d.get("name", app["name"])} trailer, (c) {pub}, via Steam', 6
+    bad = re.compile(r"soundtrack|dlc|demo|artbook|playtest|bundle|upgrade|pack", re.I)
+    q = query.lower().strip()
+    items = [i for i in items if not bad.search(i.get("name", "")) or bad.search(query)]
+    items.sort(key=lambda i: (i["name"].lower() != q, not i["name"].lower().startswith(q)))
+    for app in items[:3]:
+        data = json.loads(_get(STEAM_APP + str(app["id"]))).get(str(app["id"]), {})
+        d = data.get("data") if data.get("success") else None
+        if not d or not d.get("movies") or not _relevant(d.get("name", ""), query):
+            continue
+        mv = d["movies"][0]
+        url = ((mv.get("mp4") or {}).get("max") or (mv.get("mp4") or {}).get("480") or
+               (mv.get("webm") or {}).get("max") or (mv.get("webm") or {}).get("480") or
+               mv.get("hls_h264") or mv.get("dash_h264"))
+        if not url:
+            print(f"[media] steam {d.get('name')}: movie keys {list(mv)}")
+            continue
+        pub = ", ".join(d.get("publishers") or []) or "the publisher"
+        return url, f'Footage: {d.get("name", app["name"])} trailer, (c) {pub}, via Steam', 6
+    print(f"[media] steam: no trailer found for {query!r} ({len(items)} search hits)")
+    return None
 
 
 def _ytdlp(query, out_base):
@@ -173,7 +194,7 @@ def fetch_game(query):
         meta = os.path.join(CACHE, key + ".json")
         if os.path.exists(meta):
             m = json.load(open(meta))
-            if os.path.exists(m["path"]):
+            if m["path"].startswith("http") or os.path.exists(m["path"]):
                 return m["path"], m["credit"], m["ss"]
         for finder in (_steam, _ytdlp):
             try:
@@ -181,9 +202,12 @@ def fetch_game(query):
                     hit = _steam(query)
                     if hit:
                         url, credit, ss = hit
-                        path = os.path.join(CACHE, key + os.path.splitext(url.split("?")[0])[1])
-                        with open(path, "wb") as f:
-                            f.write(_get(url, 120))
+                        if ".m3u8" in url or ".mpd" in url:
+                            path = url  # streaming manifest: ffmpeg reads it directly
+                        else:
+                            path = os.path.join(CACHE, key + _ext(url))
+                            with open(path, "wb") as f:
+                                f.write(_get(url, 120))
                 else:
                     hit = _ytdlp(query, os.path.join(CACHE, key))
                     if hit:
