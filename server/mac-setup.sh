@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 # Run the uploader on this Mac (instead of a server). One-time setup, from the repo folder:
 #   bash server/mac-setup.sh
-# Uses launchd: Shorts at :07 every hour, long-form at :37. If the Mac was asleep at that
-# time, launchd runs the job once when it wakes. Undo with: bash server/mac-setup.sh remove
+# Uses launchd to run `tick.sh batch` hourly at :07: videos are uploaded days ahead as scheduled
+# (private + publish time), so YouTube publishes them even while the Mac is asleep or off.
+# If the Mac was asleep at :07, launchd runs the job once when it wakes.
+# Undo with: bash server/mac-setup.sh remove
 set -euo pipefail
 cd "$(dirname "$0")/.."
 DIR="$(pwd)"
@@ -10,7 +12,7 @@ AGENTS="$HOME/Library/LaunchAgents"
 LOGS="$HOME/Library/Logs"
 
 if [ "${1:-}" = remove ]; then
-  for m in short long; do
+  for m in short long batch; do
     launchctl unload "$AGENTS/com.olly.shorts.$m.plist" 2>/dev/null || true
     rm -f "$AGENTS/com.olly.shorts.$m.plist"
   done
@@ -31,8 +33,13 @@ git config user.email "oliververnoum@outlook.com"
 .venv/bin/pip install -q -r requirements.txt google-auth-oauthlib
 
 mkdir -p "$AGENTS" "$LOGS"
+# old per-slot jobs are replaced by the batch job
 for m in short long; do
-  [ $m = short ] && min=7 || min=37
+  launchctl unload "$AGENTS/com.olly.shorts.$m.plist" 2>/dev/null || true
+  rm -f "$AGENTS/com.olly.shorts.$m.plist"
+done
+for m in batch; do
+  min=7
   plist="$AGENTS/com.olly.shorts.$m.plist"
   cat > "$plist" <<PLIST
 <?xml version="1.0" encoding="UTF-8"?>
@@ -58,4 +65,4 @@ echo
 echo "== Mac uploader installed =="
 [ -f shorts.env ] || [ -f "$HOME/.shorts.env" ] || echo "Next: .venv/bin/python make_env.py   (makes shorts.env with your YouTube keys)"
 echo "Test (renders one cyber Short, no upload):  bash server/tick.sh test"
-echo "Logs: ~/Library/Logs/shorts-short.log and shorts-long.log"
+echo "Logs: ~/Library/Logs/shorts-batch.log  (schedule: schedule.json)"

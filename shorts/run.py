@@ -27,7 +27,7 @@ def gh_summary(line):
     print(line)
 
 
-def publish(slug, dry_run=False, tts_mode="edge"):
+def publish(slug, dry_run=False, tts_mode="edge", publish_at=None):
     ch_dir = os.path.join(CH_ROOT, slug)
     channel = json.load(open(os.path.join(ch_dir, "channel.json")))
     qdir = os.path.join(ch_dir, "queue")
@@ -47,7 +47,7 @@ def publish(slug, dry_run=False, tts_mode="edge"):
         os.makedirs(os.path.join(ch_dir, "rejected"), exist_ok=True)
         shutil.move(path, os.path.join(ch_dir, "rejected", queue[0]))
         gh_summary(f"::error::[{slug}] {queue[0]} failed validation: {errs}")
-        return publish(slug, dry_run, tts_mode) if len(queue) > 1 else False
+        return publish(slug, dry_run, tts_mode, publish_at) if len(queue) > 1 else False
     script = json.load(open(path))
     os.makedirs(os.path.join(ROOT, "out"), exist_ok=True)
     out = os.path.join(ROOT, "out", f"{slug}-{script['id']}.mp4")
@@ -58,10 +58,12 @@ def publish(slug, dry_run=False, tts_mode="edge"):
     gh_summary(f"[{slug}] rendered {script['id']} ({dur:.1f}s)")
     if dry_run:
         return True
-    vid, privacy = upload.upload(out, script, channel, slug)
+    vid, privacy = upload.upload(out, script, channel, slug, publish_at=publish_at)
     script.update({"video_id": vid, "url": f"https://youtube.com/shorts/{vid}",
                    "published_at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
                    "privacy": privacy})
+    if publish_at:
+        script["scheduled_for"] = publish_at.isoformat()
     os.makedirs(os.path.join(ch_dir, "published"), exist_ok=True)
     with open(os.path.join(ch_dir, "published", queue[0]), "w") as f:
         json.dump(script, f, indent=2, ensure_ascii=False)
@@ -70,7 +72,7 @@ def publish(slug, dry_run=False, tts_mode="edge"):
     return True
 
 
-def publish_long(slug, dry_run=False, tts_mode="edge"):
+def publish_long(slug, dry_run=False, tts_mode="edge", publish_at=None):
     """Render + upload the next long-form script. Quietly skips channels with no long-form
     queue, an empty queue, or no YouTube token yet."""
     from . import brand, longform
@@ -91,7 +93,7 @@ def publish_long(slug, dry_run=False, tts_mode="edge"):
         os.makedirs(os.path.join(lf, "rejected"), exist_ok=True)
         shutil.move(path, os.path.join(lf, "rejected", queue[0]))
         gh_summary(f"::error::[{slug}] long-form {queue[0]} failed validation: {errs}")
-        return publish_long(slug, dry_run, tts_mode) if len(queue) > 1 else False
+        return publish_long(slug, dry_run, tts_mode, publish_at) if len(queue) > 1 else False
     script = json.load(open(path))
     os.makedirs(os.path.join(ROOT, "out"), exist_ok=True)
     out = os.path.join(ROOT, "out", f"{slug}-{script['id']}.mp4")
@@ -107,11 +109,14 @@ def publish_long(slug, dry_run=False, tts_mode="edge"):
     if dry_run:
         print(chapters or "")
         return True
-    vid, privacy = upload.upload(out, script, channel, slug, extra=chapters, thumbnail=thumb)
+    vid, privacy = upload.upload(out, script, channel, slug, extra=chapters, thumbnail=thumb,
+                                 publish_at=publish_at)
     script.update({"video_id": vid, "url": f"https://youtu.be/{vid}",
                    "published_at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
                    "privacy": privacy, "duration_s": round(total, 1),
                    "chapter_starts": [round(s, 1) for s in starts]})
+    if publish_at:
+        script["scheduled_for"] = publish_at.isoformat()
     os.makedirs(os.path.join(lf, "published"), exist_ok=True)
     with open(os.path.join(lf, "published", queue[0]), "w") as f:
         json.dump(script, f, indent=2, ensure_ascii=False)
@@ -129,7 +134,12 @@ def main():
     ap.add_argument("--count", type=int, default=1, help="Shorts per channel this run")
     ap.add_argument("--longform", action="store_true",
                     help="publish from channels/<slug>/longform/queue instead (16:9, 5-10 min)")
+    ap.add_argument("--batch", action="store_true",
+                    help="render + upload ahead of time with YouTube scheduled publishing (schedule.json)")
     a = ap.parse_args()
+    if a.batch:
+        from . import batch
+        sys.exit(batch.main(dry_run=a.dry_run, tts_mode=a.tts))
     pub = publish_long if a.longform else publish
     slugs = sorted(os.listdir(CH_ROOT)) if a.all else [c.strip() for c in a.channel.split(",")]
     failed = []

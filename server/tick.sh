@@ -2,6 +2,7 @@
 # Run every hour by cron (server) or launchd (Mac). Replaces the old GitHub Actions workflows.
 #   tick.sh short   :07 -> 2 Shorts a day per channel (slots below)
 #   tick.sh long    :37 -> 1 long-form a day per channel (hours in longform.txt)
+#   tick.sh batch   upload ahead with YouTube scheduled publishing (schedule.json); Mac default
 #   tick.sh test    render one cyber Short without uploading
 # Each slot counts as due once its UTC hour has passed, so if the machine was asleep the
 # missed upload happens at the next tick that day (one per channel per tick).
@@ -59,7 +60,10 @@ case "$mode" in
       [ -n "${!tok:-}" ] || continue
       python -m shorts.run --channel "$c" --longform --count 1 2>&1 | tee -a "$log" && mark_done "long-$c"
     done < longform.txt ;;
-  *) echo "usage: tick.sh short|long|test"; exit 2 ;;
+  batch)
+    log=status/last-run-batch.txt; : > "$log"
+    python -m shorts.run --batch 2>&1 | tee -a "$log" ;;
+  *) echo "usage: tick.sh short|long|batch|test"; exit 2 ;;
 esac
 
 [ -s "$log" ] || exit 0

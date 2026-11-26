@@ -8,6 +8,7 @@ Env vars:
   YT_CLIENT_ID, YT_CLIENT_SECRET     OAuth Desktop client (shared by all channels)
   YT_REFRESH_TOKEN_<CHANNEL>         one per channel folder, e.g. YT_REFRESH_TOKEN_CYBER
 """
+import datetime as dt
 import os
 
 SCOPES = ["https://www.googleapis.com/auth/youtube.upload",
@@ -41,7 +42,8 @@ def build_description(script, channel, extra=None):
     return "\n\n".join(parts)[:4900]
 
 
-def upload(video_path, script, channel, channel_slug, extra=None, thumbnail=None):
+def upload(video_path, script, channel, channel_slug, extra=None, thumbnail=None, publish_at=None):
+    """publish_at: aware datetime -> uploaded private and YouTube publishes it then."""
     from googleapiclient.http import MediaFileUpload
 
     yt = client(channel_slug)
@@ -66,6 +68,9 @@ def upload(video_path, script, channel, channel_slug, extra=None, thumbnail=None
             "containsSyntheticMedia": channel.get("contains_synthetic_media", False),
         },
     }
+    if publish_at:  # YouTube only schedules private videos
+        body["status"]["privacyStatus"] = "private"
+        body["status"]["publishAt"] = publish_at.astimezone(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     req = yt.videos().insert(part="snippet,status", body=body,
                              media_body=MediaFileUpload(video_path, mimetype="video/mp4",
                                                         chunksize=8 * 1024 * 1024, resumable=True))
@@ -82,4 +87,5 @@ def upload(video_path, script, channel, channel_slug, extra=None, thumbnail=None
             print("  thumbnail set")
         except Exception as e:  # 403 until the channel is phone-verified (custom thumbnails)
             print(f"::warning::[{channel_slug}] custom thumbnail not set for {resp['id']}: {e}")
-    return resp["id"], resp.get("status", {}).get("privacyStatus")
+    st = resp.get("status", {})
+    return resp["id"], ("scheduled " + st["publishAt"]) if st.get("publishAt") else st.get("privacyStatus")

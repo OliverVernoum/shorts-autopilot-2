@@ -1,0 +1,7 @@
+{
+  "_help": "Batch mode (tick.sh batch): uploads videos ahead of time as private with a publish time, so YouTube publishes them even if this machine is off. Times are UTC hours; long-form hours come from longform.txt.",
+  "days_ahead": 3,
+  "daily_upload_budget": 6,
+  "minute": 7,
+  "shorts": {"cyber": [8, 17], "gaming": [10, 19], "tech": [12, 21]}
+}
