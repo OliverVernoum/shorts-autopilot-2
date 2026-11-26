@@ -19,7 +19,7 @@
   ],
   "_paused": "tech (Pocket Silicon) paused 2026-11-26: add it back to shorts/priority and longform.txt to resume",
   "uploader": "mac",
-  "pi_host": "pi@raspberrypi.local",
+  "pi_host": "olly@shorts-pi.local",
   "pi_dir": "shorts-ready",
   "render_days_ahead": 7,
   "max_render_minutes": 50,
