@@ -51,7 +51,9 @@ def publish(slug, dry_run=False, tts_mode="edge"):
     script = json.load(open(path))
     os.makedirs(os.path.join(ROOT, "out"), exist_ok=True)
     out = os.path.join(ROOT, "out", f"{slug}-{script['id']}.mp4")
-    dur = render.Renderer(script, channel).render(out, out + ".work", tts_mode)
+    rend = render.Renderer(script, channel)
+    dur = rend.render(out, out + ".work", tts_mode)
+    script["credits"] = rend.credits
     shutil.rmtree(out + ".work", ignore_errors=True)
     gh_summary(f"[{slug}] rendered {script['id']} ({dur:.1f}s)")
     if dry_run:

@@ -12,6 +12,9 @@ Scene kinds (vary them per video, YouTube penalises same-template spam):
   quiz     : {"question": "Which is safest?", "options": ["SMS code", "Passkey", "Email link"], "answer": 1}
              2-4 options <= 28 chars, question <= 90 chars, answer = 0-based index.
              Correct option is revealed ~60% through the scene, so ask in "say" then answer.
+  photo    : {"query": "Steam Deck", "caption": "Valve's handheld"}
+             Real photo from Wikimedia Commons (query <= 60 chars, caption <= 40). Falls back to a
+             big-text scene if no licence-safe photo is found.
   timeline : {"events": [{"year": "1998", "text": "First worm spreads"}, ...]}
              3-5 events top to bottom, year <= 10 chars, text <= 30 chars.
 Every scene also has "say": the narration.
@@ -29,7 +32,7 @@ import wave
 import numpy as np
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
-from . import tts
+from . import media, tts
 
 W, H, FPS = 1080, 1920, 30
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -124,6 +127,13 @@ class Renderer:
         pals = [tuple(tuple(c) for c in p) for p in channel.get("palettes", [])] or PALETTES
         self.pal = pals[script.get("palette", seed % len(pals))]
         glyphs = channel.get("glyphs", "01{}<>#$/\\:;")
+        self.photos, self.credits = {}, []
+        for i, sc in enumerate(script.get("scenes", [])):
+            if sc.get("kind") == "photo":
+                hit = media.fetch(sc.get("query", ""))
+                if hit:
+                    self.photos[i] = Image.open(hit[0]).convert("RGB")
+                    self.credits.append(f'{sc["query"]}: {hit[1]}')
         self.bg_base = self._gradient()
         self.grid = self._grid()
         self.blobs = [(self.rng.random(), self.rng.random(), self.rng.uniform(0.15, 0.35),
@@ -188,6 +198,30 @@ class Renderer:
         d.rounded_rectangle([x0, y0, x1, y1], 28, fill=(0, 0, 0, int(150 * alpha)),
                             outline=(*self.pal[2], int(160 * alpha)), width=3)
         frame.alpha_composite(layer)
+
+    def scene_photo(self, frame, sc, p, dur, idx=None):
+        im = self.photos.get(idx)
+        if im is None:  # no photo found: degrade to a big-text scene
+            return self.scene_big(frame, {"big": sc.get("caption", sc.get("query", ""))[:18],
+                                          "sub": ""}, p, dur)
+        a = ease_out(p * dur / 0.4)
+        pw, ph = self.W - 160, 800
+        z = 1.0 + 0.08 * p  # slow Ken Burns zoom
+        sc_f = max(pw / im.width, ph / im.height) * z
+        rs = im.resize((int(im.width * sc_f), int(im.height * sc_f)), Image.BILINEAR)
+        l, t = (rs.width - pw) // 2, (rs.height - ph) // 2
+        crop = rs.crop((l, t, l + pw, t + ph)).convert("RGBA")
+        mask = Image.new("L", (pw, ph), 0)
+        ImageDraw.Draw(mask).rounded_rectangle([0, 0, pw - 1, ph - 1], 28, fill=int(255 * a))
+        crop.putalpha(mask)
+        x0, y0 = 80, int(300 + 30 * (1 - a))
+        frame.alpha_composite(crop, (x0, y0))
+        d = ImageDraw.Draw(frame)
+        d.rounded_rectangle([x0, y0, x0 + pw, y0 + ph], 28, outline=(*self.pal[2], int(200 * a)), width=4)
+        cap = sc.get("caption")
+        if cap:
+            paste_center(frame, text_img(cap, BODY, 44, (255, 255, 255, 255), 5), self.W / 2,
+                         y0 + ph + 60, 1, a)
 
     def scene_title(self, frame, sc, p, dur):
         k = back_out(p * dur / 0.45)
@@ -658,7 +692,8 @@ class Renderer:
         """Draw scene idx's visual (no background, chrome or captions) onto frame."""
         draw = {"title": self.scene_title, "big": self.scene_big, "terminal": self.scene_terminal,
                 "steps": self.scene_steps, "versus": self.scene_versus, "bars": self.scene_bars,
-                "quiz": self.scene_quiz, "timeline": self.scene_timeline}
+                "quiz": self.scene_quiz, "timeline": self.scene_timeline,
+                "photo": lambda f, s, p, d: self.scene_photo(f, s, p, d, idx)}
         st, dur = timeline[idx]
         span = dur + GAP
         p = min(max((t - st) / span, 0), 1)

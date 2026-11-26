@@ -32,6 +32,8 @@ def client(channel_slug):
 
 def build_description(script, channel, extra=None):
     parts = [script["description"]] + ([extra] if extra else []) + [" ".join(channel.get("hashtags", []))]
+    if script.get("credits"):
+        parts.append("Image credits:\n" + "\n".join(script["credits"]))
     if script.get("sources"):
         parts.append("Sources:\n" + "\n".join(script["sources"]))
     if channel.get("description_footer"):
