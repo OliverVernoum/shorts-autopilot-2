@@ -16,7 +16,7 @@ SHORT_SLOTS_tech="12 21"
 
 lock="/tmp/shorts-$mode.lock"
 if ! mkdir "$lock" 2>/dev/null; then
-  if [ -n "$(find "$lock" -maxdepth 0 -mmin +120 2>/dev/null)" ]; then rm -rf "$lock"; mkdir "$lock"
+  if [ -n "$(find "$lock" -maxdepth 0 -mmin +360 2>/dev/null)" ]; then rm -rf "$lock"; mkdir "$lock"
   else echo "previous $mode run still going"; exit 0; fi
 fi
 trap 'rm -rf "$lock"' EXIT
