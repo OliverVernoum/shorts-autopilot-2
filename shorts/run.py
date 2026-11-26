@@ -96,7 +96,9 @@ def publish_long(slug, dry_run=False, tts_mode="edge"):
     os.makedirs(os.path.join(ROOT, "out"), exist_ok=True)
     out = os.path.join(ROOT, "out", f"{slug}-{script['id']}.mp4")
     thumb = brand.thumbnail(script, channel, slug, out[:-4] + ".png")
-    total, starts = longform.LongRenderer(script, channel, slug).render(out, out + ".work", tts_mode)
+    lr = longform.LongRenderer(script, channel, slug)
+    total, starts = lr.render(out, out + ".work", tts_mode)
+    script["credits"] = lr.r.credits
     shutil.rmtree(out + ".work", ignore_errors=True)
     chapters = longform.chapter_block(script, starts, total)
     gh_summary(f"[{slug}] rendered long-form {script['id']} ({total / 60:.1f} min)")
