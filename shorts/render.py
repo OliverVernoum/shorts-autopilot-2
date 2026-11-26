@@ -18,6 +18,9 @@ Scene kinds (vary them per video, YouTube penalises same-template spam):
   clip     : {"query": "color cycling", "caption": "Water 'animates' by palette"}
              Short real video/animated GIF from Wikimedia Commons (plays up to 8s). Falls back to a
              photo, then big text. Use it whenever motion explains the point.
+  game     : {"query": "Elden Ring", "caption": "Official trailer footage"}
+             Real footage of a CURRENT game (query = exact game title): Steam trailer, else official
+             trailer via yt-dlp, else a Commons clip/photo, else big text. Plays up to 8s.
   timeline : {"events": [{"year": "1998", "text": "First worm spreads"}, ...]}
              3-5 events top to bottom, year <= 10 chars, text <= 30 chars.
 Every scene also has "say": the narration.
@@ -132,6 +135,12 @@ class Renderer:
         glyphs = channel.get("glyphs", "01{}<>#$/\\:;")
         self.photos, self.credits, self.clips = {}, [], {}
         for i, sc in enumerate(script.get("scenes", [])):
+            if sc.get("kind") == "game":
+                hit = media.fetch_game(sc.get("query", ""))
+                if hit and self._load_clip(i, hit[0], hit[2]):
+                    self.credits.append(hit[1])
+                    continue
+                sc = dict(sc, kind="clip")  # no trailer found: try Commons instead
             if sc.get("kind") == "clip":
                 hit = media.fetch_clip(sc.get("query", ""))
                 if hit and self._load_clip(i, hit[0]):
@@ -210,14 +219,14 @@ class Renderer:
 
     CLIP_FPS, CLIP_MAX = 15, 8
 
-    def _load_clip(self, idx, path):
+    def _load_clip(self, idx, path, ss=0):
         """Decode up to CLIP_MAX s of a clip to frames (cover-cropped to the photo box)."""
         import glob
         import tempfile
         pw, ph = self.W - 160, 800
         d = tempfile.mkdtemp(prefix=f"clip{idx}_")
         r = subprocess.run(
-            ["ffmpeg", "-y", "-loglevel", "error", "-t", str(self.CLIP_MAX), "-i", path, "-an",
+            ["ffmpeg", "-y", "-loglevel", "error", "-ss", str(ss), "-t", str(self.CLIP_MAX), "-i", path, "-an",
              "-vf", f"fps={self.CLIP_FPS},scale={pw}:{ph}:force_original_aspect_ratio=increase,"
                     f"crop={pw}:{ph}", "-q:v", "4", os.path.join(d, "%04d.jpg")],
             capture_output=True)
@@ -742,7 +751,8 @@ class Renderer:
                 "steps": self.scene_steps, "versus": self.scene_versus, "bars": self.scene_bars,
                 "quiz": self.scene_quiz, "timeline": self.scene_timeline,
                 "photo": lambda f, s, p, d: self.scene_photo(f, s, p, d, idx),
-                "clip": lambda f, s, p, d: self.scene_clip(f, s, p, d, idx)}
+                "clip": lambda f, s, p, d: self.scene_clip(f, s, p, d, idx),
+                "game": lambda f, s, p, d: self.scene_clip(f, s, p, d, idx)}
         st, dur = timeline[idx]
         span = dur + GAP
         p = min(max((t - st) / span, 0), 1)
