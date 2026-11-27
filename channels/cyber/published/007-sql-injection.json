@@ -61,5 +61,13 @@
   "sources": [
     "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html",
     "https://owasp.org/www-community/attacks/SQL_Injection"
-  ]
+  ],
+  "credits": [
+    "SQL injection: Angoca / CC0 / Wikimedia Commons"
+  ],
+  "video_id": "7rUjlpIDElY",
+  "url": "https://youtube.com/shorts/7rUjlpIDElY",
+  "published_at": "2026-11-27T14:08:24+00:00",
+  "privacy": "scheduled 2026-11-27T17:07:00Z",
+  "scheduled_for": "2026-11-27T17:07:00+00:00"
 }

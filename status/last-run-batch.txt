@@ -1,21 +1,18 @@
 [gaming] long-form queue empty, nothing to publish
-[cyber] rendered long-form L001-how-passwords-get-stolen (7.5 min)
-Uploading to channel: Plain Text Threats
-  29%
-  59%
-  89%
-  thumbnail set
-[cyber] uploaded long-form **How passwords actually get stolen — and the 4 habits that stop it** -> https://youtu.be/nUuom7QoH_8 (scheduled 2026-11-27T15:07:00Z)
-[media] steam: no trailer found for 'Grand Theft Auto VI' (1 search hits)
-[gaming] rendered g001-gta6-thirteen-year-wait (40.1s)
-Uploading to channel: Boss Room Archive
-[gaming] uploaded **GTA VI: the 13-year wait, in one timeline** -> https://youtube.com/shorts/4ZVtQMQma5E (scheduled 2026-11-27T19:07:00Z)
 [cyber] rendered 007-sql-injection (54.8s)
-::error::[cyber] short for Fri 17:07Z: TransportError: HTTPSConnectionPool(host='oauth2.googleapis.com', port=443): Max retries exceeded with url: /token (Caused by NameResolutionError("HTTPSConnection(host='oauth2.googleapis.com', port=443): Failed to resolve 'oauth2.googleapis.com' ([Errno 8] nodename nor servname provided, or not know
+Uploading to channel: Plain Text Threats
+  94%
+[cyber] uploaded **One line of text that can break a login page** -> https://youtube.com/shorts/7rUjlpIDElY (scheduled 2026-11-27T17:07:00Z)
 [cyber] long-form queue empty, nothing to publish
-[media] 'Nintendo 64 controller': <urlopen error [Errno 8] nodename nor servname provided, or not known>
-::error::[gaming] short for Sat 10:07Z: RuntimeError: edge-tts failed: Cannot connect to host speech.platform.bing.com:443 ssl:<ssl.SSLContext object at 0x10bc0f350> [nodename nor servname provided, or not known]
-scheduled up to: {"long-cyber": "2026-11-27T15:07:00+00:00", "short-cyber": "2026-11-21T22:09:34+00:00", "short-gaming": "2026-11-27T19:07:00+00:00"}; uploads today 2/6
-::warning::[gaming] comments not fetched: TransportError: HTTPSConnectionPool(host='oauth2.googleapis.com', port=443): Max retries exceeded with url: /token (Caused by NameResolutionError("HTTPSConnection(host='oauth2.googleapis.com', port=443): Failed to re
-::warning::[cyber] comments not fetched: TransportError: HTTPSConnectionPool(host='oauth2.googleapis.com', port=443): Max retries exceeded with url: /token (Caused by NameResolutionError("HTTPSConnection(host='oauth2.googleapis.com', port=443): Failed to re
-run at 2026-11-27T13:31:07Z (batch)
+[gaming] rendered g002-ocarina-lock-on-explained (40.5s)
+Uploading to channel: Boss Room Archive
+[gaming] uploaded **How Ocarina of Time's lock-on button works** -> https://youtube.com/shorts/XJisQewanhU (scheduled 2026-11-28T10:07:00Z)
+[gaming] rendered g003-game-awards-2026-goty-race (37.8s)
+Uploading to channel: Boss Room Archive
+[gaming] uploaded **Game Awards 2026: the six Game of the Year nominees** -> https://youtube.com/shorts/2C7EUqX4XM4 (scheduled 2026-11-28T19:07:00Z)
+[cyber] rendered 008-ransomware-stages (53.7s)
+Uploading to channel: Plain Text Threats
+[cyber] uploaded **The 5 stages of a ransomware attack, and how to stop each** -> https://youtube.com/shorts/jJTfSJHslH4 (scheduled 2026-11-28T08:07:00Z)
+daily upload budget (6) used; next run carries on
+scheduled up to: {"long-cyber": "2026-11-27T15:07:00+00:00", "short-cyber": "2026-11-28T08:07:00+00:00", "short-gaming": "2026-11-28T19:07:00+00:00"}; uploads today 6/6
+run at 2026-11-27T14:12:15Z (batch)
